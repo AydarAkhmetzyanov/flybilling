@@ -11,7 +11,7 @@ class IndexController extends Controller {
         echo '<body class="page-main">';
         renderView('clientMenu', $data);
 		renderView('pages/console/index', $data);
-		renderView('footer', $data);
+		renderView('consoleFooter', $data);
 	}
 	
 
