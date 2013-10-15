@@ -37,7 +37,7 @@
                                     <a href="#">johnnyextraman@gmail.com</a>
                                     <a href="#" title="Настройки"><i class="icon-wrench icon-white"></i></a>
                                 </li>
-                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / 99 999 <s>Р</s> / <a href="#">Вывести</a></li>
+                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / 99 999 <s>Р</s> / <a href="#">Вывод</a></li>
                                 <li class="spec"><a href="#">Выход</a></li>
                                 <li class="last">
                                     <div class="langs">
