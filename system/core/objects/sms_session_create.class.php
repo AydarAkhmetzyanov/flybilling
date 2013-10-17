@@ -15,6 +15,8 @@ class SMS_session_create
         if($this->checkParams() == FALSE) { $this->failResponse('param missing'); exit(); }
 		if($this->getData() == FALSE) { $this->failResponse('service error'); exit(); }
         if($this->auth() == FALSE) { $this->failResponse('wrong hash'); exit(); }
+		
+		print_R($this);
 		if($this->setProvider() == FALSE) { $this->failResponse('wrong hash'); exit(); }
 		if($this->sendMessage() == FALSE) { $this->failResponse('wrong hash'); exit(); }
 		$this->save();
