@@ -3,19 +3,22 @@
 class SMS_session_create
 {
 
-    //public $ID;
+    public $ID;
     public $service_ID;
 	public $hash;
 	public $service_number;
 	public $phone;
     public $text;
     protected $tech_key='1234';
-	protected $provider_name='1234';
+	protected $provider_name;
 
     public function processSessionCreate(){
         if($this->checkParams() == FALSE) { $this->failResponse('param missing'); exit(); }
 		if($this->getData() == FALSE) { $this->failResponse('service error'); exit(); }
         if($this->auth() == FALSE) { $this->failResponse('wrong hash'); exit(); }
+		$sms_sender_class='SMS_session_create_'.$this->provider_name;
+        $sms_sender = new $sms_sender_class();
+		if($sms_sender->send() == FALSE) { $this->failResponse('providerError'); exit(); }
 		
 		print_R($this);
 		if($this->setProvider() == FALSE) { $this->failResponse('wrong hash'); exit(); }
