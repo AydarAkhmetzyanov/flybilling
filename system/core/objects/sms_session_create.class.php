@@ -10,6 +10,7 @@ class SMS_session_create
 	public $phone;
     public $text;
     protected $tech_key='1234';
+	protected $provider_name='1234';
 
     public function processSessionCreate(){
         if($this->checkParams() == FALSE) { $this->failResponse('param missing'); exit(); }
@@ -43,9 +44,10 @@ class SMS_session_create
     }
 	
     protected function getData(){
-        $tsql="SELECT SessionService.*, Clients.[tech_key] 
+        $tsql="SELECT SessionService.*, Clients.[tech_key], Provider.[name]
         FROM ".SCHEMA.".[SessionServices] SessionService
         LEFT JOIN ".SCHEMA.".[Clients] Clients ON Clients.[ID]=SessionService.[client_ID]
+		LEFT JOIN ".SCHEMA.".[SMSProviders] Provider ON Provider.[ID]=SessionService.[provider_ID]
         WHERE SessionService.[ID]=:ID AND SessionService.[status]=1";
         $statement = Database::getInstance()->prepare($tsql);
         $params=array( 'ID'=>$this->service_ID );
@@ -53,6 +55,7 @@ class SMS_session_create
         $row = $statement->fetchAll(PDO::FETCH_ASSOC);
         if(count($row)>0){
             $this->tech_key = $row[0]['tech_key'];
+			$this->provider_name = $row[0]['name'];
             return TRUE;
         } else {
             return FALSE;
