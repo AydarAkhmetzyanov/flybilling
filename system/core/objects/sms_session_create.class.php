@@ -1,24 +1,27 @@
 <?php
 
-class SMS_async_response
+class SMS_session_create
 {
 
-    public $ID;
-    public $hash;
-    public $sender_text;
+    //public $ID;
+    public $service_ID;
+	public $hash;
+	public $service_number;
+	public $phone;
+    public $text;
     protected $tech_key='1234';
 
-    public function processAsyncResponse(){
+    public function processSessionCreate(){
         if($this->checkParams() == FALSE) { $this->failResponse('param missing'); exit(); }
-        if($this->getData() == FALSE) { $this->failResponse('sms not found or already sent'); exit(); }
+		if($this->getData() == FALSE) { $this->failResponse('service error'); exit(); }
         if($this->auth() == FALSE) { $this->failResponse('wrong hash'); exit(); }
-        $this->saveResponse();
-        $this->successResponse();
-        Http_query::sendAsync(API_URL.'/system/WORKERS/sms_async_send.php',array());
+		if($this->setProvider() == FALSE) { $this->failResponse('wrong hash'); exit(); }
+		if($this->sendMessage() == FALSE) { $this->failResponse('wrong hash'); exit(); }
+		$this->save();
     }
 
     protected function checkParams(){
-        $requiredParams=array('ID','hash','sender_text');
+        $requiredParams=array('service_ID','hash','service_number','phone','text');
         foreach($requiredParams as $paramName){
             if(!isset($_GET[$paramName])){
                 return FALSE;
@@ -29,13 +32,21 @@ class SMS_async_response
         return TRUE;
     }
 
+    protected function auth(){
+        if(md5($this->service_ID.$this->tech_key)==$this->hash){ 
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+	
     protected function getData(){
-        $tsql="SELECT SMS.*, Clients.[tech_key] 
-        FROM ".SCHEMA.".[SMS] SMS
-        LEFT JOIN ".SCHEMA.".[Clients] Clients ON Clients.[ID]=SMS.[client_ID]
-        WHERE SMS.[ID]=:ID AND SMS.[response_is_sent]=0";
+        $tsql="SELECT SessionService.*, Clients.[tech_key] 
+        FROM ".SCHEMA.".[SessionServices] SessionService
+        LEFT JOIN ".SCHEMA.".[Clients] Clients ON Clients.[ID]=SessionService.[client_ID]
+        WHERE SessionService.[ID]=:ID AND SessionService.[status]=1";
         $statement = Database::getInstance()->prepare($tsql);
-        $params=array( 'ID'=>$this->ID );
+        $params=array( 'ID'=>$this->service_ID );
         $statement->execute($params);
         $row = $statement->fetchAll(PDO::FETCH_ASSOC);
         if(count($row)>0){
@@ -45,15 +56,7 @@ class SMS_async_response
             return FALSE;
         }
     }
-
-    protected function auth(){
-        if(md5($this->ID.$this->tech_key)==$this->hash){ 
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-
+	
     protected function saveResponse(){
         try{
              $tsql="UPDATE ".SCHEMA.".[SMS] 
