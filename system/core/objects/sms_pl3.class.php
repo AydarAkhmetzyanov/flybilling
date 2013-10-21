@@ -82,7 +82,6 @@ class SMS_PL3 extends SMS
                              'smsText'=>base64_encode($this->response_text),
                              'now'=>$now,
                              'md5key'=>$hash);
-                             echo $this->response_text;
         $response = Http_query::sendParamQuery('http://infoflows.partnersystem.i-free.ru/Send.aspx', $queryParams);
         if($response === FALSE){
             return FALSE;

@@ -9,11 +9,11 @@ class SMS_async_response
     protected $tech_key='1234';
 
     public function processAsyncResponse(){
-        if($this->checkParams() == FALSE) { $this->failResponse('param missing'); exit(); }
-        if($this->getData() == FALSE) { $this->failResponse('sms not found or already sent'); exit(); }
-        if($this->auth() == FALSE) { $this->failResponse('wrong hash'); exit(); }
+        if($this->checkParams() == FALSE) { API_response::failResponse('param missing'); exit(); }
+        if($this->getData() == FALSE) { API_response::failResponse('sms not found or already sent'); exit(); }
+        if($this->auth() == FALSE) { API_response::failResponse('wrong hash'); exit(); }
         $this->saveResponse();
-        $this->successResponse();
+        API_response::successResponse();
         Http_query::sendAsync(API_URL.'/system/WORKERS/sms_async_send.php',array());
     }
 
@@ -70,19 +70,6 @@ class SMS_async_response
             return FALSE;
         }
         return TRUE;
-    }
-
-    protected function successResponse(){
-        $response=array();
-        $response['result']=1;
-        echo json_encode($response);
-    }
-
-    protected function failResponse($error){
-        $response=array();
-        $response['result']=0;
-        $response['reason']=$error;
-        echo json_encode($response);
     }
 
 }
