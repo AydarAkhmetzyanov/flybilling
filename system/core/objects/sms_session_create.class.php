@@ -12,8 +12,8 @@ class SMS_session_create
     public $country;
     public $tech_key='1234';
 	public $provider_name;
-    //public $client_cost;
-    //public $client_ID;
+    public $client_cost;
+    public $client_ID;
 
     public function processSessionCreate(){
         if($this->checkParams() == FALSE) { API_response::failResponse('param missing'); exit(); }
