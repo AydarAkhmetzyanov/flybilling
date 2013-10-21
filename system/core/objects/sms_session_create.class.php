@@ -78,7 +78,7 @@ class SMS_session_create
     }
 	
     protected function getData(){
-        $tsql="SELECT SessionService.*, Clients.[tech_key], Clients.[ID] AS `client_ID`, Provider.[name]
+        $tsql="SELECT SessionService.*, Clients.[tech_key], Clients.[ID] AS [client_ID], Provider.[name]
         FROM ".SCHEMA.".[SessionServices] SessionService
         LEFT JOIN ".SCHEMA.".[Clients] Clients ON Clients.[ID]=SessionService.[client_ID]
 		LEFT JOIN ".SCHEMA.".[SMSProviders] Provider ON Provider.[ID]=SessionService.[provider_ID]

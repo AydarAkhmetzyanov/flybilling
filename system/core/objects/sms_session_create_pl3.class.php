@@ -7,7 +7,7 @@ class SMS_session_create_pl3
 	public $phone;
     public $text;
 
-    public $cost=13;
+    public $cost=0,13;
 
 	public function send($service_number, $phone, $text){
 	    $this->service_number=$service_number;
@@ -24,7 +24,7 @@ class SMS_session_create_pl3
             $result = new SimpleXMLElement($res);
             if(is_object($result)){
                 if( $result->NetworkNameInternational=='MTS' ) {
-                    $this->cost=38;
+                    $this->cost=0,38;
                 }
             }
         }
@@ -46,6 +46,7 @@ class SMS_session_create_pl3
                              'subscriberSessionLifeTime'=>'59',
                              );
         //$response = Http_query::sendParamQuery('http://infoflows.partnersystem.i-free.ru/Send.aspx', $queryParams);
+        return TRUE;
         if($response === FALSE){
             return FALSE;
         } else {
