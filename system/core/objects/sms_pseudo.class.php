@@ -4,19 +4,18 @@ abstract class SMS_PSEUDO extends SMS
 {
 
     public function getClientData(){
-        //search for external message
-        //SELECT TOP 1 * FROM [dbo].[SessionSMS] WHERE [timestamp] > dateadd(minute,-55,getdate()) AND [phone]=:phone;
-
-
-        $tsql="SELECT TOP 1 * 
-            FROM ".SCHEMA.".[SMSServices] 
-            WHERE [status]=1 AND [country]=:country AND [provider_ID]=:provider_ID and SUBSTRING( :text , 0, LEN([prefix])+1)=[prefix]";
+        $tsql="SELECT TOP 1 * FROM ".SCHEMA.".[SMSServices] 
+         WHERE [status]=1 AND 
+         [ID]=(
+              SELECT TOP 1 [client_service_ID] FROM ".SCHEMA.".[SessionServices] where 
+              [ID]=(
+                  SELECT TOP 1 [service_ID] FROM ".SCHEMA.".[SessionSMS] WHERE [timestamp] > dateadd(minute,-55,getdate()) AND [phone]=:phone
+              ) 
+         );";
         $statement = Database::getInstance()->prepare($tsql);
-        $params=array( 'country'=>$this->sender_country, 'provider_ID'=>$this->provider_ID, 'text'=>substr($this->sender_text,0,15) );
+        $params=array( 'provider_ID'=>$this->provider_ID, 'phone'=>$this->sender_phone );
         $statement->execute($params);
         $row = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-
         if(count($row)>0){
             $this->client_share = $row[0]['share'] * $this->external_share / 100;
             $this->client_ID = $row[0]['client_ID'];
