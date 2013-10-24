@@ -105,6 +105,7 @@ create table [dbo].[SessionSMS]
 				[service_number] [varchar](255) NULL,
 				[client_cost] [smallmoney] DEFAULT 0,
 				[client_ID] [int] DEFAULT NULL, 
+                [service_ID] [int] DEFAULT NULL, 
                 CONSTRAINT [PK_SessionSMS] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -112,8 +113,8 @@ create table [dbo].[SessionSMS]
             );
 			
 INSERT INTO [dbo].[SessionSMS] 
-(text, phone, country, service_number, client_cost, client_ID) 
-VALUES ('response_text', '79510665133', 'ru', '4443', 0.3, 1);
+(text, phone, country, service_number, client_cost, client_ID, service_ID) 
+VALUES ('response_text', '79510665133', 'ru', '4443', 0.3, 1, 1);
 
 create table [dbo].[SessionServices] 
             (
@@ -124,6 +125,7 @@ create table [dbo].[SessionServices]
 				[default_text] [nvarchar](500) NULL,
 				[client_ID] [int] DEFAULT NULL, 
 				[provider_ID] [int] DEFAULT NULL,
+                [client_service_ID] [int] DEFAULT NULL,
                 [timestamp] [datetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_SessionServices] PRIMARY KEY CLUSTERED
                     (
@@ -132,8 +134,8 @@ create table [dbo].[SessionServices]
             );
 			
 INSERT INTO [dbo].[SessionServices] 
-(country, is_text_unlocked, status, default_text, client_ID, provider_ID) 
-VALUES ('ru', 1, 1, 'smstext', 1, 1);
+(country, is_text_unlocked, status, default_text, client_ID, provider_ID, client_service_ID) 
+VALUES ('ru', 1, 1, 'smstext', 1, 1, 2);
 
 create table [dbo].[SMSCorePrefixes] 
             (

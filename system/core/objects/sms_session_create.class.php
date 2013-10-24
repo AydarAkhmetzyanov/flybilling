@@ -37,8 +37,8 @@ class SMS_session_create
             $statement->execute($params);
             $tsql="
                 INSERT INTO ".SCHEMA.".[SessionSMS]
-                (text, phone, country, service_number, client_cost, client_ID)
-                VALUES (:text, :phone, :country, :service_number, :client_cost, :client_ID);
+                (text, phone, country, service_number, client_cost, client_ID, service_ID)
+                VALUES (:text, :phone, :country, :service_number, :client_cost, :client_ID, :service_ID);
             ";
             $statement = Database::getInstance()->prepare($tsql);
             $params=array( 'text'=>$this->text, 
@@ -46,7 +46,8 @@ class SMS_session_create
                            'country'=>$this->country,
                            'service_number'=>$this->service_number,
                            'client_cost'=>$this->client_cost,
-                           'client_ID'=>$this->client_ID
+                           'client_ID'=>$this->client_ID,
+                           'service_ID'=>$this->service_ID
                            );
             $statement->execute($params);
             $this->ID = Database::getInstance()->lastInsertId();
@@ -92,6 +93,7 @@ class SMS_session_create
 			$this->provider_name = $row[0]['name'];
             $this->client_ID = $row[0]['client_ID'];
             $this->country = $row[0]['country'];
+            $this->service_ID = $row[0]['service_ID'];
             return TRUE;
         } else {
             return FALSE;

@@ -7,7 +7,7 @@ class SMS_session_create_pl3
 	public $phone;
     public $text;
 
-    public $cost=0,13;
+    public $cost=0.13;
 
 	public function send($service_number, $phone, $text){
 	    $this->service_number=$service_number;
@@ -24,7 +24,7 @@ class SMS_session_create_pl3
             $result = new SimpleXMLElement($res);
             if(is_object($result)){
                 if( $result->NetworkNameInternational=='MTS' ) {
-                    $this->cost=0,38;
+                    $this->cost=0.38;
                 }
             }
         }
@@ -33,9 +33,9 @@ class SMS_session_create_pl3
     private function sendQuery(){
         date_default_timezone_set("UTC");
         $now=date('YmdHis');
-        $baseString="3-511-8743sms".$this->service_number.$this->phone.base64_encode($this->text).$now."Fly333";
+        $baseString="3-511-8836sms".$this->service_number.$this->phone.base64_encode($this->text).$now."@D|Xw~_p";
         $hash=strtoupper(md5($baseString));
-        $queryParams = array('prjID'=>'3-511-8743',
+        $queryParams = array('prjID'=>'3-511-8836',
                              'serviceNumber'=>$this->service_number,
                              'subscriber'=>$this->phone,
                              'type'=>'sms',
@@ -45,7 +45,7 @@ class SMS_session_create_pl3
                              'subscriberSession'=>'START',
                              'subscriberSessionLifeTime'=>'59',
                              );
-        //$response = Http_query::sendParamQuery('http://infoflows.partnersystem.i-free.ru/Send.aspx', $queryParams);
+        $response = Http_query::sendParamQuery('http://infoflows.partnersystem.i-free.ru/Send.aspx', $queryParams);
         return TRUE;
         if($response === FALSE){
             return FALSE;
