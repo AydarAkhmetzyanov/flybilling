@@ -116,7 +116,6 @@ abstract class SMS
                 }
             }
         }
-        print_r($this);
         if($this->handler_is_async==1){
             $this->asyncResponse();
             $this->response_is_sent=0;

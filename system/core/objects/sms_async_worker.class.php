@@ -4,7 +4,7 @@ class SMS_async_worker
 {
 
     public function processQueue(){
-        $tsql="SELECT SMS.*,Provider.[name],Service.[response_static] AS [service_response_static], Service.[dynamic_responder_URL] AS [service_dynamic_responder_URL]
+        $tsql="SELECT SMS.*,Provider.[name],Service.[response_static] AS [service_response_static], Service.[dynamic_responder_URL] AS [service_dynamic_responder_URL], Service.[is_pseudo] AS [is_pseudo]
                FROM [dbo].[SMS] SMS
                LEFT JOIN [dbo].[SMSProviders] Provider ON Provider.[ID]=SMS.[provider_ID]
                LEFT JOIN [dbo].[SMSServices] Service ON Service.[ID]=SMS.[service_ID]
@@ -13,7 +13,11 @@ class SMS_async_worker
         $statement->execute();
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach ($rows as $row) {
-            $smsHandlerName='SMS_'.strtoupper($row['name']);
+            if($row['is_pseudo']==1){
+                $smsHandlerName='SMS_PSEUDO_'.strtoupper($row['name']);
+            } else {
+                $smsHandlerName='SMS_'.strtoupper($row['name']);
+            }
             $SMS = new $smsHandlerName();
             $SMS->processAsync($row);
             unset($SMS);

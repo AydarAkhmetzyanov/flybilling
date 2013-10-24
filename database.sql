@@ -78,6 +78,7 @@ create table [dbo].[SMSServices]
                 [status] [tinyint] DEFAULT 1, --0-deleted 1-active 2-disabled(visible)
 				[client_ID] [int] DEFAULT NULL, 
 				[provider_ID] [int] DEFAULT NULL,
+                [is_pseudo] [tinyint] DEFAULT 0,
                 [timestamp] [datetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_SMSServices] PRIMARY KEY CLUSTERED
                     (
@@ -86,14 +87,14 @@ create table [dbo].[SMSServices]
             );
 			
 INSERT INTO [dbo].[SMSServices] 
-(country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID) 
-VALUES ('ru', 'kmbord566', 'response_static', 1, 'http://flybill.ru/test.php', 55, 1, 1, 1);
+(country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID,is_pseudo) 
+VALUES ('ru', 'kmbord566', 'response_static', 1, 'http://flybill.ru/test.php', 55, 1, 1, 1, 0);
 INSERT INTO [dbo].[SMSServices] 
-(country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID) 
-VALUES ('ru', 'kmbords', 'response_static', 0, 'http://flybill.ru/test.php', 55, 1, 1, 1);
+(country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID,is_pseudo) 
+VALUES ('ru', 'kmbords', 'response_static', 0, 'http://flybill.ru/test.php', 55, 1, 1, 1, 1);
 INSERT INTO [dbo].[SMSServices] 
-(country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID) 
-VALUES ('ru', 'kmbordd', 'response_static', 1, 'http://flybill.ru/test.php', 55, 1, 1, 1);
+(country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID,is_pseudo) 
+VALUES ('ru', 'kmbordd', 'response_static', 1, 'http://flybill.ru/test.php', 55, 1, 1, 1, 0);
 
 create table [dbo].[SessionSMS]
             (
