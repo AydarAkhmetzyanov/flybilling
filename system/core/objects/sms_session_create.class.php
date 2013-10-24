@@ -23,7 +23,6 @@ class SMS_session_create
         $sms_sender = new $sms_sender_class();
 		if($sms_sender->send($this->service_number, $this->phone, $this->text) == FALSE) { API_response::failResponse('provider error'); exit(); }
         $this->client_cost=$sms_sender->cost;
-		print_R($this);
 		$this->saveData();
         API_response::successResponse();
     }
