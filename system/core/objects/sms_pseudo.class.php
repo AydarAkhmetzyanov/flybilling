@@ -13,7 +13,7 @@ abstract class SMS_PSEUDO extends SMS
               ) 
          );";
         $statement = Database::getInstance()->prepare($tsql);
-        $params=array( 'provider_ID'=>$this->provider_ID, 'phone'=>$this->sender_phone );
+        $params=array( 'phone'=>$this->sender_phone );
         $statement->execute($params);
         $row = $statement->fetchAll(PDO::FETCH_ASSOC);
         if(count($row)>0){
