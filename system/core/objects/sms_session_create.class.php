@@ -93,7 +93,7 @@ class SMS_session_create
 			$this->provider_name = $row[0]['name'];
             $this->client_ID = $row[0]['client_ID'];
             $this->country = $row[0]['country'];
-            $this->service_ID = $row[0]['service_ID'];
+            $this->service_ID = $row[0]['ID'];
             return TRUE;
         } else {
             return FALSE;
