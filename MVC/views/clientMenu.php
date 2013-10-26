@@ -32,13 +32,20 @@
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">
+                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / 99 999 <s>Р</s> / <a href="#">Вывод</a></li>
                                 <li>
                                     <a href="#" class="notific" title="Уведомления"><span class="badge badge-success">21</span></a>
-                                    <a href="#">johnnyextraman@gmail.com</a>
-                                    <a href="#" title="Настройки"><i class="icon-wrench icon-white"></i></a>
                                 </li>
-                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / 99 999 <s>Р</s> / <a href="#">Вывод</a></li>
-                                <li class="spec"><a href="#">Выход</a></li>
+                                <li>
+                                    <div class="dropdown">
+                                        <a id="dLabel" data-toggle="dropdown" data-target="#" href="#">johnnyextraman@gmail.com</a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                            <li><a href="#">Настройки профиля</a></li>
+                                            <li role="presentation" class="divider"></li>
+                                            <li><a href="#">Выход</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
                                 <li class="last">
                                     <div class="langs">
                                         <a href="/" rel="nofollow" title="Русский" class="rus"></a>

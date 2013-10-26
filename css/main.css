@@ -52,9 +52,9 @@ a:hover {
 
 .navbar .brand {
 	float: left;
-	width: 150px;
+	width: 132px;
 	height: 50px;
-	background: url(../img/logo-flybill.png) no-repeat;
+	background: url(../img/logo-flybill.png) no-repeat left center;
 	padding: 0;
 	margin: 0 35px 0 0;
 }
@@ -81,13 +81,24 @@ a:hover {
 	margin-top: 5px;
 }
 
-.navbar .nav>li>a {
+.navbar .nav>li>a,
+.navbar .nav>li>.dropdown>a {
 	text-transform: uppercase;
 	color: #fff;
 	font-size: 12px;
 	font-weight: bold;
 	padding: 0;
 	margin: 0;
+    text-decoration: none;
+    outline: 0;
+}
+
+.navbar .nav>li>.dropdown>a {
+    text-transform: none;
+}
+
+.dropdown-menu li a {
+    display: block;
     text-decoration: none;
 }
 
@@ -142,7 +153,7 @@ a:hover {
 	background-position: -25px 0;
 }
 
-.navbar-console .pull-right .nav li {
+.navbar-console .pull-right .nav > li {
     border-right: 1px dotted #666;
 }
 
@@ -150,7 +161,7 @@ a:hover {
     border-right: 0;
 }
 
-.navbar-console .pull-right .nav li a {
+.navbar-console .pull-right .nav > li > a {
     display: inline-block;
     text-transform: none;
 }
@@ -789,12 +800,8 @@ h3 {
 @media (min-width: 1200px) {
 	.navbar .container {
 		background: none;
-		background: url(../img/reg-shadow.png) no-repeat 49% 0;
+		background: url(../img/reg-shadow.png) no-repeat 48% 0;
 	}
-    
-    .navbar-console .container {
-        background-position: 48% 0;
-    }
 }
 
 @media (max-width: 979px) {
