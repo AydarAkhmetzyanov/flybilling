@@ -1,4 +1,4 @@
-
+<div id="is-main-page"></div>
         
         <div class="top-promo">
             <div class="container">

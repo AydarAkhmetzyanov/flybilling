@@ -16,7 +16,9 @@
 		<?php echo HTML::includeCSS('bootstrap.min');?>
 		<?php echo HTML::includeCSS('bootstrap-responsive.min');?>
 		<?php echo HTML::includeCSS('main');?>
-		 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
         <?php echo HTML::includeJS('lib/modernizr-2.6.2-respond-1.1.0.min');?>
     </head>

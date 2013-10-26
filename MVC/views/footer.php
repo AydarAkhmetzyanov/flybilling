@@ -48,6 +48,7 @@
 <?php echo HTML::includeJS('lib/bootstrap.min');?>
 <?php echo HTML::includeJS('lib/jquery.stellar.min');?>
 <?php echo HTML::includeJS('lib/jquery.bxslider.min');?>
-<?php echo HTML::includeJS('main');?>
+<?php echo HTML::includeJS('scripts');?>
+<?php echo HTML::includeJS('main-page');?>
     </body>
 </html>

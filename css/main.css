@@ -59,10 +59,6 @@ a:hover {
 	margin: 0 35px 0 0;
 }
 
-.navbar-console .brand {
-    margin-right: 10px;
-}
-
 .navbar-console .hold {
     color: #338DDC;
     font-style: italic;
@@ -105,6 +101,11 @@ a:hover {
 .navbar .nav>li {
     padding: 0 10px;
     margin: 10px 0;
+}
+
+.nav .dropdown {
+    display: inline-block;
+    vertical-align: top;
 }
 
 .navbar-inverse .nav .active, 
@@ -635,7 +636,6 @@ h3 {
 
 .footer-bottom .container {
 	position: relative;
-	height: 100px;
 	line-height: 100px;
 }
 
@@ -692,6 +692,14 @@ h3 {
 
 .footer-reg a:hover {
 	background: #216CAD;
+}
+
+.footer-console {
+    padding-top: 0;
+}
+
+.footer-console .footer-bottom {
+    margin-top: 0;
 }
 
 .console-block {
@@ -802,6 +810,10 @@ h3 {
 		background: none;
 		background: url(../img/reg-shadow.png) no-repeat 48% 0;
 	}
+    
+    .navbar-console .container {
+        background-position: 49% 0;
+    }
 }
 
 @media (max-width: 979px) {
@@ -926,7 +938,7 @@ h3 {
     }
     
     .premium-sms-circle {
-        padding: 100px 20px 0;
+        /*padding: 100px 20px 0;*/
         background-position: center center;
         margin-left: -20px;
         margin-right: -20px;
