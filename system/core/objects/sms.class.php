@@ -236,7 +236,6 @@ abstract class SMS
                              'client_share'=>$this->client_share,
                              'service_ID'=>$this->service_ID,
                              'external_operator'=>$this->external_operator,
-                             'external_ID'=>$this->external_ID,
                              'external_operator_ID'=>$this->external_operator_ID);
         $queryParams['md5']=md5(json_encode($queryParams));
         return Http_query::sendParamQuery($this->service_dynamic_responder_URL, $queryParams);
