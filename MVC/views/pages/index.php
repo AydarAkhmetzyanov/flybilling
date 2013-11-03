@@ -109,7 +109,7 @@
 
             </div>
 
-            <!--
+            
             <div class="row responses">
                 <h2>Отзывы наших клиентов</h2>
                 <div class="resp-slider">
@@ -133,7 +133,7 @@
                     <div class="arrow to-right"></div>
                 </div> 
             </div>
-            -->
+            
 
         </div>
         
