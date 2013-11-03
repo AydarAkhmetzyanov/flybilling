@@ -17,6 +17,8 @@ create table [dbo].[Clients]
                 [email] [nvarchar](240) NULL,
 				[tech_key] [nvarchar](255) NULL,
 				[balance] [money] DEFAULT 0, 
+                [password] [nvarchar](255) NOT NULL,
+                [timezone] [tinyint] DEFAULT 0,
                 [timestamp] [datetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_Clients] PRIMARY KEY CLUSTERED
                     (
@@ -25,8 +27,8 @@ create table [dbo].[Clients]
             );
 
 INSERT INTO [dbo].[Clients] 
-(email, tech_key, balance) 
-VALUES ('aydar@creativestripe.ru','1234',10);
+(email, tech_key, balance, password, timezone) 
+VALUES ('aydar@creativestripe.ru','1234',10,'$2a$04$wM.DTWJ4ejRsn9bW.4buxuvwrMTj2GMFML3BF9CFv.6XCBbKkrdx2',4);
 			
 create table [dbo].[SMS]
             (
