@@ -2,7 +2,7 @@
 class Controller {
     
      function __construct() {
-         global $controllerObject;
+         
 
      }
 

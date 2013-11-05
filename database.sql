@@ -19,6 +19,10 @@ create table [dbo].[Clients]
 				[balance] [money] DEFAULT 0, 
                 [password] [nvarchar](255) NOT NULL,
                 [timezone] [tinyint] DEFAULT 0,
+                [language] [char](2) NULL, 
+                [ip] [varchar](100) NULL, 
+                [country] [char](2) NULL, 
+                [status] [tinyint] DEFAULT 1, --0-deleted 1-active 2-baned
                 [timestamp] [datetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_Clients] PRIMARY KEY CLUSTERED
                     (
@@ -27,9 +31,83 @@ create table [dbo].[Clients]
             );
 
 INSERT INTO [dbo].[Clients] 
-(email, tech_key, balance, password, timezone) 
-VALUES ('aydar@creativestripe.ru','1234',10,'$2a$04$wM.DTWJ4ejRsn9bW.4buxuvwrMTj2GMFML3BF9CFv.6XCBbKkrdx2',4);
+(email, tech_key, balance, password, timezone, language, ip, country, status) 
+VALUES ('aydar@creativestripe.ru','1234',10,'$2a$04$wM.DTWJ4ejRsn9bW.4buxuvwrMTj2GMFML3BF9CFv.6XCBbKkrdx2',4,'ru','87.117.176.162','ru',1);
+
+
+create table [dbo].[News]
+            (
+                [ID] [bigint] IDENTITY(1,1) NOT NULL,
+				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[text_ru] [nvarchar](4000) NULL, 
+                [text_en] [nvarchar](4000) NULL, 
+                [title_ru] [nvarchar](255) NULL, 
+                [title_en] [nvarchar](255) NULL,
+                CONSTRAINT [PK_News] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
 			
+INSERT INTO [dbo].[News] 
+(text_ru,text_en,title_ru,title_en) 
+VALUES ('test','test','test','test');
+
+create table [dbo].[Notifications]
+            (
+                [ID] [bigint] IDENTITY(1,1) NOT NULL,
+				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[text_ru] [nvarchar](4000) NULL, 
+                [text_en] [nvarchar](4000) NULL, 
+                [title_ru] [nvarchar](255) NULL, 
+                [title_en] [nvarchar](255) NULL,
+                [client_ID] [int] DEFAULT NULL,
+                [status] [tinyint] DEFAULT 1, --1-read 0-new
+                CONSTRAINT [PK_Notifications] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
+			
+INSERT INTO [dbo].[Notifications] 
+(text_ru,text_en,title_ru,title_en,client_ID,status) 
+VALUES ('test','test','test','test',1,0);
+
+create table [dbo].[Questions]
+            (
+                [ID] [bigint] IDENTITY(1,1) NOT NULL,
+				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [text] [nvarchar](4000) NULL, 
+                [topic] [nvarchar](255) NULL,
+                [client_ID] [int] DEFAULT NULL,
+                [notification_ID] [int] DEFAULT NULL,
+                CONSTRAINT [PK_Questions] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
+			
+INSERT INTO [dbo].[Questions] 
+(text,topic,client_ID,notification_ID) 
+VALUES ('test','test',1,1);
+
+create table [dbo].[Withdrawals]
+            (
+                [ID] [bigint] IDENTITY(1,1) NOT NULL,
+				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [summ] [money] DEFAULT 0, 
+                [client_ID] [int] DEFAULT NULL,
+                [status] [tinyint] DEFAULT 1, --1-done 0-new
+                CONSTRAINT [PK_Withdrawals] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
+			
+INSERT INTO [dbo].[Withdrawals] 
+(summ,client_ID,status) 
+VALUES (10,1,0);
+
 create table [dbo].[SMS]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
@@ -51,6 +129,7 @@ create table [dbo].[SMS]
 				[external_operator] [nvarchar](255) NULL, 
 				[external_operator_ID] [int] DEFAULT NULL, 
 				[external_share] [smallmoney] DEFAULT 0,
+                [is_fraud] [tinyint] DEFAULT 0,
                 CONSTRAINT [PK_SMS] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -61,12 +140,12 @@ INSERT INTO [dbo].[SMS]
 (response_text, response_is_sent, response_is_dynamic, sender_phone, sender_country, sender_cost, sender_service_number, sender_text, client_share, client_ID, service_ID, provider_ID
 , external_ID, external_operator, external_operator_ID, external_share) 
 VALUES ('response_text', 0, 1, '79510665133', 'ru', 10, '4443', 'sender_text', 5, 1, 1, 1
-, 1, 'rostelecom', 1, 9);
+, 1, 'rostelecom', 1, 9,0);
 INSERT INTO [dbo].[SMS] 
 (response_text, response_is_sent, response_is_dynamic, sender_phone, sender_country, sender_cost, sender_service_number, sender_text, client_share, client_ID, service_ID, provider_ID
 , external_ID, external_operator, external_operator_ID, external_share) 
 VALUES ('response_text', 1, 1, '79510665133', 'ru', 10, '4443', 'sender_text', 5, 1, 1, 1
-, 34484459280, 'rostelecom', 1, 9);
+, 34484459280, 'rostelecom', 1, 9,0);
 
 create table [dbo].[SMSServices] 
             (
