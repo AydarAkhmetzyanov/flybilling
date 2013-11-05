@@ -14,7 +14,7 @@ class API_helper
         echo json_encode($response);
     }
 
-    public static function failResponse($error,$code=400){
+    public static function failResponse($error,$code=500){
         http_response_code($code);
         $response=array();
         $response['result']=0;
