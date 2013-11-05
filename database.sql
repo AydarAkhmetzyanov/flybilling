@@ -34,7 +34,6 @@ INSERT INTO [dbo].[Clients]
 (email, tech_key, balance, password, timezone, language, ip, country, status) 
 VALUES ('aydar@creativestripe.ru','1234',10,'$2a$04$wM.DTWJ4ejRsn9bW.4buxuvwrMTj2GMFML3BF9CFv.6XCBbKkrdx2',4,'ru','87.117.176.162','ru',1);
 
-
 create table [dbo].[News]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
@@ -107,6 +106,39 @@ create table [dbo].[Withdrawals]
 INSERT INTO [dbo].[Withdrawals] 
 (summ,client_ID,status) 
 VALUES (10,1,0);
+
+create table [dbo].[Fines]
+            (
+                [ID] [bigint] IDENTITY(1,1) NOT NULL,
+				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [summ] [money] DEFAULT 0, 
+                [client_ID] [int] DEFAULT NULL,
+                [description] [nvarchar](4000) NULL, 
+                CONSTRAINT [PK_Fines] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
+			
+INSERT INTO [dbo].[Fines] 
+(summ,client_ID,description) 
+VALUES (5,1,'fine from provider');
+
+create table [dbo].[FinesOur]
+            (
+                [ID] [bigint] IDENTITY(1,1) NOT NULL,
+				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [summ] [money] DEFAULT 0, 
+                [description] [nvarchar](4000) NULL, 
+                CONSTRAINT [PK_FinesOur] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
+			
+INSERT INTO [dbo].[FinesOur] 
+(summ,client_ID,description) 
+VALUES (5,'fine from provider');
 
 create table [dbo].[SMS]
             (
