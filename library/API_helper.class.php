@@ -8,10 +8,11 @@ class API_helper
         && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
     }
 
-    public static function successResponse(){
+    public static function successResponse($data=FALSE){
         $response=array();
         $response['result']=1;
-        echo json_encode($response);
+        $response['data']=$data;
+        echo json_encode($response, JSON_NUMERIC_CHECK);
     }
 
     public static function failResponse($error,$code=500){

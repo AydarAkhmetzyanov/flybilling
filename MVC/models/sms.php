@@ -4,9 +4,7 @@ class SMS extends Model
 {
 
     public static function get($data){
-        print_r($data);
         //possible options id,from,to,client_ID,timezone,service_ID,signature,order,offset,limit
-        $params=array();
         $tsql="SELECT *";
         if(isset($data['timezone'])){
             $tsql.=", dateadd(hour,$data[timezone],CAST([timestamp] AS datetime)) as [localtimestamp]";

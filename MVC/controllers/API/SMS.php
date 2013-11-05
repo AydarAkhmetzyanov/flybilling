@@ -2,7 +2,8 @@
 
 class SMSController extends Controller {
     
-	public function index($id=0){ //possible get options from,to,client_ID,timezone,service_ID,signature,order,offset,limit
+	public function index($id=0){
+        //possible get options from,to,client_ID,timezone,service_ID,signature,order,offset,limit
         $options=$_GET;
         if(API_helper::requested_with_ajax()){
             if(!isset($_SESSION['isAdmin'])){
@@ -26,9 +27,13 @@ class SMSController extends Controller {
             $options['ID']=$id;
         }
         $resultData=SMS::get($options);
-        //delete share field
-        //TODO: api pattern class
-        echo json_encode($resultData, JSON_NUMERIC_CHECK);
+        if($resultData!=FALSE){
+            foreach($resultData as &$value){
+                unset($value['external_share']);
+            }
+        }
+        unset($value);
+        API_helper::successResponse($resultData);
 	}
 
 }
