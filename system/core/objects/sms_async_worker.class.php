@@ -13,11 +13,13 @@ class SMS_async_worker
         $statement->execute();
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach ($rows as $row) {
+            print_r($row);
             if($row['is_pseudo']==1){
                 $smsHandlerName='SMS_PSEUDO_'.strtoupper($row['name']);
             } else {
                 $smsHandlerName='SMS_'.strtoupper($row['name']);
             }
+            print_r($smsHandlerName);
             $SMS = new $smsHandlerName();
             $SMS->processAsync($row);
             unset($SMS);
