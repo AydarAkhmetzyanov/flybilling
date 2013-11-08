@@ -34,6 +34,27 @@ INSERT INTO [dbo].[Clients]
 (email, tech_key, balance, password, timezone, language, ip, country, status) 
 VALUES (N'aydar@creativestripe.ru',N'1234',10,'$2a$04$wM.DTWJ4ejRsn9bW.4buxuvwrMTj2GMFML3BF9CFv.6XCBbKkrdx2',4,'ru','87.117.176.162','ru',1);
 
+create table [dbo].[ClientsPrivateData] 
+            (
+				[ID] [int] IDENTITY(1,1) NOT NULL,
+				[phone] [varchar](255) NULL,
+				[icq] [int](9) NULL,
+				[serviceName] [nvarchar](500) NULL,
+				[serviceURL] [nvarchar](500) NULL,
+				[registerAs] [tinyint](1) NOT NULL,
+				[emailActivationCode] [char](16) NOT NULL,
+				[emailActivated] [tinyint](4) NOT NULL,
+				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+                CONSTRAINT [PK_ClientsPrivateData] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
+			
+INSERT INTO [dbo].[ClientsPrivateData] 
+(phone, icq, serviceName, serviceURL, registerAs, emailActivationCode, emailActivated) 
+VALUES ('791234567',123456789,'Test Project','http://test.ru',2,'qwertyuiopasdfgh',1);
+
 create table [dbo].[News]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
