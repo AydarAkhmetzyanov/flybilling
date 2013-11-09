@@ -10,7 +10,7 @@ class PremiumController extends Controller {
         $data['newGuest']=false;
         $data['locale']='en_EN';
 
-        $data['countries'] = Countries::getExCountries()->fetchAll();
+        $data['countries'] = Countries::getExCountries();
 		renderView('header', $data);
         echo '<body class="page-inner">';
         renderView('menu_en', $data);

@@ -5,6 +5,7 @@ $(document).ready(function () {
 
 function countrySelected(){
     $.get("/price/getNumbers/" + $('#countrySelect').val(), function (data) {
+        
         renderNumberTable(jQuery.parseJSON(data));
     });
 }
@@ -23,6 +24,7 @@ function renderNumberTable(data){
 
 function numberSelected(id){
     $.get("/price/getPrices/" + id, function (data) {
+        console.log(data);
         renderPricesTable(jQuery.parseJSON(data));
     });
 }

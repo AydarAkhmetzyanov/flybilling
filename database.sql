@@ -307,21 +307,21 @@ VALUES (N'pl3', 1, 1);
 	
 
 
-create table [dbo].[Сountries] 
+create table [dbo].[Countries] 
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
                 [name] [nvarchar](200) NULL,
                 [code] [char](2) NULL,
 				[a1] [int] NULL,
-                CONSTRAINT [PK_Сountries] PRIMARY KEY CLUSTERED
+                CONSTRAINT [PK_Countries] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
                     )
             );
 
-SET IDENTITY_INSERT [dbo].[Сountries] ON;
+SET IDENTITY_INSERT [dbo].[Countries] ON;
 
-INSERT INTO [dbo].[Сountries] (ID, name, code, a1) VALUES
+INSERT INTO [dbo].[Countries] (ID, name, code, a1) VALUES
 (1, N'Россия', 'ru', 1),
 (2, N'Эстония', N'ee', 2),
 (3, N'Украина', N'ua', 3),
