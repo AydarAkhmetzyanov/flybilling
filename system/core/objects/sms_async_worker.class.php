@@ -8,7 +8,7 @@ class SMS_async_worker
                FROM [dbo].[SMS] SMS
                LEFT JOIN [dbo].[SMSProviders] Provider ON Provider.[ID]=SMS.[provider_ID]
                LEFT JOIN [dbo].[SMSServices] Service ON Service.[ID]=SMS.[service_ID]
-               WHERE [response_is_sent]=0;";
+               WHERE [response_is_sent]=0;"; //todo:date new
         $statement = Database::getInstance()->prepare($tsql);
         $statement->execute();
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
