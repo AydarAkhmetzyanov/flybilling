@@ -82,6 +82,7 @@ create table [dbo].[Notifications]
                 [title_ru] [nvarchar](255) NULL, 
                 [title_en] [nvarchar](255) NULL,
                 [client_ID] [int] DEFAULT NULL,
+                [notification_ID] [int] DEFAULT NULL,
                 [status] [tinyint] DEFAULT 1, --1-read 0-new
                 CONSTRAINT [PK_Notifications] PRIMARY KEY CLUSTERED
                     (
@@ -90,17 +91,17 @@ create table [dbo].[Notifications]
             );
 			
 INSERT INTO [dbo].[Notifications] 
-(text_ru,text_en,title_ru,title_en,client_ID,status) 
-VALUES (N'test',N'test',N'test',N'test',1,0);
+(text_ru,text_en,title_ru,title_en,client_ID,notification_ID,status) 
+VALUES (N'test',N'test',N'test',N'test',1,NULL,0);
 
 create table [dbo].[Questions]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
 				[timestamp] [datetime] DEFAULT GETUTCDATE(),
                 [text] [nvarchar](4000) NULL, 
-                [topic] [nvarchar](255) NULL,
                 [client_ID] [int] DEFAULT NULL,
                 [notification_ID] [int] DEFAULT NULL,
+                [status] [tinyint] DEFAULT 1, --1-read 0-new
                 CONSTRAINT [PK_Questions] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -108,8 +109,8 @@ create table [dbo].[Questions]
             );
 			
 INSERT INTO [dbo].[Questions] 
-(text,topic,client_ID,notification_ID) 
-VALUES (N'test',N'test',1,1);
+(text,client_ID,notification_ID,status) 
+VALUES (N'test',1,1,0);
 
 create table [dbo].[Withdrawals]
             (
@@ -208,7 +209,7 @@ create table [dbo].[SMSServices]
 				[response_static] [nvarchar](500) NULL,
                 [is_dynamic] [tinyint] DEFAULT 0,
 				[dynamic_responder_URL] [nvarchar](500) NULL,
-				[share] [int] DEFAULT 95,
+				[share] [int] DEFAULT 75,
                 [status] [tinyint] DEFAULT 1, --0-deleted 1-active 2-disabled(visible)
 				[client_ID] [int] DEFAULT NULL, 
 				[provider_ID] [int] DEFAULT NULL,
@@ -295,6 +296,7 @@ create table [dbo].[SMSProviders]
                 [is_async] [tinyint] DEFAULT 0,
                 [timestamp] [datetime] DEFAULT GETUTCDATE(),
 				[status] [tinyint] DEFAULT 1, --0-hidden 1-active
+                [code] [char](2) NULL,
                 CONSTRAINT [PK_SMSProviders] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -302,8 +304,8 @@ create table [dbo].[SMSProviders]
             );
 			
 INSERT INTO [dbo].[SMSProviders] 
-(name, is_async, status) 
-VALUES (N'pl3', 1, 1);
+(name, is_async, status, code) 
+VALUES (N'pl3', 1, 1, 'ru');
 	
 
 
@@ -313,6 +315,7 @@ create table [dbo].[Countries]
                 [name] [nvarchar](200) NULL,
                 [code] [char](2) NULL,
 				[a1] [int] NULL,
+                [is_available] [tinyint] DEFAULT 0,
                 CONSTRAINT [PK_Countries] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC

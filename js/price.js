@@ -24,7 +24,6 @@ function renderNumberTable(data){
 
 function numberSelected(id){
     $.get("/price/getPrices/" + id, function (data) {
-        console.log(data);
         renderPricesTable(jQuery.parseJSON(data));
     });
 }
