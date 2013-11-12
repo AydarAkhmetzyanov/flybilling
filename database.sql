@@ -38,34 +38,34 @@ create table [dbo].[ClientsPrivateData]
             (
 				[ID] [int] IDENTITY(1,1) NOT NULL,
 				[phone] [varchar](255) NOT NULL,
-				[icq] [int] NULL,
+				[icq] [int] NOT NULL,
 				[serviceName] [nvarchar](500) NOT NULL,
 				[serviceURL] [nvarchar](500) NOT NULL,
-				[registerAs] [tinyint] NOT NULL,
+				[accountType] [tinyint] NOT NULL,
+				[firstName] [nvarchar](500) NOT NULL,
+				[secondName] [nvarchar](500) NOT NULL,
 				[WMR] [char](13) NULL,				
-				[PName] [nvarchar](255) NOT NULL,
-				[PFIO] [nvarchar](255) NOT NULL,
-				[PINN] [nvarchar](255) NOT NULL,
-				[POGRN] [nvarchar](255) NOT NULL,
-				[PSGRN] [nvarchar](255) NOT NULL,
-				[PSGRD] [nvarchar](255) NOT NULL,
-				[CName] [nvarchar](255) NOT NULL,
-				[CINN] [nvarchar](255) NOT NULL,
-				[CKPP] [nvarchar](255) NOT NULL,
-				[COGRN] [nvarchar](255) NOT NULL,
-				[CFIO] [nvarchar](255) NOT NULL,
-				[CFIOR] [nvarchar](255) NOT NULL,
-				[CPPos] [nvarchar](255) NOT NULL,
-				[CPDoc] [nvarchar](255) NOT NULL,
-				[UAddr] [nvarchar](255) NOT NULL,
-				[UPostAddr] [nvarchar](255) NOT NULL,
-				[accountNDS] [nvarchar](255) NOT NULL,
-				[bankName] [nvarchar](255) NOT NULL,
-				[bankBIK] [nvarchar](255) NOT NULL,
-				[bankKor] [nvarchar](255) NOT NULL,
-				[bankAcc] [nvarchar](255) NOT NULL,				
-				[firstName] [nvarchar](500) NULL,
-				[secondName] [nvarchar](500) NULL,
+				[PName] [nvarchar](700) NOT NULL,
+				[PFIO] [nvarchar](500) NOT NULL,
+				[PINN] [char](12) NOT NULL,
+				[POGRN] [char](15) NOT NULL,
+				[PSGRN] [char](12) NOT NULL,
+				[PSGRD] [char](10) NOT NULL,
+				[CName] [nvarchar](700) NOT NULL,
+				[CINN] [char](10) NOT NULL,
+				[CKPP] [char](9) NOT NULL,
+				[COGRN] [char](13) NOT NULL,
+				[CFIO] [nvarchar](500) NOT NULL,
+				[CFIOR] [nvarchar](500) NOT NULL,
+				[CPPos] [nvarchar](500) NOT NULL,
+				[CPDoc] [nvarchar](700) NOT NULL,
+				[UAddr] [nvarchar](700) NOT NULL,
+				[UPostAddr] [nvarchar](700) NOT NULL,
+				[accountNDS] [tinyint] NOT NULL,
+				[bankName] [nvarchar](700) NOT NULL,
+				[bankBIK] [char](9) NOT NULL,
+				[bankKor] [char](20) NOT NULL,
+				[bankAcc] [char](20) NOT NULL,
 				[emailActivationCode] [char](16) NOT NULL,
 				[emailActivated] [tinyint] NOT NULL,
                 CONSTRAINT [PK_ClientsPrivateData] PRIMARY KEY CLUSTERED
@@ -75,8 +75,8 @@ create table [dbo].[ClientsPrivateData]
             );
 			
 INSERT INTO [dbo].[ClientsPrivateData] 
-(phone, icq, serviceName, serviceURL, registerAs, emailActivationCode, emailActivated) 
-VALUES ('791234567',123456789,'Test Project','http://test.ru',2,'qwertyuiopasdfgh',1);
+(phone, icq, serviceName, serviceURL, accountType, firstName, secondName, WMR, PName, PFIO, PINN, POGRN, PSGRN, PSGRD, CName, CINN, CKPP, COGRN, CFIO, CFIOR, CPPos, CPDoc, UAddr, UPostAddr, accountNDS, bankName, bankBIK, bankKor, bankAcc, emailActivationCode, emailActivated) 
+VALUES ('+791234567',123456789,'Test Project','http://test.ru',2,'Иван','Иванов','R123456789012','ИП Иванов Иван Иванович','Иванов Иван Иванович','123456789012','123456789012345','12-123456789','01-01-2013','Юридическое имя организации согласно уставу или свидетельству о регистрации','0123456789','123456789','1234567890123','Иванов Иван Иванович','Иванова Ивана Ивановича','Генеральный директор','Устава/доверенности №_от_','Адрес, номер офиса, индекс','Адрес, номер офиса, индекс',18,'Полное наименование банка','123456789','12345678901234567890','12345678901234567890','qwertyuiopasdfgh',1);
 
 create table [dbo].[News]
             (
