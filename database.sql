@@ -133,7 +133,7 @@ create table [dbo].[Questions]
 			
 INSERT INTO [dbo].[Questions] 
 (text,client_ID,notification_ID,status) 
-VALUES (N'test',1,1,0);
+VALUES (N'test',1,1,0); 
 
 create table [dbo].[Withdrawals]
             (
