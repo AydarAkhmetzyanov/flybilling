@@ -38,7 +38,7 @@ create table [dbo].[ClientsPrivateData]
             (
 				[ID] [int] IDENTITY(1,1) NOT NULL,
 				[phone] [varchar](255) NOT NULL,
-				[icq] [int] NOT NULL,
+				[icq] [int] NULL,
 				[serviceName] [nvarchar](500) NOT NULL,
 				[serviceURL] [nvarchar](500) NOT NULL,
 				[accountType] [tinyint] NOT NULL,
@@ -76,7 +76,7 @@ create table [dbo].[ClientsPrivateData]
 			
 INSERT INTO [dbo].[ClientsPrivateData] 
 (phone, icq, serviceName, serviceURL, accountType, firstName, secondName, WMR, PName, PFIO, PINN, POGRN, PSGRN, PSGRD, CName, CINN, CKPP, COGRN, CFIO, CFIOR, CPPos, CPDoc, UAddr, UPostAddr, accountNDS, bankName, bankBIK, bankKor, bankAcc, emailActivationCode, emailActivated) 
-VALUES ('+791234567',123456789,'Test Project','http://test.ru',2,'Иван','Иванов','R123456789012','ИП Иванов Иван Иванович','Иванов Иван Иванович','123456789012','123456789012345','12-123456789','01-01-2013','Юридическое имя организации согласно уставу или свидетельству о регистрации','0123456789','123456789','1234567890123','Иванов Иван Иванович','Иванова Ивана Ивановича','Генеральный директор','Устава/доверенности №_от_','Адрес, номер офиса, индекс','Адрес, номер офиса, индекс',18,'Полное наименование банка','123456789','12345678901234567890','12345678901234567890','qwertyuiopasdfgh',1);
+VALUES ('+791234567', 123456789, N'Test Project', N'http://test.ru', 2, N'Иван', N'Иванов', 'R123456789012', N'ИП Иванов Иван Иванович', N'Иванов Иван Иванович', '123456789012', '123456789012345', '12-123456789', '01-01-2013', N'Юридическое имя организации согласно уставу или свидетельству о регистрации', '0123456789', '123456789', '1234567890123', N'Иванов Иван Иванович', N'Иванова Ивана Ивановича', N'Генеральный директор', N'Устава/доверенности №_от_', N'Адрес, номер офиса, индекс', N'Адрес, номер офиса, индекс', 18, N'Полное наименование банка', '123456789', '12345678901234567890', '12345678901234567890', 'qwertyuiopasdfgh', 1);
 
 create table [dbo].[News]
             (
