@@ -34,6 +34,7 @@ class API_helper
             if(!isset($_GET['client_ID'])){ API_helper::failResponse('client_ID option required',401); exit(); } 
             if(!isset($_GET['signature'])){ API_helper::failResponse('signature option required',401); exit(); } 
             if( md5(Clients::getInstance($_GET['client_ID'])->data['tech_key']) != $_GET['signature'] ){ API_helper::failResponse('wrong signature',401); exit(); } 
+            if( Clients::getInstance($_GET['client_ID'])->data['status']!=1 ){ API_helper::failResponse('client not active',401); exit(); } 
         }
         if(!isset($options['timezone'])){
             $options['timezone']=Clients::getInstance()->data['timezone'];
