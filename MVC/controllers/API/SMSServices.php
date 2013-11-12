@@ -22,7 +22,7 @@ class SMSServicesController extends Controller {
         break;
         }
 	}
-
+    
     protected function indexGET($options){
         $resultData=SMSServices::get($options);
         if($resultData!=FALSE){
