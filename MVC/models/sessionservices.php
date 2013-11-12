@@ -1,6 +1,6 @@
 <?php
 
-class SMSServices extends Model
+class SessionServices extends Model
 {
 
     public static function get($data){
@@ -11,14 +11,10 @@ class SMSServices extends Model
         } else {
             $tsql.=", [timestamp] as [localtimestamp]";
         }
-        $tsql.=" FROM ".SCHEMA.".[SMSServices] WHERE 1=1 ";
+        $tsql.=" FROM ".SCHEMA.".[SessionServices] WHERE 1=1 ";
         if(isset($data['ID'])){
             $tsql.=' AND [ID]=:ID';
             $params['ID']=$data['ID'];
-        }
-        if(isset($data['client_ID'])){
-            $tsql.=' AND [client_ID]=:client_ID';
-            $params['client_ID']=$data['client_ID'];
         }
         $statement = Database::getInstance()->prepare($tsql);
         try{

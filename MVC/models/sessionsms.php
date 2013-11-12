@@ -1,6 +1,6 @@
 <?php
 
-class SMS extends Model
+class SessionSMS extends Model
 {
 
     public static function get($data){
@@ -11,7 +11,7 @@ class SMS extends Model
         } else {
             $tsql.=", [timestamp] as [localtimestamp]";
         }
-        $tsql.=" FROM ".SCHEMA.".[SMS] WHERE 1=1 ";
+        $tsql.=" FROM ".SCHEMA.".[SessionSMS] WHERE 1=1 ";
         if(isset($data['ID'])){
             $tsql.=' AND [ID]=:ID';
             $params['ID']=$data['ID'];

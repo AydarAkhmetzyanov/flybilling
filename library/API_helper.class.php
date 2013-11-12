@@ -23,5 +23,21 @@ class API_helper
         $response['reason']=$error;
         echo json_encode($response);
     }
+
+    public static function authorize($options) {
+        if(API_helper::requested_with_ajax()){
+            if(!isset($_SESSION['isAdmin'])){
+                if(!isset($_SESSION['ID'])){ API_helper::failResponse('auth required',401); exit(); } 
+                $options['client_ID']=Clients::getInstance()->data['ID'];
+            }
+        } else {
+            if(!isset($_GET['client_ID'])){ API_helper::failResponse('client_ID option required',401); exit(); } 
+            if(!isset($_GET['signature'])){ API_helper::failResponse('signature option required',401); exit(); } 
+            if( md5(Clients::getInstance($_GET['client_ID'])->data['tech_key']) != $_GET['signature'] ){ API_helper::failResponse('wrong signature',401); exit(); } 
+        }
+        if(!isset($options['timezone'])){
+            $options['timezone']=Clients::getInstance()->data['timezone'];
+        }
+    }
 	
 }

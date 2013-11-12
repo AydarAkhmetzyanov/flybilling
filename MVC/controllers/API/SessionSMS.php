@@ -1,6 +1,6 @@
 <?php
 
-class SMSController extends Controller {
+class SessionSMSController extends Controller {
     
 	public function index($id=0){
         //possible get options from,to,client_ID,timezone,service_ID,signature,order,offset,limit
@@ -11,18 +11,12 @@ class SMSController extends Controller {
         if(isset($_GET['service_ID'])){
             $serviceOptions['ID']=$_GET['service_ID'];
             $serviceOptions['timezone']=$options['timezone'];
-            if( SMSServices::get($serviceOptions)[0]['client_ID'] != $options['client_ID'] ){ API_helper::failResponse('service owned by other client',403); exit(); } 
+            if( SessionServices::get($serviceOptions)[0]['client_ID'] != $options['client_ID'] ){ API_helper::failResponse('service owned by other client',403); exit(); } 
         }
         if($id!=0){
             $options['ID']=$id;
         }
-        $resultData=SMS::get($options);
-        if($resultData!=FALSE){
-            foreach($resultData as &$value){
-                unset($value['external_share']);
-            }
-        }
-        unset($value);
+        $resultData=SessionSMS::get($options);
         API_helper::successResponse($resultData);
 	}
 

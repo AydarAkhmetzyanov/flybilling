@@ -4,7 +4,7 @@
                 [msg] [nvarchar](240) NULL, 
                 [url] [nvarchar](720) NULL, 
                 [is_warning] [tinyint] DEFAULT 0,
-                [timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_ErrorLog] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -23,7 +23,7 @@ create table [dbo].[Clients]
                 [ip] [varchar](100) NULL, 
                 [country] [char](2) NULL, 
                 [status] [tinyint] DEFAULT 1, --0-deleted 1-active 2-baned
-                [timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_Clients] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -44,7 +44,7 @@ create table [dbo].[ClientsPrivateData]
 				[registerAs] [tinyint](1) NOT NULL,
 				[emailActivationCode] [char](16) NOT NULL,
 				[emailActivated] [tinyint](4) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_ClientsPrivateData] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -58,7 +58,7 @@ VALUES ('791234567',123456789,'Test Project','http://test.ru',2,'qwertyuiopasdfg
 create table [dbo].[News]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
 				[text_ru] [nvarchar](4000) NULL, 
                 [text_en] [nvarchar](4000) NULL, 
                 [title_ru] [nvarchar](255) NULL, 
@@ -76,7 +76,7 @@ VALUES (N'test',N'test',N'тест',N'test');
 create table [dbo].[Notifications]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
 				[text_ru] [nvarchar](4000) NULL, 
                 [text_en] [nvarchar](4000) NULL, 
                 [title_ru] [nvarchar](255) NULL, 
@@ -97,7 +97,7 @@ VALUES (N'test',N'test',N'test',N'test',1,NULL,0);
 create table [dbo].[Questions]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 [text] [nvarchar](4000) NULL, 
                 [client_ID] [int] DEFAULT NULL,
                 [notification_ID] [int] DEFAULT NULL,
@@ -115,7 +115,7 @@ VALUES (N'test',1,1,0);
 create table [dbo].[Withdrawals]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 [summ] [money] DEFAULT 0, 
                 [client_ID] [int] DEFAULT NULL,
                 [status] [tinyint] DEFAULT 1, --1-done 0-new
@@ -132,7 +132,7 @@ VALUES (10,1,0);
 create table [dbo].[Fines]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 [summ] [money] DEFAULT 0, 
                 [client_ID] [int] DEFAULT NULL,
                 [description] [nvarchar](4000) NULL, 
@@ -149,7 +149,7 @@ VALUES (5,1,N'fine from provider');
 create table [dbo].[FinesOur]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 [summ] [money] DEFAULT 0, 
                 [description] [nvarchar](4000) NULL, 
                 CONSTRAINT [PK_FinesOur] PRIMARY KEY CLUSTERED
@@ -165,7 +165,7 @@ VALUES (5,N'fine from provider');
 create table [dbo].[SMS]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
 				[response_text] [nvarchar](500) NULL, 
 				[response_is_sent] [tinyint] DEFAULT 0,
 				[response_is_async] [tinyint] DEFAULT 0,
@@ -214,7 +214,7 @@ create table [dbo].[SMSServices]
 				[client_ID] [int] DEFAULT NULL, 
 				[provider_ID] [int] DEFAULT NULL,
                 [is_pseudo] [tinyint] DEFAULT 0,
-                [timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_SMSServices] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -234,7 +234,7 @@ VALUES ('ru', N'kmbordd', 'response_static', 1, 'http://flybill.ru/test.php', 55
 create table [dbo].[SessionSMS]
             (
                 [ID] [bigint] IDENTITY(1,1) NOT NULL,
-				[timestamp] [datetime] DEFAULT GETUTCDATE(),
+				[timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
 				[text] [nvarchar](500) NULL,
 				[phone] [varchar](255) NULL, 
 				[country] [char](2) NULL, 
@@ -262,7 +262,7 @@ create table [dbo].[SessionServices]
 				[client_ID] [int] DEFAULT NULL, 
 				[provider_ID] [int] DEFAULT NULL,
                 [client_service_ID] [int] DEFAULT NULL,
-                [timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_SessionServices] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -294,7 +294,7 @@ create table [dbo].[SMSProviders]
                 [ID] [int] IDENTITY(1,1) NOT NULL,
                 [name] [nvarchar](500) NULL,
                 [is_async] [tinyint] DEFAULT 0,
-                [timestamp] [datetime] DEFAULT GETUTCDATE(),
+                [timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
 				[status] [tinyint] DEFAULT 1, --0-hidden 1-active
                 [code] [char](2) NULL,
                 CONSTRAINT [PK_SMSProviders] PRIMARY KEY CLUSTERED
