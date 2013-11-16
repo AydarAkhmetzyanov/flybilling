@@ -1,5 +1,4 @@
 <div id="is-main-page"></div>
-        
         <div class="top-promo">
             <div class="container">
                 <div class="hero-unit">
@@ -7,8 +6,8 @@
                     <div class="promo-descr span6">
                     <p>СМС биллинг FlyBill нацелен на современный интернет-бизнес, в котором происходит большое количество микроплатежей. FlyBill - молодая и быстроразвивающаяся компания, предоставляющая широкий спектр услуг, инновационную платформу и лучшие тарифы среди смс биллингов.</p>
                     <p>
-                        <a href="http://flybill.ru/reg" class="reg-btn">Регистрация</a>
-                        <a href="http://flybill.ru/login" class="enter-btn">Вход</a>
+                        <a href="/registration" class="reg-btn">Регистрация</a>
+                        <a href="/login" class="enter-btn">Вход</a>
                     </p>
                     </div>
                 </div>
