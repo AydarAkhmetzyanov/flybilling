@@ -36,7 +36,7 @@ class SMSServices extends Model
 
     public static function update($data){
         $params=array();
-        $requiredParams=array('response_static','is_dynamic','dynamic_responder_URL','prefix','share','status','ID');
+        $requiredParams=array('ID','response_static','is_dynamic','dynamic_responder_URL','prefix','share','status');
         foreach($data as $key=>$value){
             if(!in_array($key, $requiredParams)) {
                 unset($data[$key]);
@@ -44,11 +44,12 @@ class SMSServices extends Model
         }
         $fieldexists=true;
         foreach($requiredParams as $key=>$value){
-            if(!in_array($key, $data)) {
+            if(!in_array($value, $data)) {
                 $fieldexists = false;
+                $field=$key;
             }
         }
-        if($fieldexists==false){ API_helper::failResponse('fields required',400); exit(); }
+        if($fieldexists==false){ API_helper::failResponse('field required: '.$field,400); exit(); }
         $params=$data;
         $tsql="UPDATE ".SCHEMA.".[SMSServices] 
         SET [response_static]=:response_static,[is_dynamic]=:is_dynamic,[dynamic_responder_URL]=:dynamic_responder_URL,[prefix]=:prefix,[share]=:share,[status]=:status 
@@ -63,40 +64,33 @@ class SMSServices extends Model
         }
 	}
 
-    public static function delete($data){
-       
-	}
-
     public static function insert($data){
-        print_r($data);
-
-        $provideroptions=array();
-        
-        SMSProviders::
-
-
-        $requiredParams=array('country'=>get,
+        $providerOptions['ID']=$data['provider_ID'];
+        $providers=SMSProviders::get($providerOptions);
+        if($providers==FALSE){ API_helper::failResponse('provider not found',404); exit(); } 
+        $provider=$providers[0];
+        $requiredParams=array('country'=>$provider['code'],
                               'response_static'=>'default',
                               'is_dynamic'=>0,
                               'dynamic_responder_URL'=>'',
                               'prefix'=>self::generatePrefix($data['provider_ID'],2),
                               'share'=>DEFAULT_SHARE,
                               'status'=>2,
-                              'provider_ID'=>1,
-                              'client_ID'=>0);
+                              'provider_ID'=>$data['provider_ID'],
+                              'client_ID'=>$data['client_ID'],
+                              'is_pseudo'=>0);
         foreach($requiredParams as $key=>$value){
             if(isset($data[$key])) {
                 $requiredParams[$key]=$data[$key];
             }
         }
-        print_r($requiredParams); //todo
         $tsql="INSERT INTO ".SCHEMA.".[SMSServices] 
                (country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID,is_pseudo) 
-               VALUES ('ru', N'kmbord566', 'response_static', 1, 'http://flybill.ru/test.php', 55, 1, 1, 1, 0)  ;";
+               VALUES (:country, :prefix, :response_static, :is_dynamic, :dynamic_responder_URL, :share, :status, :client_ID, :provider_ID, :is_pseudo)  ;";
         $statement = Database::getInstance()->prepare($tsql);
         try{
-            //$statement->execute($requiredParams);
-            return TRUE;
+            $statement->execute($requiredParams);
+            return Database::getInstance()->lastInsertId();
         } catch(PDOException $e) {
             API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
             return FALSE;
@@ -115,7 +109,6 @@ class SMSServices extends Model
             API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
         }
         $corePrefixes = $statement->fetchAll(PDO::FETCH_ASSOC);
-        print_r($corePrefixes);
         foreach ($corePrefixes as $key=>$prefix) {
             if(!self::checkPrefixAvailability($prefix['prefix'])){
                 unset($corePrefixes[$key]);
@@ -124,11 +117,11 @@ class SMSServices extends Model
         if(count($corePrefixes)==0){ API_helper::failResponse('Out of free prefixes',500); exit(); }
         $prefix = $corePrefixes[0]['prefix']; //TODO: random select not first
         $resultPrefix=$prefix;
-        for ($i = 10; $i < 99; $i++) {
-            if(self::checkPrefixAvailability($prefix['prefix'].$i)){
-                $resultPrefix = $prefix['prefix'].$i;
-            }
+        $i = 10;
+        while (!self::checkPrefixAvailability($prefix.$i)) {
+            $i++;
         }
+        $resultPrefix = $prefix.$i;
         return $resultPrefix;
     }
 
@@ -136,7 +129,7 @@ class SMSServices extends Model
             $subq['prefix']=$prefix;
             $tsql="SELECT * 
                   FROM ".SCHEMA.".[SMSServices]
-                  WHERE [prefix]=:prefix;";
+                  WHERE [prefix]=:prefix AND status<>0;";
             $pst = Database::getInstance()->prepare($tsql);
             try{
                 $pst->execute($subq);

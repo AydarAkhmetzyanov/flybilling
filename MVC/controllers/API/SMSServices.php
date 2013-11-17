@@ -58,6 +58,16 @@ class SMSServicesController extends Controller {
         if($resultData==FALSE){ API_helper::failResponse('unknown error',500); exit(); } 
         API_helper::successResponse($resultData);
     }
+    
+    protected function indexDELETE($options){
+        API_helper::authorize($options);
+        $target=SMSServices::get($options)[0];
+        if( $target['client_ID'] != $options['client_ID'] ){ API_helper::failResponse('service owned by other client',403); exit(); } 
+        $target['status']=0;
+        $resultData=SMSServices::update($target);
+        if($resultData==FALSE){ API_helper::failResponse('unknown error',500); exit(); } 
+        API_helper::successResponse($resultData);
+    }
 
     protected function indexPOSTInsert($options){
         $fieldexists=true;
@@ -73,8 +83,5 @@ class SMSServicesController extends Controller {
         API_helper::successResponse($resultData);
     }
 
-    protected function indexDELETE($options){
-        
-    }
 
 }
