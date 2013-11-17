@@ -7,7 +7,7 @@ class SessionServices extends Model
         $params=array();
         $tsql="SELECT *";
         if(isset($data['timezone'])){
-            $tsql.=", dateadd(hour,$data[timezone],CAST([timestamp] AS datetime)) as [localtimestamp]";
+            $tsql.=", dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)) as [localtimestamp]";
         } else {
             $tsql.=", [timestamp] as [localtimestamp]";
         }

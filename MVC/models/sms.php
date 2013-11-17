@@ -7,7 +7,7 @@ class SMS extends Model
         //possible options id,from,to,client_ID,timezone,service_ID,signature,order,offset,limit
         $tsql="SELECT *";
         if(isset($data['timezone'])){
-            $tsql.=", dateadd(hour,$data[timezone],CAST([timestamp] AS smalldatetime)) as [localtimestamp]";
+            $tsql.=", dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)) as [localtimestamp]";
         } else {
             $tsql.=", [timestamp] as [localtimestamp]";
         }
@@ -26,7 +26,7 @@ class SMS extends Model
         }
         if(isset($data['from'])){
             if(isset($data['timezone'])){
-                $tsql.=" AND dateadd(hour,$data[timezone],[timestamp])>=CAST(:from AS smalldatetime)";
+                $tsql.=" AND dateadd(minute,$data[timezone]*60,[timestamp])>=CAST(:from AS smalldatetime)";
             } else {
                 $tsql.=" AND [timestamp]>=CAST(:from AS smalldatetime)";
             }
@@ -34,7 +34,7 @@ class SMS extends Model
         }
         if(isset($data['to'])){
             if(isset($data['timezone'])){
-                $tsql.=" AND dateadd(hour,$data[timezone],[timestamp])<=CAST(:to AS smalldatetime)";
+                $tsql.=" AND dateadd(minute,$data[timezone]*60,[timestamp])<=CAST(:to AS smalldatetime)";
             } else {
                 $tsql.=" AND [timestamp]>=CAST(:to AS smalldatetime)";
             }
