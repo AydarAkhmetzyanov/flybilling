@@ -316,6 +316,7 @@ create table [dbo].[SMSProviders]
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
                 [name] [nvarchar](500) NULL,
+                [description] [nvarchar](2000) NULL,
                 [is_async] [tinyint] DEFAULT 0,
                 [timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
 				[status] [tinyint] DEFAULT 1, --0-hidden 1-active
@@ -327,8 +328,8 @@ create table [dbo].[SMSProviders]
             );
 			
 INSERT INTO [dbo].[SMSProviders] 
-(name, is_async, status, code) 
-VALUES (N'pl3', 1, 1, 'ru');
+(name, description, is_async, status, code) 
+VALUES (N'pl3', N'IFree, лучшие отчисления и большой выбор коротких номеров', 1, 1, 'ru');
 	
 
 

@@ -70,6 +70,11 @@ class SMSServices extends Model
     public static function insert($data){
         print_r($data);
 
+        $provideroptions=array();
+        
+        SMSProviders::
+
+
         $requiredParams=array('country'=>get,
                               'response_static'=>'default',
                               'is_dynamic'=>0,
@@ -90,7 +95,7 @@ class SMSServices extends Model
                VALUES ('ru', N'kmbord566', 'response_static', 1, 'http://flybill.ru/test.php', 55, 1, 1, 1, 0)  ;";
         $statement = Database::getInstance()->prepare($tsql);
         try{
-            $statement->execute($requiredParams);
+            //$statement->execute($requiredParams);
             return TRUE;
         } catch(PDOException $e) {
             API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
