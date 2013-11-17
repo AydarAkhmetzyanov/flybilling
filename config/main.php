@@ -12,3 +12,4 @@ define ('DEFAULT_SECONDARY_CONTROLLER_NAME','index');
 define ('DEFAULT_LANGUAGE','ru');
 
 define('SCHEMA','[dbo]');
+define('DEFAULT_SHARE',75);

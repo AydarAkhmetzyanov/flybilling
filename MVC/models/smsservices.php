@@ -69,27 +69,81 @@ class SMSServices extends Model
 
     public static function insert($data){
         print_r($data);
-        $requiredParams=array('response_static'=>'default',
+
+        $requiredParams=array('country'=>get,
+                              'response_static'=>'default',
                               'is_dynamic'=>0,
                               'dynamic_responder_URL'=>'',
-                              'prefix'=>self::generatePrefix($data->provider_ID),
-                              'share'=>75,
+                              'prefix'=>self::generatePrefix($data['provider_ID'],2),
+                              'share'=>DEFAULT_SHARE,
                               'status'=>2,
                               'provider_ID'=>1,
                               'client_ID'=>0);
         foreach($requiredParams as $key=>$value){
-            if(in_array($key, $data)) {
+            if(isset($data[$key])) {
                 $requiredParams[$key]=$data[$key];
             }
         }
-        print_r($requiredParams);
-
-
-
+        print_r($requiredParams); //todo
+        $tsql="INSERT INTO ".SCHEMA.".[SMSServices] 
+               (country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID,is_pseudo) 
+               VALUES ('ru', N'kmbord566', 'response_static', 1, 'http://flybill.ru/test.php', 55, 1, 1, 1, 0)  ;";
+        $statement = Database::getInstance()->prepare($tsql);
+        try{
+            $statement->execute($requiredParams);
+            return TRUE;
+        } catch(PDOException $e) {
+            API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
+            return FALSE;
+        }
 	}
 
-    public static function generatePrefix($provider){
-        return $provider;
+    public static function generatePrefix($provider_ID,$length=2){
+        $SMSCorePrefixesparams['provider_ID']=$provider_ID;
+        $tsql="SELECT * 
+               FROM ".SCHEMA.".[SMSCorePrefixes]
+               WHERE [provider_ID]=:provider_ID;";
+        $statement = Database::getInstance()->prepare($tsql);
+        try{
+            $statement->execute($SMSCorePrefixesparams);
+        } catch(PDOException $e) {
+            API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
+        }
+        $corePrefixes = $statement->fetchAll(PDO::FETCH_ASSOC);
+        print_r($corePrefixes);
+        foreach ($corePrefixes as $key=>$prefix) {
+            if(!self::checkPrefixAvailability($prefix['prefix'])){
+                unset($corePrefixes[$key]);
+            }
+        }
+        if(count($corePrefixes)==0){ API_helper::failResponse('Out of free prefixes',500); exit(); }
+        $prefix = $corePrefixes[0]['prefix']; //TODO: random select not first
+        $resultPrefix=$prefix;
+        for ($i = 10; $i < 99; $i++) {
+            if(self::checkPrefixAvailability($prefix['prefix'].$i)){
+                $resultPrefix = $prefix['prefix'].$i;
+            }
+        }
+        return $resultPrefix;
+    }
+
+    public static function checkPrefixAvailability($prefix){
+            $subq['prefix']=$prefix;
+            $tsql="SELECT * 
+                  FROM ".SCHEMA.".[SMSServices]
+                  WHERE [prefix]=:prefix;";
+            $pst = Database::getInstance()->prepare($tsql);
+            try{
+                $pst->execute($subq);
+            } catch(PDOException $e) {
+                API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
+            }
+            $sresult = $pst->fetchAll(PDO::FETCH_ASSOC);
+            if(count($sresult)>0){
+                return FALSE;
+            } else {
+                return TRUE;
+            }
     }
 
 }
