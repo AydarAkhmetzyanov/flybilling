@@ -234,4 +234,3 @@ class Pass
         return $status === 0;
     }
 }
-?>

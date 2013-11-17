@@ -27,14 +27,15 @@
 		<div class="control-group">
 			<label class="control-label">Введите ваш пароль</label>
 			<div class="controls">
-				<input required name="password" type="password" placeholder="От 6 символов">
+				<input required pattern=".{6,}" name="password" onkeyup="passwordValidate();" onblur="passwordValidate();" type="password" placeholder="Минимум 6 символов">
 			</div>
 		</div>
 		
 		<div class="control-group">
 			<label class="control-label">Подтвердите пароль</label>
 			<div class="controls">
-				<input required type="password" placeholder="">
+				<input required pattern=".{6,}" name="passwordRepeat" onkeyup="passwordValidate();" onblur="passwordValidate();" type="password" placeholder="">
+				<span id="passwordCheck"></span>
 			</div>
 		</div>
 		
@@ -327,7 +328,7 @@
 		<div id="regFinish" class="control-group">
 			<div class="controls">
 				<label class="checkbox">
-				<input onclick="$('#completeReg').show();" type="checkbox">Я согласен/согласна на обработку и хранение персональных данных для подключения услуг.</input>
+				<input onclick="showSubmit();" id="submitCheck" type="checkbox">Я согласен/согласна на обработку и хранение персональных данных для подключения услуг.</input>
 				</label>
 				<button type="submit" id="completeReg" style="display: none;" class="btn">Завершить регистрацию</button>
 			</div>

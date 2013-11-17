@@ -2,6 +2,29 @@ $(document).ready(function () {
     closeAll();
 });
 
+function passwordValidate(){
+	var valueX = $( "input[name='password']" ).val();
+    var valueY = $( "input[name='passwordRepeat']" ).val();
+	if (valueX || valueY){
+		if (valueX != valueY) {
+			$( "#passwordCheck" ).css( "color", "red" );
+			$( "#passwordCheck" ).html('<em>Пароли не совпадают</em>');
+			$('#completeReg').hide();
+			return false;
+		}
+		else {
+			$( "#passwordCheck" ).css( "color", "green" );
+			$( "#passwordCheck" ).html('<em>Пароли совпадают</em>');
+			if (document.getElementById('submitCheck').checked) $('#completeReg').show();
+			return true;
+		}
+	}
+	else{
+		$( "#passwordCheck" ).text('');
+	}
+	return false;
+}
+
 function closeAll(){
     $('#personData').hide();
     $('#ppData').hide();
@@ -89,3 +112,11 @@ function openCompany(){
     $('input[name="bankKor"]').attr("required","required");
     $('input[name="bankAcc"]').attr("required","required");
 }
+
+function showSubmit() {
+        if (document.getElementById('submitCheck').checked) {
+			if (passwordValidate()) $('#completeReg').show();
+        } else {
+		    $('#completeReg').hide();
+        }
+    }
