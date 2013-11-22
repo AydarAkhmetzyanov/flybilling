@@ -44,9 +44,9 @@ class SMSServices extends Model
         }
         $fieldexists=true;
         foreach($requiredParams as $key=>$value){
-            if(!in_array($value, $data)) {
+            if(!in_array($value,array_keys($data))) {
                 $fieldexists = false;
-                $field=$key;
+                $field=$value;
             }
         }
         if($fieldexists==false){ API_helper::failResponse('field required: '.$field,400); exit(); }
