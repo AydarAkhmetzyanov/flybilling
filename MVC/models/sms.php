@@ -15,17 +15,17 @@ class SMS extends Model
             }
         } else {
             switch ($data['group']) {
-                case 'day':
-                    $grouppart="CONVERT(CHAR(13), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
-                    break;
                 case 'hour':
                     $grouppart="CONVERT(CHAR(13), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
                     break;
+                case 'day':
+                    $grouppart="CONVERT(CHAR(10), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
+                    break;
                 case 'month':
-                    $grouppart="CONVERT(CHAR(13), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
+                    $grouppart="CONVERT(CHAR(7), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
                     break;
                 case 'year':
-                    $grouppart="CONVERT(CHAR(13), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
+                    $grouppart="CONVERT(CHAR(4), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
                     break;
             }
             $tsql.=$grouppart." [localtimestamp],sum([external_share]) AS [external_share],sum([client_share]) AS [client_share],count([ID]) AS [ID] ";

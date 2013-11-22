@@ -5,11 +5,30 @@ class SessionSMS extends Model
 
     public static function get($data){
         //possible options id,from,to,client_ID,timezone,service_ID,signature,order,offset,limit
-        $tsql="SELECT *";
-        if(isset($data['timezone'])){
-            $tsql.=", dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)) as [localtimestamp]";
+        $tsql="SELECT ";
+        if(!isset($data['group'])){
+            $tsql.='*';
+            if(isset($data['timezone'])){
+                $tsql.=", dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)) as [localtimestamp]";
+            } else {
+                $tsql.=", [timestamp] as [localtimestamp]";
+            }
         } else {
-            $tsql.=", [timestamp] as [localtimestamp]";
+            switch ($data['group']) {
+                case 'hour':
+                    $grouppart="CONVERT(CHAR(13), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
+                    break;
+                case 'day':
+                    $grouppart="CONVERT(CHAR(10), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
+                    break;
+                case 'month':
+                    $grouppart="CONVERT(CHAR(7), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
+                    break;
+                case 'year':
+                    $grouppart="CONVERT(CHAR(4), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
+                    break;
+            }
+            $tsql.=$grouppart." [localtimestamp],sum([external_share]) AS [external_share],sum([client_share]) AS [client_share],count([ID]) AS [ID] ";
         }
         $tsql.=" FROM ".SCHEMA.".[SessionSMS] WHERE 1=1 ";
         if(isset($data['ID'])){
@@ -40,10 +59,13 @@ class SessionSMS extends Model
             }
             $params['to']=$data['to'];
         }
+        if(isset($data['group'])){
+            $tsql.=" GROUP BY ".$grouppart;
+        }
         if(isset($data['order'])){
             $tsql.=" ORDER BY [$data[order]]";
         } else {
-            $tsql.=' ORDER BY [ID]';
+            $tsql.=' ORDER BY [localtimestamp]';
         }
         if(isset($data['offset'])){
             $tsql.=" OFFSET $data[offset] ROW ";
