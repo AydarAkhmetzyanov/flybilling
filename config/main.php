@@ -12,5 +12,5 @@ define ('DEFAULT_SECONDARY_CONTROLLER_NAME','index');
 define ('DEFAULT_LANGUAGE','ru');
 
 define('SCHEMA','[dbo]');
-print_r($_ENV);
+define('PREFIX','[fb]');
 define('DEFAULT_SHARE',75);
