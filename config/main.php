@@ -12,5 +12,5 @@ define ('DEFAULT_SECONDARY_CONTROLLER_NAME','index');
 define ('DEFAULT_LANGUAGE','ru');
 
 define('SCHEMA','[dbo]');
-define('PREFIX','[fb]');
+define('PREFIX','fb_');
 define('DEFAULT_SHARE',75);
