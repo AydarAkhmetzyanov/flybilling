@@ -21,3 +21,5 @@ define('DEFAULT_SHARE',75);
 print_r($_ENV);
 
 print_r(getenv('SCHEMA'));
+
+print_R($_SERVER);
