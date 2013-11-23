@@ -3,7 +3,7 @@
 session_start();
 header("Content-type: text/html; charset=utf-8");
 
-define ('DEVELOPMENT_ENVIRONMENT',true);
+define ('DEVELOPMENT_ENVIRONMENT',getenv('DEVELOPMENT_ENVIRONMENT'));
 
 if(DEVELOPMENT_ENVIRONMENT==true){
     error_reporting(1); ini_set('display_errors', 'on'); error_reporting( E_ALL | !E_STRICT );   
@@ -13,13 +13,7 @@ if(DEVELOPMENT_ENVIRONMENT==true){
 
 define ('DEFAULT_CONTROLLER_PATH','index');
 define ('DEFAULT_SECONDARY_CONTROLLER_NAME','index');
-define ('DEFAULT_LANGUAGE','ru');
+define ('DEFAULT_LANGUAGE',getenv('DEFAULT_LANGUAGE'));
 
-define('SCHEMA','[dbo]');
-define('DEFAULT_SHARE',75);
-
-print_r($_ENV);
-
-print_r(getenv('SCHEMA'));
-
-print_R($_SERVER);
+define('SCHEMA',getenv('SCHEMA'));
+define('DEFAULT_SHARE',getenv('DEFAULT_SHARE'));
