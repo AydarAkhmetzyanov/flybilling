@@ -54,7 +54,6 @@ class Clients extends Model
 	
 	public static function registration($secret)
 	{
-		global $db;
 		$data = array(
 			$_POST['email'], //email
 			Pass::generateString(16), //tech_key
@@ -64,7 +63,9 @@ class Clients extends Model
 			$_POST['language'], //language
 			$_SERVER['REMOTE_ADDR'], //ip
 			$_POST['language'], //country
-			1 //status
+			1, //status
+			$secret,
+			0
 		);
 		
 		$data2 = array(
@@ -96,51 +97,139 @@ class Clients extends Model
 			$_POST['bankName'],
 			$_POST['bankBIK'],
 			$_POST['bankKor'],
-			$_POST['bankAcc'],
-			$secret,
-			0
+			$_POST['bankAcc']
 		);
 		
-		$tsql="INSERT INTO ".SCHEMA.".[Clients] 
-               (email, tech_key, balance, password, timezone, language, ip, country, status) 
-               VALUES (?,?,?,?,?,?,?,?,?);";
-		$tsql2="INSERT INTO ".SCHEMA.".[ClientsPrivateData] 
-               (phone, icq, serviceName, serviceURL, accountType, firstName, secondName, WMR, PName, PFIO, PINN, POGRN, PSGRN, PSGRD, CName, CINN, CKPP, COGRN, CFIO, CFIOR, CPPos, CPDoc, UAddr, UPostAddr, accountNDS, bankName, bankBIK, bankKor, bankAcc, emailActivationCode, emailActivated) 
-               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
-        $statement = Database::getInstance()->prepare($tsql);
+		$tsql       = "INSERT INTO " . SCHEMA . ".[Clients] 
+               (email, tech_key, balance, password, timezone, language, ip, country, status, emailActivationCode, emailActivated) 
+               VALUES (?,?,?,?,?,?,?,?,?,?,?);";
+		$tsql2      = "INSERT INTO " . SCHEMA . ".[ClientsPrivateData] 
+               (phone, icq, serviceName, serviceURL, accountType, firstName, secondName, WMR, PName, PFIO, PINN, POGRN, PSGRN, PSGRD, CName, CINN, CKPP, COGRN, CFIO, CFIOR, CPPos, CPDoc, UAddr, UPostAddr, accountNDS, bankName, bankBIK, bankKor, bankAcc) 
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+		$statement  = Database::getInstance()->prepare($tsql);
 		$statement2 = Database::getInstance()->prepare($tsql2);
-        try{
-            $statement->execute($data);
+		try {
+			$statement->execute($data);
 			$statement2->execute($data2);
-            return TRUE;
-        } catch(PDOException $e) {
-            API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
-            return FALSE;
-        }
+			return TRUE;
+		}
+		catch (PDOException $e) {
+			API_helper::failResponse($e->getMessage() . ' SQL query: ' . $tsql, 500);
+			exit();
+			return FALSE;
+		}
 	}
 	
 	public static function regComplete($secret, $email)
 	{
-		/*global $db;
-		$stmt = $db->prepare('
-			    UPDATE `users` SET `emailActivated`=1 WHERE `email` = :email and `emailActivationCode` = :emailActivationCode LIMIT 1
-		    ');
-		$stmt->execute(array(
-			'email' => $email,
-			'emailActivationCode' => $secret
-		));
-		$stmt = $db->prepare('
-			    SELECT `id`, `email`, `accountType`, `serviceName` FROM `users` WHERE `email` = :email
-		    ');
-		$stmt->execute(array(
-			'email' => $email
-		));
-		$stmt->setFetchMode(PDO::FETCH_ASSOC);
-		$table                   = $stmt->fetch();
-		$_SESSION['id']          = $table['id'];
-		$_SESSION['email']       = $table['email'];
-		$_SESSION['accountType'] = $table['accountType'];
-		$_SESSION['serviceName'] = $table['serviceName']; */
+		try {
+			$params = array(
+				'email' => $email,
+				'emailActivationCode' => $secret
+			);
+			
+			$tsql      = "UPDATE " . SCHEMA . ".[Clients] SET [emailActivated] = 1 WHERE [email] = :email AND [emailActivationCode] = :emailActivationCode;";
+			$statement = Database::getInstance()->prepare($tsql);
+			$statement->execute($params);
+			
+			$tsql2      = "SELECT [id] FROM " . SCHEMA . ".[Clients] WHERE [email] = :email;";
+			$statement2 = Database::getInstance()->prepare($tsql2);
+			$statement2->execute(array(
+				'email' => $email
+			));
+			
+			$statement2->setFetchMode(PDO::FETCH_ASSOC);
+			$table             = $statement2->fetch();
+			$_SESSION['id']    = $table['id'];
+			$_SESSION['email'] = $email;
+			
+			$tsql3      = "SELECT [accountType], [serviceName] FROM " . SCHEMA . ".[ClientsPrivateData] WHERE [id] = :id;";
+			$statement3 = Database::getInstance()->prepare($tsql3);
+			$statement3->execute(array(
+				'id' => $_SESSION['id']
+			));
+			
+			$statement3->setFetchMode(PDO::FETCH_ASSOC);
+			$table3                  = $statement3->fetch();
+			$_SESSION['accountType'] = $table3['accountType'];
+			$_SESSION['serviceName'] = $table3['serviceName'];
+			
+			return TRUE;
+		}
+		catch (PDOException $e) {
+			API_helper::failResponse($e->getMessage(), 500);
+			exit();
+			return FALSE;
+		}
+	}
+	
+	public static function checkLoginData($email, $password)
+	{		
+		try {
+			$tsql      = "SELECT [id], [password], [emailActivated] FROM " . SCHEMA . ".[Clients] WHERE [email] = :email;";
+			$statement = Database::getInstance()->prepare($tsql);
+			$statement->execute(array(
+				'email' => $email
+			));
+		}
+		catch (PDOException $e) {
+			$arr = array(
+				'error' => 1,
+				'uid' => 0,
+				'password' => 0
+			);
+			return $arr;
+		}
+		
+		$statement->setFetchMode(PDO::FETCH_ASSOC);
+		$table  = $statement->fetch();
+		$tempId = $table['id'];
+		
+		try {
+			$tsql2      = "SELECT [accountType], [serviceName] FROM " . SCHEMA . ".[ClientsPrivateData] WHERE [id] = :id;";
+			$statement2 = Database::getInstance()->prepare($tsql2);
+			$statement2->execute(array(
+				'id' => $tempId
+			));
+		}
+		catch (PDOException $e) {
+			$arr = array(
+				'error' => 1,
+				'uid' => 0,
+				'password' => 0
+			);
+			return $arr;
+		}
+		
+		$statement2->setFetchMode(PDO::FETCH_ASSOC);
+		$table2 = $statement2->fetch();
+			
+			if (Pass::password_verify($password, $table['password'])) {
+				if ($table['emailActivated'] == 1) {
+					$arr = array(
+						'error' => 0,
+						'uid' => $table['id'],
+						'password' => $table['password']
+					);
+					$_SESSION['id']          = $table['id'];
+					$_SESSION['email']       = $email;
+					$_SESSION['accountType'] = $table2['accountType'];
+					$_SESSION['serviceName'] = $table2['serviceName'];
+				} else {
+					$arr = array(
+						'error' => 3,
+						'uid' => 0,
+						'password' => 0
+					);
+				}
+			} else {
+				$arr = array(
+					'error' => 2,
+					'uid' => 0,
+					'password' => 0
+				);
+			}
+		return $arr;
 	}
 	
 }

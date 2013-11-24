@@ -14,7 +14,7 @@ function onLogIn(data)
     switch(oresult.error)
 {
 case 0:
- window.location="/client/";
+  window.location="/client/";
   break;
 case 1:
   alert("Email не найден");
@@ -32,6 +32,6 @@ default:
 
 function demoAccess() {
     $('#inputEmail').attr('value','test@flybill.ru');
-    $('#inputPassword').attr('value','test');
+    $('#inputPassword').attr('value','testtest');
     logIn();
 }
