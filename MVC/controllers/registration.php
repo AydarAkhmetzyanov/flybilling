@@ -41,7 +41,7 @@ class RegistrationController extends Controller
             $secret = Pass::generateString(16);
             Clients::registration($secret);
             $activateLink = 'http://flybill.ru/reg/complete/' . $secret . '/' . $_POST['email'];
-            Mail::sendEmailValidation($_POST['email'], $activateLink);
+            Mail::send($_POST['email']);
             echo "<h1>На вашу почту отправлено письмо подтверждения регистрации, пройдите по ссылке в письме для завершения.</h1>";
             echo '</div>';
             renderView('footer', $data);
