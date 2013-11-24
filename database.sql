@@ -23,6 +23,8 @@ create table [dbo].[Clients]
                 [ip] [varchar](100) NULL, 
                 [country] [char](2) NULL, 
                 [status] [tinyint] DEFAULT 1, --0-deleted 1-active 2-baned
+				[emailActivationCode] [char](16) NOT NULL,
+				[emailActivated] [tinyint] NOT NULL,
                 [timestamp] [smalldatetime] DEFAULT GETUTCDATE(),
                 CONSTRAINT [PK_Clients] PRIMARY KEY CLUSTERED
                     (
@@ -31,8 +33,8 @@ create table [dbo].[Clients]
             );
 
 INSERT INTO [dbo].[Clients] 
-(email, tech_key, balance, password, timezone, language, ip, country, status) 
-VALUES (N'aydar@creativestripe.ru',N'1234',10,'$2a$04$wM.DTWJ4ejRsn9bW.4buxuvwrMTj2GMFML3BF9CFv.6XCBbKkrdx2',4.0,'ru','87.117.176.162','ru',1);
+(email, tech_key, balance, password, timezone, language, ip, country, status, emailActivationCode, emailActivated) 
+VALUES (N'aydar@creativestripe.ru',N'1234',10,'$2a$04$wM.DTWJ4ejRsn9bW.4buxuvwrMTj2GMFML3BF9CFv.6XCBbKkrdx2',4.0,'ru','87.117.176.162','ru',1, 'qwertyuiopasdfgh', 1);
 
 create table [dbo].[ClientsPrivateData] 
             (
@@ -66,8 +68,6 @@ create table [dbo].[ClientsPrivateData]
 				[bankBIK] [char](9) NULL,
 				[bankKor] [char](20) NULL,
 				[bankAcc] [char](20) NULL,
-				[emailActivationCode] [char](16) NOT NULL,
-				[emailActivated] [tinyint] NOT NULL,
                 CONSTRAINT [PK_ClientsPrivateData] PRIMARY KEY CLUSTERED
                     (
                         [ID] ASC
@@ -75,8 +75,8 @@ create table [dbo].[ClientsPrivateData]
             );
 			
 INSERT INTO [dbo].[ClientsPrivateData] 
-(phone, icq, serviceName, serviceURL, accountType, firstName, secondName, WMR, PName, PFIO, PINN, POGRN, PSGRN, PSGRD, CName, CINN, CKPP, COGRN, CFIO, CFIOR, CPPos, CPDoc, UAddr, UPostAddr, accountNDS, bankName, bankBIK, bankKor, bankAcc, emailActivationCode, emailActivated) 
-VALUES ('+791234567', 123456789, N'Test Project', N'http://test.ru', 2, N'Иван', N'Иванов', 'R123456789012', N'ИП Иванов Иван Иванович', N'Иванов Иван Иванович', '123456789012', '123456789012345', '12-123456789', '01-01-2013', N'Юридическое имя организации согласно уставу или свидетельству о регистрации', '0123456789', '123456789', '1234567890123', N'Иванов Иван Иванович', N'Иванова Ивана Ивановича', N'Генеральный директор', N'Устава/доверенности №_от_', N'Адрес, номер офиса, индекс', N'Адрес, номер офиса, индекс', 18, N'Полное наименование банка', '123456789', '12345678901234567890', '12345678901234567890', 'qwertyuiopasdfgh', 1);
+(phone, icq, serviceName, serviceURL, accountType, firstName, secondName, WMR, PName, PFIO, PINN, POGRN, PSGRN, PSGRD, CName, CINN, CKPP, COGRN, CFIO, CFIOR, CPPos, CPDoc, UAddr, UPostAddr, accountNDS, bankName, bankBIK, bankKor, bankAcc) 
+VALUES ('+791234567', 123456789, N'Test Project', N'http://test.ru', 2, N'Иван', N'Иванов', 'R123456789012', N'ИП Иванов Иван Иванович', N'Иванов Иван Иванович', '123456789012', '123456789012345', '12-123456789', '01-01-2013', N'Юридическое имя организации согласно уставу или свидетельству о регистрации', '0123456789', '123456789', '1234567890123', N'Иванов Иван Иванович', N'Иванова Ивана Ивановича', N'Генеральный директор', N'Устава/доверенности №_от_', N'Адрес, номер офиса, индекс', N'Адрес, номер офиса, индекс', 18, N'Полное наименование банка', '123456789', '12345678901234567890', '12345678901234567890');
 
 create table [dbo].[News]
             (
