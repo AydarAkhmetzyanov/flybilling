@@ -4,11 +4,9 @@ class Notifications extends Model
 {
 
     public static function get($data){
-        if(isset($data['mark_read']) and $data['mark_read']==false){
+        if(isset($data['mark_read']) and $data['mark_read']==true and isset($data['client_ID'])){
             
-        } else {
-            
-        }
+        } 
         $params=array();
         $tsql="SELECT *";
         if(isset($data['timezone'])){

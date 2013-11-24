@@ -11,7 +11,7 @@
                     )
             );
 
-create table [dbo].[Clients] 
+create table [dbo].[Clients]  
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
                 [email] [nvarchar](240) NULL,
