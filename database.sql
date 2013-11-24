@@ -116,6 +116,9 @@ create table [dbo].[Notifications]
 INSERT INTO [dbo].[Notifications] 
 (text_ru,text_en,title_ru,title_en,client_ID,notification_ID,status) 
 VALUES (N'test',N'test',N'test',N'test',1,NULL,0);
+INSERT INTO [dbo].[Notifications] 
+(text_ru,text_en,title_ru,title_en,client_ID,notification_ID,status) 
+VALUES (N'test2',N'test2',N'test2',N'test2',1,1,0);
 
 create table [dbo].[Questions]
             (
