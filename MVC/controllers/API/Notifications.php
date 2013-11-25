@@ -38,12 +38,6 @@ class NotificationsController extends Controller {
 
     protected function indexGETTicket($options){
         $resultData=Tickets::get($options);
-        if($resultData!=FALSE){
-            foreach($resultData as &$value){
-                unset($value['share']);
-            }
-        }
-        unset($value);
         API_helper::successResponse($resultData);
     }
 
@@ -53,29 +47,19 @@ class NotificationsController extends Controller {
     }
 
     protected function indexPOSTInsertQuestion($options){
-        $fieldexists=true;
-        $required=array('provider_ID');
-        foreach($required as $key=>$value){
-            if(!in_array($value, array_keys($options))) {
-                $fieldexists = false;
-            }
-        }
-        if($fieldexists==false){ API_helper::failResponse('options required',400); exit(); }
-        $resultData=SMSServices::insert($options);
+        if(!isset($_POST['text'])){ API_helper::failResponse('option required: text',400); exit(); }
+        $options['text']=$_POST['text'];
+        $resultData=Tickets::insert($options);
         if($resultData==FALSE){ API_helper::failResponse('unknown error',500); exit(); } 
         API_helper::successResponse($resultData);
     }
 
     protected function indexPOSTInsertTicket($options){
-        $fieldexists=true;
-        $required=array('provider_ID');
-        foreach($required as $key=>$value){
-            if(!in_array($value, array_keys($options))) {
-                $fieldexists = false;
-            }
-        }
-        if($fieldexists==false){ API_helper::failResponse('options required',400); exit(); }
-        $resultData=SMSServices::insert($options);
+        if(!isset($_POST['text'])){ API_helper::failResponse('option required: text',400); exit(); }
+        if(!isset($_POST['title'])){ API_helper::failResponse('option required: text',400); exit(); }
+        $options['text']=$_POST['text'];
+        $options['title']=$_POST['title'];
+        $resultData=Notifications::insert($options);
         if($resultData==FALSE){ API_helper::failResponse('unknown error',500); exit(); } 
         API_helper::successResponse($resultData);
     }
