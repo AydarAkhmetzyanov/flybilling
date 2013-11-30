@@ -16,26 +16,27 @@
             <div class="polygon-2" data-stellar-ratio="0.3"  data-stellar-vertical-offset="250"></div>
 
             <div class="content-inner">
-	<form action="/registration/submit" method="post" class="form-horizontal">		
+	<form action="/registration/submit" name="reg" method="post" class="form-horizontal">	
 		<div class="control-group">
-			<label class="control-label">Введите ваш Email</label>
+			<label class="control-label">Введите ваш Email<span class="red">*</span></label>
 			<div class="controls">
-				<input required name="email" type="email" placeholder="Email">
+				<input required name="email" type="email" placeholder="Email" onchange="responseEmail();">
+				<span id="emailCheck" class="datacheck"></span>
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<label class="control-label">Введите ваш пароль</label>
+			<label class="control-label">Введите ваш пароль<span class="red">*</span></label>
 			<div class="controls">
 				<input required pattern=".{6,}" name="password" onkeyup="passwordValidate();" onblur="passwordValidate();" type="password" placeholder="Минимум 6 символов">
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<label class="control-label">Подтвердите пароль</label>
+			<label class="control-label">Подтвердите пароль<span class="red">*</span></label>
 			<div class="controls">
 				<input required pattern=".{6,}" name="passwordRepeat" onkeyup="passwordValidate();" onblur="passwordValidate();" type="password" placeholder="">
-				<span id="passwordCheck"></span>
+				<span id="passwordCheck" class="datacheck"></span>
 			</div>
 		</div>
 		
@@ -91,7 +92,7 @@
 		</div>
 		
 		<div class="control-group">
-			<label class="control-label">Контактный телефон</label>
+			<label class="control-label">Контактный телефон<span class="red">*</span></label>
 			<div class="controls">
 				<input required name="phone" type="tel" placeholder="+7 900 909-51-33">
 			</div>
@@ -100,26 +101,26 @@
 		<div class="control-group">
 			<label class="control-label">ICQ</label>
 			<div class="controls">
-				<input required name="icq" type="text" placeholder="">
+				<input name="icq" pattern="[0-9]{5,9}" maxlength="9" type="text" placeholder="">
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<label class="control-label">Название проекта</label>
+			<label class="control-label">Название проекта<span class="red">*</span></label>
 			<div class="controls">
 				<input required name="serviceName" type="text" placeholder="Интернет-магазин">
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<label class="control-label">Адрес сайта</label>
+			<label class="control-label">Адрес сайта<span class="red">*</span></label>
 			<div class="controls">
 				<input required type="url" name="serviceURL" placeholder="http://example.ru">
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<label class="control-label">Зарегистрироваться как</label>
+			<label class="control-label">Зарегистрироваться как<span class="red">*</span></label>
 			<div class="controls">
 				<label class="radio">
 				<input onclick="openCompany();" type="radio" name="accountType" id="optionsAccountCompany" value="1">
@@ -137,21 +138,21 @@
 			<legend>Платёжные данные физического лица</legend>
 			
 			<div class="control-group">
-				<label class="control-label">Имя</label>
+				<label class="control-label">Имя<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="firstName" type="text" placeholder="Имя">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Фамилия</label>
+				<label class="control-label">Фамилия<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="secondName" type="text" placeholder="Фамилия">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Номер кошелька WMR начинается с заглавной R</label>
+				<label class="control-label">Номер кошелька WMR (начинается с заглавной R)<span class="red">*</span></label>
 				<div class="controls">
 					<input name="WMR" pattern="[R]{1}[0-9]{12}" maxlength="13" type="text" placeholder="R123456789123">
 				</div>
@@ -161,42 +162,42 @@
 			<legend>Реквизиты индивидуального предпринимателя</legend>
 			
 			<div class="control-group">
-				<label class="control-label">Полное наименование индивидуального предпринимателя согласно свидетельству о регистрации</label>
+				<label class="control-label">Полное наименование индивидуального предпринимателя согласно свидетельству о регистрации<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="PName" type="text" placeholder="ИП 'Иванов Иван Иванович'">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Индивидуальный предприниматель, ФИО</label>
+				<label class="control-label">Индивидуальный предприниматель, ФИО<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="PFIO" type="text" placeholder="Иванов Иван Иванович">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">ИНН Вашей организации</label>
+				<label class="control-label">ИНН Вашей организации<span class="red">*</span></label>
 				<div class="controls">
 					<input required pattern="[0-9]{12}" maxlength="12" name="PINN" type="text" placeholder="12 знаков">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">ОГРНИП Вашей организации</label>
+				<label class="control-label">ОГРНИП Вашей организации<span class="red">*</span></label>
 				<div class="controls">
 					<input required pattern="[0-9]{15}" maxlength="15" name="POGRN" type="text" placeholder="15 знаков">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Свидетельство о государственной регистрации физического лица в качестве индивидуального предпринимателя (серия - номер)</label>
+				<label class="control-label">Свидетельство о государственной регистрации физического лица в качестве индивидуального предпринимателя (серия - номер)<span class="red">*</span></label>
 				<div class="controls">
 					<input required pattern="[0-9]{2}[-][0-9]{9}" maxlength="12" name="PSGRN" type="text" placeholder="12-123456789">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Свидетельство о государственной регистрации физического лица в качестве индивидуального предпринимателя (дата выдачи)</label>
+				<label class="control-label">Свидетельство о государственной регистрации физического лица в качестве индивидуального предпринимателя (дата выдачи)<span class="red">*</span></label>
 				<div class="controls">
 					<input required pattern="[0-9]{2}[-][0-9]{2}[-][0-9]{4}" maxlength="10" name="PSGRD" type="text" placeholder="дд-мм-гггг">
 				</div>
@@ -207,56 +208,56 @@
 			<legend>Реквизиты юридического лица</legend>
 			
 			<div class="control-group">
-				<label class="control-label">Юридическое имя организации согласно уставу или свидетельству о регистрации</label>
+				<label class="control-label">Юридическое имя организации согласно уставу или свидетельству о регистрации<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="CName" type="text" placeholder="Полное наименование">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">ИНН Вашей организации</label>
+				<label class="control-label">ИНН Вашей организации<span class="red">*</span></label>
 				<div class="controls">
 					<input required pattern="[0-9]{10}" maxlength="10" name="CINN" type="text" placeholder="10 знаков">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">КПП Вашей организации</label>
+				<label class="control-label">КПП Вашей организации<span class="red">*</span></label>
 				<div class="controls">
 					<input required pattern="[0-9]{9}" maxlength="9" name="CKPP" type="text" placeholder="9 знаков">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">ОГРН Вашей организации</label>
+				<label class="control-label">ОГРН Вашей организации<span class="red">*</span></label>
 				<div class="controls">
 					<input required pattern="[0-9]{13}" maxlength="13" name="COGRN" type="text" placeholder="13 знаков">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">ФИО подписанта</label>
+				<label class="control-label">ФИО подписанта<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="CFIO" type="text" placeholder="Иванов Иван Иванович">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">ФИО подписанта в родительском падаже</label>
+				<label class="control-label">ФИО подписанта в родительском падаже<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="CFIOR" type="text" placeholder="Иванова Ивана Ивановича">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Должность подписанта</label>
+				<label class="control-label">Должность подписанта<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="CPPos" type="text" placeholder="Генеральный директор/Главный бухгалтер">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Документ, подтверждающий полномочия Подписанта в родительском падеже</label>
+				<label class="control-label">Документ, подтверждающий полномочия Подписанта в родительском падеже<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="CPDoc" type="text" placeholder="Устава/доверенности №_от_">
 				</div>
@@ -265,21 +266,21 @@
 		<div id="companyUData">
 		
 			<div class="control-group">
-				<label class="control-label">Юридический адрес</label>
+				<label class="control-label">Юридический адрес<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="UAddr" type="text" placeholder="Адрес, номер офиса, индекс">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Почтовый адрес</label>
+				<label class="control-label">Почтовый адрес<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="UPostAddr" type="text" placeholder="Адрес, номер офиса, индекс">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Ставка НДС</label>
+				<label class="control-label">Ставка НДС<span class="red">*</span></label>
 				<div class="controls">
 					<label class="radio">
 					<input type="radio" name="accountNDS" value="18">
@@ -298,28 +299,28 @@
 			<legend>Платежные данные</legend>
 			
 			<div class="control-group">
-				<label class="control-label">Наименование банка</label>
+				<label class="control-label">Наименование банка<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="bankName" type="text" placeholder="Полное наименование банка">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">БИК</label>
+				<label class="control-label">БИК<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="bankBIK" pattern="[0-9]{9}" maxlength="9" type="text" placeholder="9 знаков">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Корреспондентский счет</label>
+				<label class="control-label">Корреспондентский счет<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="bankKor" pattern="[0-9]{20}" type="text" placeholder="20 знаков">
 				</div>
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Расчетный счет</label>
+				<label class="control-label">Расчетный счет<span class="red">*</span></label>
 				<div class="controls">
 					<input required name="bankAcc" pattern="[0-9]{20}" type="text" placeholder="20 знаков">
 				</div>
@@ -330,9 +331,11 @@
 				<label class="checkbox">
 				<input onclick="showSubmit();" id="submitCheck" type="checkbox">Я согласен/согласна на обработку и хранение персональных данных для подключения услуг.</input>
 				</label>
+				<img src="<?php $_SESSION['captcha']['image_src']; ?>">
 				<button type="submit" id="completeReg" style="display: none;" class="btn">Завершить регистрацию</button>
 			</div>
 		</div>
+		<span class="red">*Поля, отмеченные звездочкой, обязательны для заполнения</span>
 	</form>
 </div>
 </div>

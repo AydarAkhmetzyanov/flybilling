@@ -13,7 +13,8 @@ class IndexController extends Controller {
         
 		renderView('header', $data);
         echo '<body class="page-main">';
-        renderView('menu', $data);
+		if(Clients::isAuth()) renderView('clientMenu', $data);
+		else renderView('menu', $data);
 		renderView('pages/index', $data);
 		renderView('footer', $data);
 	}

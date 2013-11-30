@@ -45,7 +45,7 @@ $(window).resize(function() {
 function scrollToId(id, dur) {
     if (id !== '' && $(id).length) {
         $('html, body').animate({
-            scrollTop: $(id).offset().top - 100
+            scrollTop: $(id).offset().top
         }, dur, function() {
             window.location.hash = id;
             $('.nav a').removeClass('active');
@@ -61,28 +61,5 @@ function changeMenuSelection() {
 
     if ($(window).scrollTop() == 0) {
         window.location.hash = '';
-    }
-    if ($(window).scrollTop() <= $('#services').offset().top - 150) {
-        $('.nav a').removeClass('active');
-    }
-
-    if ($(window).scrollTop() >= $('#services').offset().top - 150) {
-        $('.nav a').removeClass('active');
-        $('.nav a[href="#services"]').addClass('active');
-    }
-
-    if ($(window).scrollTop() >= $('#about').offset().top - 150) {
-        $('.nav a').removeClass('active');
-        $('.nav a[href="#about"]').addClass('active');
-    }
-
-    if ($(window).scrollTop() >= $('#clients').offset().top - 150) {
-        $('.nav a').removeClass('active');
-        $('.nav a[href="#clients"]').addClass('active');
-    }
-
-    if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
-        $('.nav a').removeClass('active');
-        $('.nav a[href="#contacts"]').addClass('active');
     }
 }

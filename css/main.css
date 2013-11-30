@@ -6,8 +6,9 @@
     cursor:  pointer;
 }
 
-body {
-    padding: 80px 0 0;
+body, html {
+    padding: 0;
+	height: 100%;
 }
 
 a {
@@ -27,6 +28,7 @@ a:hover {
 
 
 .navbar-fixed-top {
+	position:relative;
 	margin-left: 0;
 	margin-right: 0;
 }
@@ -37,7 +39,12 @@ a:hover {
 
 .navbar .container {
 	min-height: 65px;
+	max-height:65px;
 	padding-top: 15px;
+}
+
+.fb-like {
+	max-width:140px !important;
 }
 
 .navbar form {
@@ -196,8 +203,8 @@ a:hover {
 	-moz-border-radius: 0px;
 	border-radius: 0px;
 	color: #fff;
-	padding: 0;
-	padding-top: 65px;
+	padding: 65px 0 0 30px;
+	margin-left:-30px;
     overflow: hidden;
 }
 
@@ -992,7 +999,19 @@ h3 {
 	z-index: 2;
 }
 
-#passwordCheck{
+.datacheck{
 	margin-left:15px;
 	font-size:13px;
+}
+
+.red{
+	color:red;
+}
+
+.form-horizontal .control-label {
+	width: 300px;
+}
+
+.form-horizontal .controls { 
+margin-left: 320px;
 }

@@ -6,6 +6,8 @@ class RegistrationController extends Controller
     public function index($referedBy = 0)
     {
         if (!(Clients::isAuth())) {
+		    start_session();
+			$_SESSION['captcha'] = Captcha::simple_php_captcha();
             $data          = array();
             $data['title'] = 'Регистрация';
             
@@ -25,7 +27,12 @@ class RegistrationController extends Controller
     
     public function submit()
     {
-        if (!(Clients::isAuth())) {
+			if (!(Clients::isAuth())) {
+            $secret = Pass::generateString(16);
+            Clients::registration($secret);
+			$activateLink='http://'.$_SERVER["HTTP_HOST"].'/registration/complete/'.$secret.'/'.$_POST['email'];
+            Mail::sendEmailValidation($_POST['email'],$activateLink);
+			
             $data          = array();
             $data['title'] = 'Завершение регистрации';
 			
@@ -36,14 +43,7 @@ class RegistrationController extends Controller
             renderView('header', $data);
             echo '<body class="page-inner">';
             renderView('menu', $data);
-            echo '<div class="container">';
-            //print_r($_POST);
-            $secret = Pass::generateString(16);
-            Clients::registration($secret);
-			$activateLink='http://'.$_SERVER["HTTP_HOST"].'/registration/complete/'.$secret.'/'.$_POST['email'];
-            Mail::sendEmailValidation($_POST['email'],$activateLink);
-            echo "<h1>На вашу почту отправлено письмо подтверждения регистрации, пройдите по ссылке в письме для завершения.</h1>";
-            echo '</div>';
+            renderView('pages/registration-complete', $data);
             renderView('footer', $data);
         } else {
             redirect('/');
@@ -54,6 +54,11 @@ class RegistrationController extends Controller
     {
         Clients::regComplete($secret, $email);
         redirect('');
+    }
+	
+	public function validate()
+    {
+        echo Clients::checkEmail($_POST['email']);
     }
     
 }

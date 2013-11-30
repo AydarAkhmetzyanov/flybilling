@@ -39,7 +39,6 @@
             <a href="" class="cs-logo">CreativeStripe</a>
         </div>
     </div>
-    <div class="polygon-4" data-stellar-ratio="1.5"  data-stellar-vertical-offset="500"></div>
         </div>
 
        

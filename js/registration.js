@@ -2,6 +2,36 @@ $(document).ready(function () {
     closeAll();
 });
 
+function responseEmail(){
+
+if (document.reg.email.value){
+        $.ajax({
+            type: "POST",
+            url: "/registration/validate",
+            data: { action: 'email', email: document.reg.email.value },
+            cache: false,
+            success: function(response){
+                 if(response == 'on'){
+                    $("#emailCheck").html("<em>E-mail занят</em>").css("color","red");
+					$("input[name='email']").css("background","#ffefef");
+					$('#completeReg').hide();
+                    return false;
+                }else{
+                    $("#emailCheck").html("<em>E-mail свободен</em>").css("color","green");
+					$("input[name='email']").css("background","#f2ffef");
+					if (document.getElementById('submitCheck').checked) $('#completeReg').show();
+                    return true;
+                };
+            }
+        });
+		}
+		else {
+			$("#emailCheck").html("");
+			$("input[name='email']").css("background","white");
+			$('#completeReg').hide();
+		}
+    };
+
 function passwordValidate(){
 	var valueX = $( "input[name='password']" ).val();
     var valueY = $( "input[name='passwordRepeat']" ).val();
@@ -9,12 +39,16 @@ function passwordValidate(){
 		if (valueX != valueY) {
 			$( "#passwordCheck" ).css( "color", "red" );
 			$( "#passwordCheck" ).html('<em>Пароли не совпадают</em>');
+			$("input[name='password']").css("background","#ffefef");
+			$("input[name='passwordRepeat']").css("background","#ffefef");
 			$('#completeReg').hide();
 			return false;
 		}
 		else {
 			$( "#passwordCheck" ).css( "color", "green" );
 			$( "#passwordCheck" ).html('<em>Пароли совпадают</em>');
+			$("input[name='password']").css("background","#f2ffef");
+			$("input[name='passwordRepeat']").css("background","#f2ffef");
 			if (document.getElementById('submitCheck').checked) $('#completeReg').show();
 			return true;
 		}
@@ -115,7 +149,7 @@ function openCompany(){
 
 function showSubmit() {
         if (document.getElementById('submitCheck').checked) {
-			if (passwordValidate()) $('#completeReg').show();
+			if (passwordValidate() && responseEmail()) $('#completeReg').show();
         } else {
 		    $('#completeReg').hide();
         }

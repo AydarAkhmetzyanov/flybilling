@@ -232,4 +232,18 @@ class Clients extends Model
 		return $arr;
 	}
 	
+	public static function checkEmail($email){
+			$tsql      = "SELECT * FROM " . SCHEMA . ".[Clients] WHERE [email] = :email;";
+			$statement = Database::getInstance()->prepare($tsql);
+			$statement->execute(array(
+				'email' => $email
+			));
+			$row = $statement->fetchAll(PDO::FETCH_ASSOC);
+		if (count($row) > 0) {
+			return "on";
+		} else {
+			return "off";
+		}
+	}
+	
 }
