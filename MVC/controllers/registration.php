@@ -6,7 +6,6 @@ class RegistrationController extends Controller
     public function index($referedBy = 0)
     {
         if (!(Clients::isAuth())) {
-		    start_session();
 			$_SESSION['captcha'] = Captcha::simple_php_captcha();
             $data          = array();
             $data['title'] = 'Регистрация';
