@@ -16,7 +16,7 @@ class Clients extends Model
 	private function __construct($id)
 	{
 		if ($id == 0) {
-			$this->data = Clients::getClient($_SESSION['ID']);
+			$this->data = Clients::getClient($_SESSION['id']);
 		} else {
 			$this->data = Clients::getClient($id);
 		}
@@ -24,12 +24,12 @@ class Clients extends Model
 	
 	public static function logOut()
 	{
-		unset($_SESSION['ID']);
+		unset($_SESSION['id']);
 	}
 	
 	public static function isAuth()
 	{
-		if (isset($_SESSION['ID'])) {
+		if (isset($_SESSION['id'])) {
 			return true;
 		} else {
 			return false;

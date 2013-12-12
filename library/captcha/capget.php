@@ -23,7 +23,9 @@ if( !function_exists('hex2rgb') ) {
 // Draw the image
 if( isset($_GET['_CAPTCHA']) ) {
         
-        session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
         
         $captcha_config = unserialize($_SESSION['_CAPTCHA']['config']);
         if( !$captcha_config ) exit();

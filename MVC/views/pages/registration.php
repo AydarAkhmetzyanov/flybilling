@@ -326,12 +326,22 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="control-group">
+				<label class="control-label">Проверочный код<span class="red">*</span><br>
+				<img src="<?php echo $_SESSION['captcha']['image_src']; ?>"></label>
+				
+				<div class="controls">
+					<input required pattern=".{7}" name="captcha" onkeyup="captchaValidate();" onblur="captchaValidate();" type="text" placeholder="Введите проверочный код">
+				<span id="captchaCheck" class="datacheck"></span>
+				</div>
+			</div>
+		
 		<div id="regFinish" class="control-group">
 			<div class="controls">
 				<label class="checkbox">
 				<input onclick="showSubmit();" id="submitCheck" type="checkbox">Я согласен/согласна на обработку и хранение персональных данных для подключения услуг.</input>
 				</label>
-				<img src="<?php $_SESSION['captcha']['image_src']; ?>">
 				<button type="submit" id="completeReg" style="display: none;" class="btn">Завершить регистрацию</button>
 			</div>
 		</div>
