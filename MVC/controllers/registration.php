@@ -59,5 +59,17 @@ class RegistrationController extends Controller
     {
         echo Clients::checkEmail($_POST['email']);
     }
+	
+	public function validateCaptcha()
+    {
+		if (strtolower($_POST['captcha']) == strtolower($_SESSION['captcha']['code']))
+		{
+			echo 'off';
+		}
+		else
+		{
+			echo 'on';
+		}
+    }
     
 }

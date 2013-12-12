@@ -36,7 +36,7 @@
                                 <li>
                                     <a href="#" class="notific" title="Уведомления"><span class="badge badge-success">21</span></a>
                                     <div class="dropdown">
-                                        <a id="dLabel" data-toggle="dropdown" data-target="#" href="#">johnnyextraman@gmail.com &#x25BC;</a>
+                                        <a id="dLabel" data-toggle="dropdown" data-target="#" href="#"><?php echo $_SESSION['email']; ?> &#x25BC;</a>
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                             <li><a href="#">Настройки профиля</a></li>
                                             <li role="presentation" class="divider"></li>

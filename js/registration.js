@@ -31,6 +31,36 @@ if (document.reg.email.value){
 			$('#completeReg').hide();
 		}
     };
+	
+function captchaValidate(){
+
+if (document.reg.captcha.value){
+        $.ajax({
+            type: "POST",
+            url: "/registration/validateCaptcha",
+            data: { action: 'captcha', captcha: document.reg.captcha.value },
+            cache: false,
+            success: function(response){
+                 if(response == 'on'){
+                    $("#captchaCheck").html("<em>Проверочный код неверный</em>").css("color","red");
+					$("input[name='captcha']").css("background","#ffefef");
+					$('#completeReg').hide();
+                    return false;
+                }else{
+                    $("#captchaCheck").html("<em>Проверочный код верный</em>").css("color","green");
+					$("input[name='captcha']").css("background","#f2ffef");
+					if (document.getElementById('submitCheck').checked) $('#completeReg').show();
+                    return true;
+                };
+            }
+        });
+		}
+		else {
+			$("#captchaCheck").html("");
+			$("input[name='captcha']").css("background","white");
+			$('#completeReg').hide();
+		}
+    };
 
 function passwordValidate(){
 	var valueX = $( "input[name='password']" ).val();
@@ -149,7 +179,7 @@ function openCompany(){
 
 function showSubmit() {
         if (document.getElementById('submitCheck').checked) {
-			if (passwordValidate() && responseEmail()) $('#completeReg').show();
+			if (passwordValidate() && captchaValidate() && responseEmail()) $('#completeReg').show();
         } else {
 		    $('#completeReg').hide();
         }

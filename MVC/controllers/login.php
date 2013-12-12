@@ -12,7 +12,6 @@ class LoginController extends Controller {
         $data['locale']   = 'ru_RU';
 		
 		renderView('header', $data);
-		echo 'test';
 		echo '<body class="page-inner">';
         renderView('menu', $data);
 		renderView('pages/login', $data);

@@ -28,7 +28,7 @@ class API_helper
         parse_str(file_get_contents('php://input'), $_POST);
         if(API_helper::requested_with_ajax()){
             if(!isset($_SESSION['isAdmin'])){
-                if(!isset($_SESSION['ID'])){ API_helper::failResponse('auth required',401); exit(); } 
+                if(!isset($_SESSION['id'])){ API_helper::failResponse('auth required',401); exit(); } 
                 $options['client_ID']=Clients::getInstance()->data['ID'];
             }
         } else {
