@@ -8,6 +8,7 @@ class SMS_session_create_pl3
     public $text;
 
     public $cost=0.13;
+    public $projectnum='3-511-8743';
 
 	public function send($service_number, $phone, $text){
 	    $this->service_number=$service_number;
@@ -24,7 +25,10 @@ class SMS_session_create_pl3
             $result = new SimpleXMLElement($res);
             if(is_object($result)){
                 if( $result->NetworkNameInternational=='MTS' ) {
-                    $this->cost=0.38;
+                    $this->cost=40;
+                    $this->projectnum='3-511-8868';
+                } elseif ( $result->NetworkNameInternational=='Megafon' ) {
+                    $this->cost=33;
                 }
             }
         }
@@ -33,9 +37,9 @@ class SMS_session_create_pl3
     private function sendQuery(){
         date_default_timezone_set("UTC");
         $now=date('YmdHis');
-        $baseString="3-511-8836sms".$this->service_number.$this->phone.base64_encode($this->text).$now."@D|Xw~_p";
+        $baseString=$this->projectnum."sms".$this->service_number.$this->phone.base64_encode($this->text).$now."@D|Xw~_p";
         $hash=strtoupper(md5($baseString));
-        $queryParams = array('prjID'=>'3-511-8836',
+        $queryParams = array('prjID'=>$this->projectnum,
                              'serviceNumber'=>$this->service_number,
                              'subscriber'=>$this->phone,
                              'type'=>'sms',
