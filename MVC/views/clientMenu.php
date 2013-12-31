@@ -32,7 +32,7 @@
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">
-                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / 99 999 <s>Р</s> / <a href="#">Вывод</a></li>
+                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / <?php echo number_format(Clients::getInstance()->data['balance'], 2, ',', ' '); ?> <s>Р</s> / <a href="#">Вывод</a></li>
                                 <li>
                                     <a href="#" class="notific" title="Уведомления"><span class="badge badge-success">21</span></a>
                                     <div class="dropdown">
@@ -40,7 +40,7 @@
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                                             <li><a href="#">Настройки профиля</a></li>
                                             <li role="presentation" class="divider"></li>
-                                            <li><a href="#">Выход</a></li>
+                                            <li><a href="/login/logout">Выход</a></li>
                                         </ul>
                                     </div>
                                 </li>

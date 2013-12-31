@@ -3,8 +3,9 @@
 class IndexController extends Controller {
     
 	public function index($change=0){
+		if(Clients::isAuth()){
 	    $data = array();
-        $data['title'] = 'Home';
+        $data['title'] = 'Кабинет пользователя';
 
         
 		renderView('header', $data);
@@ -12,6 +13,9 @@ class IndexController extends Controller {
         renderView('clientMenu', $data);
 		renderView('pages/console/index', $data);
 		renderView('consoleFooter', $data);
+		} else {
+            redirect('login');
+        }
 	}
 	
 

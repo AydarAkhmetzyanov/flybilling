@@ -17,18 +17,13 @@ class LoginController extends Controller {
 		renderView('pages/login', $data);
 		renderView('footer', $data);
         } else {
-            redirect('');
+            redirect('console');
         }
 	}
 	
     public function logout(){
         Clients::logOut();
-	    $data = array();
-        $data['title'] = 'Авторизация';
-		renderView('header', $data);
-        renderView('guestMenu', $data);
-		renderView('pages/login', $data);
-		renderView('footer', $data);
+	    redirect('login');
 	}
 
     public function login(){

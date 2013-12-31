@@ -20,7 +20,7 @@ class RegistrationController extends Controller
             renderView('pages/registration', $data);
             renderView('footer', $data);
         } else {
-            redirect('');
+            redirect('console');
         }
     }
     

@@ -23,23 +23,23 @@
                             <div class="console-summary">
                                 <div class="field">
                                     <div class="title">Доход за сегодня:</div>
-                                    <div class="status status-up"></div>
-                                    <div class="count">1 366 <s>Р</s></div>
+                                    <div class="status" id="todayProfitArrow"></div>
+                                    <div class="count" id="todayProfit"><img src="/img/arrows16.gif"></div>
                                 </div>
                                 <div class="field">
-                                    <div class="title">Доход за неделю:</div>
-                                    <div class="status status-down"></div>
-                                    <div class="count">7 532 <s>Р</s></div>
+                                    <div class="title">Доход за 7 дней:</div>
+                                    <div class="status" id="weekProfitArrow"></div>
+                                    <div class="count" id="weekProfit"><img src="/img/arrows16.gif"></div>
                                 </div>
                                 <div class="field">
-                                    <div class="title">Доход за месяц:</div>
-                                    <div class="status status-up"></div>
-                                    <div class="count">38 536 <s>Р</s></div>
+                                    <div class="title">Доход за 30 дней:</div>
+                                    <div class="status" id="monthProfitArrow"></div>
+                                    <div class="count" id="monthProfit"><img src="/img/arrows16.gif"></div>
                                 </div>
                                 <div class="field field-balance">
                                     <div class="title">Баланс:</div>
                                     <div class="status"></div>
-                                    <div class="count">65 536 <s>Р</s></div>
+                                    <div class="count"><?php echo number_format(Clients::getInstance()->data['balance'], 2, ',', ' '); ?> <s>Р</s></div>
                                     <br>
                                     <a href="#" class="btn btn-primary">Вывод средств</a>
                                 </div>
@@ -49,59 +49,29 @@
                     <div class="span8">
                         <div class="console-block console-block-graph">
                             <h2>График доходов</h2>
+							<div id="chart_div" style="width: 728px; height: 200px; margin-top:-25px;"></div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="span4">
+                    <div class="span4" style="width:1170px !important;">
                         <div class="console-block console-block-notice">
-                            <h2>Уведомления</h2>
-                            <div class="notice">
-                                <div class="item item-new">
-                                    <div class="date">15 января 2014, 13:47</div>
-                                    Баланс успешно пополнен на <nobr>1 000 <s>Р</s></nobr>
-                                </div>
-                                <div class="item item-new">
-                                    <div class="date">15 января 2014, 13:47</div>
-                                    Баланс успешно пополнен на <nobr>1 000 <s>Р</s></nobr>
-                                </div>
-                                <div class="item">
-                                    <div class="date">15 января 2014, 13:47</div>
-                                    Баланс успешно пополнен на <nobr>1 000 <s>Р</s></nobr>
-                                </div>
-                                <div class="item">
-                                    <div class="date">15 января 2014, 13:47</div>
-                                    Баланс успешно пополнен на <nobr>1 000 <s>Р</s></nobr>
-                                </div>
-                                <div class="item">
-                                    <div class="date">15 января 2014, 13:47</div>
-                                    Баланс успешно пополнен на <nobr>1 000 <s>Р</s></nobr>
-                                </div>
+                            <h2>Уведомления и новости</h2>
+                            <div class="notice" id="notifsDiv">
                             </div>
                             <a href="#" class="btn btn-default">Читать далее</a>
                         </div>
                     </div>
-                    <div class="span8">
-                        <div class="console-block console-block-news">
-                            <h2>Новости</h2>
-                            <div class="news">
-                                <div class="item item-new">
-                                    <div class="date">15 января 2014, 13:47</div>
-                                    <a href="#" class="title">Новые правила оплаты с помощью платежных систем</a>
-                                    <p>Архетип, в первом приближении, имитирует горизонт ожидания, таким образом, второй комплекс движущих сил получил разработку в трудах А.Берталанфи и Ш.Бюлера. Калокагатия, как бы это ни казалось парадоксальным, характерна.</p>
-                                </div>
-                                <div class="item">
-                                    <div class="date">15 января 2014, 13:47</div>
-                                    <a href="#" class="title">Новые правила оплаты с помощью платежных систем</a>
-                                    <p>Архетип, в первом приближении, имитирует горизонт ожидания, таким образом, второй комплекс движущих сил получил разработку в трудах А.Берталанфи и Ш.Бюлера. Калокагатия, как бы это ни казалось парадоксальным, характерна.</p>
-                                </div>
-                            </div>
-                            <a href="#" class="btn btn-default">Читать далее</a>
-                        </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
         
 </div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+	</script>
+<?php echo HTML::includeJS('lib/dateformat');?>
+<?php echo HTML::includeJS('console');?>
