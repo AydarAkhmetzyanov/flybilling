@@ -8,7 +8,7 @@ class WithdrawalsController extends Controller {
         if($id!=0){
             $options['ID']=$id;
         }
-        API_helper::authorize($options);
+        $options = API_helper::authorize($options);
         $http_verb = strtoupper($_SERVER['REQUEST_METHOD']);
         switch ($http_verb) {
         case 'GET':

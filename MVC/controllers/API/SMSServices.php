@@ -8,7 +8,7 @@ class SMSServicesController extends Controller {
         if($id!=0){
             $options['ID']=$id;
         }
-        API_helper::authorize($options);
+        $options = API_helper::authorize($options);
         $http_verb = strtoupper($_SERVER['REQUEST_METHOD']);
         switch ($http_verb) {
         case 'GET':
@@ -60,7 +60,7 @@ class SMSServicesController extends Controller {
     }
     
     protected function indexDELETE($options){
-        API_helper::authorize($options);
+        $options = API_helper::authorize($options);
         $target=SMSServices::get($options)[0];
         if( $target['client_ID'] != $options['client_ID'] ){ API_helper::failResponse('service owned by other client',403); exit(); } 
         $target['status']=0;

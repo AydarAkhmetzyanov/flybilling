@@ -9,7 +9,7 @@ class ClientsController extends Controller {
             $options['ID']=$id;
             $options['client_ID']=$id;
         }
-        API_helper::authorize($options);
+        $options = API_helper::authorize($options);
         $http_verb = strtoupper($_SERVER['REQUEST_METHOD']);
         switch ($http_verb) {
         case 'GET':

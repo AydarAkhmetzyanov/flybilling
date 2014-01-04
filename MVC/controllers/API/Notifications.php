@@ -8,7 +8,7 @@ class NotificationsController extends Controller {
         if($id!=0){
             $options['ID']=$id;
         }
-        API_helper::authorize($options);
+        $options = API_helper::authorize($options);
         $http_verb = strtoupper($_SERVER['REQUEST_METHOD']);
         switch ($http_verb) {
         case 'GET':
@@ -43,6 +43,7 @@ class NotificationsController extends Controller {
 
     protected function indexGETNotificatons($options){
         $resultData=Notifications::get($options);
+        $resultData['debug']=print_r(Clients::getInstance());
         API_helper::successResponse($resultData);
     }
 

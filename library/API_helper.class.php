@@ -40,6 +40,7 @@ class API_helper
         if(!isset($options['timezone'])){
             $options['timezone']=Clients::getInstance()->data['timezone'];
         }
+        return $options;
     }
 	
 }
