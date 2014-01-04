@@ -3,7 +3,7 @@
 class SessionSMSController extends Controller {
     
 	public function index($id=0){
-        //possible get options from,to,client_ID,timezone,service_ID,signature,order,offset,limit
+        //possible get options from,to,client_ID,timezone,service_ID,signature,order,offset,limit,group[day,hour,month,year]
         $options=$_GET;
         $options = API_helper::authorize($options);
 

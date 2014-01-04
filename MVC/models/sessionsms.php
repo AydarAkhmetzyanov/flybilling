@@ -28,7 +28,7 @@ class SessionSMS extends Model
                     $grouppart="CONVERT(CHAR(4), dateadd(minute,$data[timezone]*60,CAST([timestamp] AS smalldatetime)), 120)";
                     break;
             }
-            $tsql.=$grouppart." [localtimestamp],sum([external_share]) AS [external_share],sum([client_share]) AS [client_share],count([ID]) AS [ID] ";
+            $tsql.=$grouppart." [localtimestamp],sum([client_cost]) AS [client_cost],count([ID]) AS [ID] ";
         }
         $tsql.=" FROM ".SCHEMA.".[SessionSMS] WHERE 1=1 ";
         if(isset($data['ID'])){
