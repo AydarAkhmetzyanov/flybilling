@@ -43,7 +43,6 @@ class NotificationsController extends Controller {
 
     protected function indexGETNotificatons($options){
         $resultData=Notifications::get($options);
-        $resultData['debug']=print_r(Clients::getInstance());
         API_helper::successResponse($resultData);
     }
 
