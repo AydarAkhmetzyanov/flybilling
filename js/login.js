@@ -31,7 +31,7 @@ default:
 }
 
 function demoAccess() {
-    $('#inputEmail').attr('value','test@flybill.ru');
-    $('#inputPassword').attr('value','testtest');
+    $('#inputEmail').attr('value','test@test.ru');
+    $('#inputPassword').attr('value','123456');
     logIn();
 }

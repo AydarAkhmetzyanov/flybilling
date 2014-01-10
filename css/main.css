@@ -793,6 +793,11 @@ h3 {
     font-weight: bold;
 }
 
+.console-block .notice .item-new:hover {
+    cursor:pointer;
+	background: #dbdbdb;
+}
+
 .console-block .notice .date,
 .console-block .news .date {
     color: #808080;
@@ -1012,5 +1017,63 @@ h3 {
 }
 
 .form-horizontal .controls { 
-margin-left: 320px;
+	margin-left: 320px;
+}
+
+#notifsDiv .ticket-link {
+	float:right;
+font-size: 90%;
+font-style: italic;
+font-weight: 400;
+color: #338ddc;
+text-decoration: none;
+border-bottom: 1px #338ddc dotted;
+cursor:pointer;
+}
+
+#notifsDiv .ticket-link:hover {
+color: #338ddc;
+border-bottom: 1px #338ddc solid;
+}
+
+
+.arcticmodal-overlay,
+.arcticmodal-container { position: fixed; left: 0; top: 0; right: 0; bottom: 0; z-index: 1000; }
+.arcticmodal-container { overflow: auto; margin: 0; padding: 0; border: 0; border-collapse: collapse; }
+*:first-child+html .arcticmodal-container { height: 100% }
+.arcticmodal-container_i { height: 100%; margin: 0 auto; }
+.arcticmodal-container_i2 { padding: 24px; margin: 0; border: 0; vertical-align: middle; }
+.arcticmodal-error { padding: 20px; border-radius: 10px; background: #000; color: #fff; }
+.arcticmodal-loading { width: 80px; height: 80px; border-radius: 10px; background: #000 url(loading.gif) no-repeat 50% 50%; }
+
+.box-modal { 
+background: #FFFFFF;
+border-radius: 6px;
+box-shadow: 0px 0px 0px 6px rgba(153, 153, 153, 0.298);
+color: #3C3C3C;
+padding: 16px;
+position: relative;
+width: 500px;
+}
+
+.box-modal input, .box-modal textarea {
+width:486px;
+}
+
+.box-modal_close { 
+color: #999999;
+cursor: pointer;
+font-size: 11px;
+line-height: 15px;
+position: absolute;
+right: 10px;
+top: 6px;
+}
+
+.g-hidden { 
+display: none;
+}
+
+.clear-fix {
+	clear:both;
 }

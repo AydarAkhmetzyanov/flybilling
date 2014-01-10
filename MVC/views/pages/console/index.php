@@ -1,4 +1,16 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+	</script>
+<?php echo HTML::includeJS('lib/dateformat');?>
+<?php echo HTML::includeJS('jquery.arcticmodal-0.3.min');?>
+<?php echo HTML::includeJS('console');?>
+
 <div class="page-inner">
+
+<div class="g-hidden">
+						
+</div>
 
 <div class="top-promo">
             <div class="container">
@@ -68,10 +80,3 @@
         </div>
         
 </div>
-
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-	</script>
-<?php echo HTML::includeJS('lib/dateformat');?>
-<?php echo HTML::includeJS('console');?>

@@ -1,133 +1,148 @@
 $(document).ready(function () {
-	drawChart();
 	showNews();
-	
-	var today = getSMS(getDate('today0'), getDate('today'), 'SMS') - getSMS(getDate('today0'), getDate('today'), 'SessionSMS');
-	var yesterday = getSMS(getDate('yesterday0'), getDate('yesterday'), 'SMS') - getSMS(getDate('yesterday0'), getDate('yesterday'), 'SessionSMS');
-	$("#todayProfit").html(today.toFixed(2) + " <s>Р</s>");
-	if (today < yesterday) $("#todayProfitArrow").addClass("status-down");
-	else if (today > yesterday) $("#todayProfitArrow").addClass("status-up");
-
-	today = getSMS(getDate('currentWeek'), getDate('today'), 'SMS') - getSMS(getDate('currentWeek'), getDate('today'), 'SessionSMS');
-	yesterday = getSMS(getDate('pastWeek'), getDate('currentWeek'), 'SMS') - getSMS(getDate('pastWeek'), getDate('currentWeek'), 'SessionSMS');
-	$("#weekProfit").html(today.toFixed(2) + " <s>Р</s>");
-	if (today < yesterday) $("#weekProfitArrow").addClass("status-down");
-	else if (today > yesterday) $("#weekProfitArrow").addClass("status-up");
-
-	today = getSMS(getDate('currentMonth'), getDate('today'), 'SMS') - getSMS(getDate('currentMonth'), getDate('today'), 'SessionSMS');
-	yesterday = getSMS(getDate('pastMonth'), getDate('currentMonth'), 'SMS') - getSMS(getDate('pastMonth'), getDate('currentMonth'), 'SessionSMS');
-	$("#monthProfit").html(today.toFixed(2) + " <s>Р</s>");
-	if (today < yesterday) $("#monthProfitArrow").addClass("status-down");
-	else if (today > yesterday) $("#monthProfitArrow").addClass("status-up");
-
+	drawChart();
+	getSMS('today0', 'today', 'yesterday0', 'yesterday', 'todayProfit');
+	getSMS('currentWeek', 'today', 'pastWeek', 'currentWeek', 'weekProfit');
+	getSMS('currentMonth', 'today', 'pastWeek', 'currentWeek', 'monthProfit');
 });
 
-function showNews() {
-var res;
+function getSMS(today0Input, todayInput, yesterday0Input, yesterdayInput, idInput) {
 
-	$.ajax({
-		type: "GET",
-		async: false,
-		url: "/API/Notifications",
-		data: {
-		},
-		success: function (result) {
-			res = result;
+	var today1 = $.get(
+		"/API/SMS", {
+			from: getDate(today0Input),
+			timezone: 4,
+			to: getDate(todayInput)
 		}
+	);
+
+	var today2 = $.get(
+		"/API/SessionSMS", {
+			from: getDate(today0Input),
+			timezone: 4,
+			to: getDate(todayInput)
+		}
+	);
+
+	var yesterday1 = $.get(
+		"/API/SMS", {
+			from: getDate(yesterday0Input),
+			timezone: 4,
+			to: getDate(yesterdayInput)
+		}
+	);
+
+	var yesterday2 = $.get(
+		"/API/SessionSMS", {
+			from: getDate(yesterday0Input),
+			timezone: 4,
+			to: getDate(yesterdayInput)
+		}
+	);
+
+	$.when(today1, today2, yesterday1, yesterday2).done(function (today1Result, today2Result, yesterday1Result, yesterday2Result) {
+
+		var today = jsonParse(today1Result[0], 'SMS') - jsonParse(today2Result[0], 'SessionSMS');
+		var yesterday = jsonParse(yesterday1Result[0], 'SMS') - jsonParse(yesterday2Result[0], 'SessionSMS');
+		$("#" + idInput).html(today.toFixed(2) + " <s>Р</s>");
+		if (today < yesterday) $("#" + idInput + "Arrow").addClass("status-down");
+		else if (today > yesterday) $("#" + idInput + "Arrow").addClass("status-up");
 	});
+}
 
-	var obj = jQuery.parseJSON(res);
+function showNews() {
 
-	if (obj.data) {
-		obj.data.forEach(function (entry) {
-		var t = (entry.timestamp).split(/[- :]/);
-		var d = new Date(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-		
-		if (entry.status)
-		{
-		$("#notifsDiv").html('<div class="item"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div>' + entry.title_ru + '</div>' + $("#notifsDiv").html());
+	var data = $.get(
+		"/API/Notifications", {
+			mark_read: true
+		},
+		function (objResult) {
+			var obj = jQuery.parseJSON(objResult);
+
+			if (obj.data) {
+				obj.data.forEach(function (entry) {
+					var t = (entry.timestamp).split(/[- :]/);
+					var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
+
+					if (entry.status) {
+						$("#notifsDiv").html('<div class="item" data-id="' + entry.ID + '"><span onclick="notificationRead(' + entry.ID + ')" class="ticket-link" >Задать вопрос</span><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + $("#notifsDiv").html());
+					} else {
+						$("#notifsDiv").html('<div class="item item-new" data-id="' + entry.ID + '"><span onclick="notificationRead(' + entry.ID + ')" class="ticket-link" >Задать вопрос</span><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + $("#notifsDiv").html());
+					}
+				});
+			}
 		}
-		else
-		{
-		$("#notifsDiv").html('<div class="item item-new"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div>' + entry.title_ru + '</div>' + $("#notifsDiv").html());
-		}
-		});
+	);
+}
+
+function notificationRead(id) {
+
+	$(".g-hidden").html('<div class="box-modal" id="exampleModal1"><div class="box-modal_close arcticmodal-close">закрыть</div><div style="margin:10px 0;">' + $('div[data-id="' + id + '"] .notif-body').html() + '</div><textarea id="ticket-text" rows="8" placeholder="Текст вопроса" data-default-value=""/><span style="float:right;" onclick="askQuestion(' + id + ')" class="btn btn-primary">Отправить вопрос</span><div class="clear-fix"></div></div>');
+	//<input id="ticket-title" type="text" placeholder="Заголовок вопроса" data-default-value=""/>
+	$('#exampleModal1').arcticmodal();
+}
+
+function askQuestion(id) {
+
+	if ($('#ticket-text').val()) {
+		$.post(
+			"/API/Notifications/" + id, {
+				text: $('#ticket-text').val()
+			});
+		$('#exampleModal1').arcticmodal('close');
+	} else {
+		alert('Введите текст вопроса');
 	}
 }
 
 function drawChart() {
-	var res;
-
-	$.ajax({
-		type: "GET",
-		async: false,
-		url: "/API/SMS",
-		data: {
+	var dataChart = $.get(
+		"/API/SMS", {
 			from: getDate('currentMonth'),
 			timezone: 4,
 			to: getDate('today'),
 			group: 'day'
 		},
-		success: function (result) {
-			res = result;
+		function (objResult) {
+			var obj = jQuery.parseJSON(objResult);
+			var dict = new Array();
+
+			if (obj.data) {
+				obj.data.forEach(function (entry) {
+					dict[entry.localtimestamp] = entry.client_share;
+				});
+			}
+
+			var arr1 = new Array();
+			arr1[0] = new Array("Дата", "Доход");
+
+			var now = new Date();
+			now.setDate(now.getDate() - 29);
+
+			for (var i = 1; i < 31; i++) {
+				if (dict[now.format("yyyy-mm-dd")]) {
+					arr1[i] = new Array(now.format("dd-mm"), dict[now.format("yyyy-mm-dd")]);
+
+				} else {
+					arr1[i] = new Array(now.format("dd-mm"), 0);
+				}
+				now.setDate(now.getDate() + 1);
+			}
+
+			var data = google.visualization.arrayToDataTable(arr1);
+
+			var options = {
+				title: '',
+				titlePosition: 'none'
+			};
+
+			var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
 		}
-	});
-
-	var obj = jQuery.parseJSON(res);
-	var dict = new Array();
-
-	if (obj.data) {
-		obj.data.forEach(function (entry) {
-			dict[entry.localtimestamp] = entry.client_share;
-		});
-	}
-
-	var arr1 = new Array();
-	arr1[0] = new Array("Дата", "Доход");
-
-	var now = new Date();
-	now.setDate(now.getDate() - 29);
-
-	for (var i = 1; i < 31; i++) {
-		if (dict[now.format("yyyy-mm-dd")]) {
-			arr1[i] = new Array(now.format("dd-mm"), dict[now.format("yyyy-mm-dd")]);
-
-		} else {
-			arr1[i] = new Array(now.format("dd-mm"), 0);
-		}
-		now.setDate(now.getDate() + 1);
-	}
-
-	var data = google.visualization.arrayToDataTable(arr1);
-
-	var options = {
-		title: '',
-		titlePosition: 'none'
-	};
-
-	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-	chart.draw(data, options);
+	);
 }
 
-function getSMS(from, to, url) {
-	var res;
 
-	$.ajax({
-		type: "GET",
-		async: false,
-		url: "/API/" + url,
-		data: {
-			from: from,
-			timezone: 4,
-			to: to
-		},
-		success: function (result) {
-			res = result;
-		}
-	});
-
-	return jsonParse(res, url);
-}
 
 function jsonParse(input, type) {
 	var obj = jQuery.parseJSON(input);
@@ -175,5 +190,4 @@ function getDate(date) {
 		now.setDate(now.getDate() - 60);
 		return now.format("yyyy-mm-dd hh:mm");
 	}
-
 }
