@@ -8,7 +8,12 @@ class Notifications extends Model
             $params['client_ID']=$data['client_ID'];
             $tsql="UPDATE ".SCHEMA.".[Notifications] 
             SET [status]=1
-            WHERE [client_ID]=:client_ID ;";
+            WHERE [client_ID]=:client_ID ";
+            if(isset($data['ID'])){
+                $tsql.=' AND [ID]=:ID';
+                $params['ID']=$data['ID'];
+            }
+            $tsql.=';';
             $statement = Database::getInstance()->prepare($tsql);
             try{
                 $statement->execute($params);
