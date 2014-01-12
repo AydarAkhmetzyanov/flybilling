@@ -793,11 +793,6 @@ h3 {
     font-weight: bold;
 }
 
-.console-block .notice .item-new:hover {
-    cursor:pointer;
-	background: #dbdbdb;
-}
-
 .console-block .notice .date,
 .console-block .news .date {
     color: #808080;
@@ -1020,20 +1015,10 @@ h3 {
 	margin-left: 320px;
 }
 
-#notifsDiv .ticket-link {
-	float:right;
-font-size: 90%;
-font-style: italic;
-font-weight: 400;
-color: #338ddc;
-text-decoration: none;
-border-bottom: 1px #338ddc dotted;
-cursor:pointer;
-}
-
-#notifsDiv .ticket-link:hover {
-color: #338ddc;
-border-bottom: 1px #338ddc solid;
+#notifsDiv .item:hover {
+	cursor:pointer;
+	background: #dbdbdb;
+	border-radius: 5px;
 }
 
 
@@ -1076,4 +1061,8 @@ display: none;
 
 .clear-fix {
 	clear:both;
+}
+
+.box-modal h2 { 
+	font-size: 26px;
 }

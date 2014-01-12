@@ -65,9 +65,9 @@ function showNews() {
 					var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
 
 					if (entry.status) {
-						$("#notifsDiv").html('<div class="item" data-id="' + entry.ID + '"><span onclick="notificationRead(' + entry.ID + ')" class="ticket-link" >Задать вопрос</span><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + $("#notifsDiv").html());
+						$("#notifsDiv").html('<div class="item" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + $("#notifsDiv").html());
 					} else {
-						$("#notifsDiv").html('<div class="item item-new" data-id="' + entry.ID + '"><span onclick="notificationRead(' + entry.ID + ')" class="ticket-link" >Задать вопрос</span><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + $("#notifsDiv").html());
+						$("#notifsDiv").html('<div class="item item-new" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + $("#notifsDiv").html());
 					}
 				});
 			}
@@ -75,10 +75,9 @@ function showNews() {
 	);
 }
 
-function notificationRead(id) {
+function notificationClick(id) {
 
 	$(".g-hidden").html('<div class="box-modal" id="exampleModal1"><div class="box-modal_close arcticmodal-close">закрыть</div><div style="margin:10px 0;">' + $('div[data-id="' + id + '"] .notif-body').html() + '</div><textarea id="ticket-text" rows="8" placeholder="Текст вопроса" data-default-value=""/><span style="float:right;" onclick="askQuestion(' + id + ')" class="btn btn-primary">Отправить вопрос</span><div class="clear-fix"></div></div>');
-	//<input id="ticket-title" type="text" placeholder="Заголовок вопроса" data-default-value=""/>
 	$('#exampleModal1').arcticmodal();
 }
 
@@ -92,6 +91,29 @@ function askQuestion(id) {
 		$('#exampleModal1').arcticmodal('close');
 	} else {
 		alert('Введите текст вопроса');
+	}
+}
+
+function addTicket() {
+
+	$(".g-hidden").html('<div class="box-modal" id="exampleModal1"><div class="box-modal_close arcticmodal-close">закрыть</div><h2>Введите свой вопрос</h2><input id="ticket-title" type="text" placeholder="Тема вопроса" data-default-value=""/><textarea id="ticket-text" rows="8" placeholder="Текст вопроса" data-default-value=""/><span style="float:right;" onclick="addTicketPost()" class="btn btn-primary">Отправить вопрос</span><div class="clear-fix"></div></div>');
+	$('#exampleModal1').arcticmodal();
+}
+
+function addTicketPost() {
+	if ($('#ticket-text').val() && $('#ticket-title').val()) {
+		$.post(
+			"/API/Notifications", {
+				title: $('#ticket-title').val(),
+				text: $('#ticket-text').val()
+			});
+		$('#exampleModal1').arcticmodal('close');
+	} else if (!$('#ticket-text').val() && $('#ticket-title').val()) {
+		alert('Введите текст вопроса');
+	} else if ($('#ticket-text').val() && !$('#ticket-title').val()) {
+		alert('Введите тему вопроса');
+	} else {
+		alert('Введите тему и текст вопроса');
 	}
 }
 

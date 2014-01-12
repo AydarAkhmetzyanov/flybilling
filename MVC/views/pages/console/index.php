@@ -68,10 +68,11 @@
                 <div class="row">
                     <div class="span4" style="width:1170px !important;">
                         <div class="console-block console-block-notice">
+							<span class="btn btn-primary" style="float:right; margin:26px 0;" onclick="addTicket()">Задать вопрос специалисту</span>
                             <h2>Уведомления и новости</h2>
                             <div class="notice" id="notifsDiv">
                             </div>
-                            <a href="#" class="btn btn-default">Читать далее</a>
+                            <!-- <a href="#" class="btn btn-default">Читать далее</a> -->
                         </div>
                     </div>
                     </div>
