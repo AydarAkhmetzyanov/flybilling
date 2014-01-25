@@ -24,6 +24,10 @@ class API_helper
         echo json_encode($response);
     }
 
+    public static function isAdmin() {
+        return isset($_SESSION['isAdmin']);
+    }
+
     public static function authorize($options) {
         parse_str(file_get_contents('php://input'), $_POST);
         if(API_helper::requested_with_ajax()){

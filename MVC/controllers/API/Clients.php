@@ -40,7 +40,7 @@ class ClientsController extends Controller {
 
     protected function indexPOSTUpdate($options){
         $target=Clients::get($options)[0];
-        if( $target['client_ID'] != $options['client_ID'] ){ API_helper::failResponse('service owned by other client',403); exit(); } 
+        if( !API_helper::isAdmin() and ($target['client_ID'] != $options['client_ID']) ){ API_helper::failResponse('service owned by other client',403); exit(); } 
         $fieldexists=FALSE;
         $possibleOptions=array('response_static','is_dynamic','dynamic_responder_URL');
         foreach($options as $key=>$value){
