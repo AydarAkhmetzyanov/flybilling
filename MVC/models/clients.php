@@ -35,6 +35,36 @@ class Clients extends Model
 			return false;
 		}
 	}
+
+    public static function update($data){
+        $params=array();
+        $requiredParams=array('ID','api_signature');
+        foreach($data as $key=>$value){
+            if(!in_array($key, $requiredParams)) {
+                unset($data[$key]);
+            }
+        }
+        $fieldexists=true;
+        foreach($requiredParams as $key=>$value){
+            if(!in_array($value,array_keys($data))) {
+                $fieldexists = false;
+                $field=$value;
+            }
+        }
+        if($fieldexists==false){ API_helper::failResponse('field required: '.$field,400); exit(); }
+        $params=$data;
+        $tsql="UPDATE ".SCHEMA.".[Clients] 
+        SET [api_signature]=:api_signature
+        WHERE [ID]=:ID ;";
+        $statement = Database::getInstance()->prepare($tsql);
+        try{
+            $statement->execute($params);
+            return TRUE;
+        } catch(PDOException $e) {
+            API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
+            return FALSE;
+        }
+        }
 	
 	public static function getClient($id)
 	{
