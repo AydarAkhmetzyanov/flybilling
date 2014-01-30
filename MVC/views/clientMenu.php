@@ -25,14 +25,14 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li><a href="#">Home</a></li>
-                            <li><a href="#">Сервисы</a></li>
+                            <li><a href="/console/services">Сервисы</a></li>
                             <li><a href="#">Статистика</a></li>
                             <li><a href="#">Помощь</a></li>
                             <li><a href="#">Тикеты</a></li>
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">
-                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / <?php echo number_format(Clients::getInstance()->data['balance'], 2, ',', ' '); ?> <s>Р</s> / <a href="#">Вывод</a></li>
+                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / <?php echo number_format(Clients::getInstance()->data['balance'], 2, ',', ' '); ?> <s>Р</s> / <a href="/console/withdrawals">Вывод</a></li>
                                 <li>
                                     <a href="#" class="notific" title="Уведомления"><span class="badge badge-success">21</span></a>
                                     <div class="dropdown">

@@ -17,7 +17,7 @@
 
             <div class="content-inner">
 <form id="logInForm" onSubmit="return logIn()" class="form-horizontal">
-    <p><a onclick="demoAccess();">Протестировать сервис</a></p>
+    <p><span class="dotted-link" onclick="demoAccess();">Протестировать сервис</span></p>
 						<div class="control-group">
 							<label class="control-label" for="inputEmail">Email</label>
 							<div class="controls">

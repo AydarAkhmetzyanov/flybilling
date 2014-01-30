@@ -11,6 +11,10 @@ body, html {
 	height: 100%;
 }
 
+#wrap {
+  min-height: 100%;
+}
+
 a {
 	color: #338ddc;
 	text-decoration: underline;
@@ -703,6 +707,8 @@ h3 {
 
 .footer-console {
     padding-top: 0;
+	margin-top: -100px;
+	clear:both;
 }
 
 .footer-console .footer-bottom {
@@ -970,6 +976,10 @@ h3 {
 
 /* inner page styles */
 
+.page-inner-console {
+	padding-bottom:100px;
+}
+
 .page-inner .top-promo .container {
 	height: 170px;
 	background: 0;
@@ -1041,7 +1051,11 @@ position: relative;
 width: 500px;
 }
 
-.box-modal input, .box-modal textarea {
+.box-modal .form-horizontal input[type="text"], .box-modal .form-horizontal textarea { 
+width: 286px;
+}
+
+.box-modal input[type="text"], .box-modal textarea {
 width:486px;
 }
 
@@ -1055,7 +1069,7 @@ right: 10px;
 top: 6px;
 }
 
-.g-hidden { 
+.g-hidden, .g-hidden2 { 
 display: none;
 }
 
@@ -1065,4 +1079,23 @@ display: none;
 
 .box-modal h2 { 
 	font-size: 26px;
+}
+
+.dotted-link { 
+color: #338DDC;
+text-decoration: none;
+border-bottom:1px dotted;
+cursor:pointer;
+}
+
+.dotted-link:hover, .dotted-link:focus { 
+border:none;
+}
+
+.box-modal .form-horizontal .control-label { 
+width: 180px;
+}
+
+.box-modal .form-horizontal .controls { 
+margin-left: 200px;
 }
