@@ -4,6 +4,7 @@ class ClientsController extends Controller {
     
 	public function index($id=0){
         //possible get options 
+        parse_str(file_get_contents('php://input'), $_POST);
         $options=$_GET;
         if($id!=0){
             $options['ID']=$id;

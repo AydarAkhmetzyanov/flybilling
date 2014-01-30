@@ -5,6 +5,7 @@ class WithdrawalsController extends Controller {
 	public function index($id=0){
         //possible get options summ
         $options=$_GET;
+        parse_str(file_get_contents('php://input'), $_POST);
         if($id!=0){
             $options['ID']=$id;
         }

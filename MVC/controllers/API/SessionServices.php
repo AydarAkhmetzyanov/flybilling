@@ -4,6 +4,7 @@ class SessionServicesController extends Controller {
     
 	public function index($id=0){
         //possible get options response_static,is_dynamic,dynamic_responder_URL,provider_ID,default_text
+        parse_str(file_get_contents('php://input'), $_POST);
         $options=$_GET;
         if($id!=0){
             $options['ID']=$id;
