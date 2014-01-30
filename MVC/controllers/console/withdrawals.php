@@ -1,11 +1,11 @@
 <?php
 
-class IndexController extends Controller {
+class WithdrawalsController extends Controller {
     
 	public function index($change=0){
 		if(Clients::isAuth()){
 	    $data = array();
-        $data['title'] = 'Кабинет пользователя';
+        $data['title'] = 'Вывод средств';
 		
 		HTML::setUserLanguage('ru');
         $data['newGuest']=false;
@@ -14,7 +14,7 @@ class IndexController extends Controller {
 		renderView('header', $data);
         echo '<body class="page-main"><div id="wrap">';
         renderView('clientMenu', $data);
-		renderView('pages/console/index', $data);
+		renderView('pages/console/withdrawals', $data);
 		renderView('consoleFooter', $data);
 		} else {
             redirect('login');

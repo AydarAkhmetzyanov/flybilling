@@ -6,11 +6,9 @@
 <?php echo HTML::includeJS('jquery.arcticmodal-0.3.min');?>
 <?php echo HTML::includeJS('console');?>
 
-<div class="page-inner">
+<div class="page-inner page-inner-console">
 
-<div class="g-hidden">
-						
-</div>
+<div class="g-hidden"></div>
 
 <div class="top-promo">
             <div class="container">
@@ -61,7 +59,7 @@
                     <div class="span8">
                         <div class="console-block console-block-graph">
                             <h2>График доходов</h2>
-							<div id="chart_div" style="width: 728px; height: 200px; margin-top:-25px;"></div>
+							<div id="chart_div" style="width: 728px; height: 200px; margin-top:-25px; text-align:center;"><img style="margin-top:90px;" src="/img/dots64.gif"></div>
                         </div>
                     </div>
                 </div>
@@ -71,6 +69,7 @@
 							<span class="btn btn-primary" style="float:right; margin:26px 0;" onclick="addTicket()">Задать вопрос специалисту</span>
                             <h2>Уведомления и новости</h2>
                             <div class="notice" id="notifsDiv">
+								<img src="/img/dots64.gif">
                             </div>
                             <!-- <a href="#" class="btn btn-default">Читать далее</a> -->
                         </div>
