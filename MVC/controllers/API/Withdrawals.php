@@ -27,8 +27,8 @@ class WithdrawalsController extends Controller {
     }
 
     protected function indexPOST($options){
-        if(!isset($_POST['summ'])){ API_helper::failResponse('option required: summ',400); exit(); }
-        $options['summ']=$_POST['summ'];
+        if(!isset($_GET['summ'])){ API_helper::failResponse('option required: summ',400); exit(); }
+        $options['summ']=$_GET['summ'];
         $resultData=Withdrawals::insert($options);
         if($resultData==FALSE){ API_helper::failResponse('unknown error',500); exit(); } 
         API_helper::successResponse($resultData);
