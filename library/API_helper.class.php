@@ -23,12 +23,13 @@ class API_helper
         $response['reason']=$error;
         echo json_encode($response);
     }
-
-    public static function isAdmin() {
-        return isset($_SESSION['isAdmin']);
+	
+	public static function isAdmin() {
+		return isset($_SESSION['isAdmin']);
     }
-
+	
     public static function authorize($options) {
+        parse_str(file_get_contents('php://input'), $_POST);
         if(API_helper::requested_with_ajax()){
             if(!isset($_SESSION['isAdmin'])){
                 if(!isset($_SESSION['id'])){ API_helper::failResponse('auth required',401); exit(); } 

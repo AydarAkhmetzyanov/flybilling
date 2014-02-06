@@ -66,9 +66,65 @@ class Clients extends Model
         }
         }
 	
+	public static function updateProfile($data){
+		$id = Clients::getInstance()->data['ID'];
+        $params1=array();
+		$params2=array();
+		if ($data['password']) $params1['password'] = Pass::password_hash($data['password'], PASSWORD_DEFAULT);
+		$params1['language'] = $data['language'];
+		$params1['timezone'] = $data['timezone'];
+		unset($data['password']);
+		unset($data['oldPassword']);
+		unset($data['passwordRepeat']);
+		unset($data['language']);
+		unset($data['timezone']);
+		$params2 = $data;
+		
+		$tsql = "UPDATE ".SCHEMA.".[Clients] SET ";
+		foreach($params1 as $key=>$value){
+            $tsql = $tsql."[".$key."] = :".$key.", ";
+        }
+		$tsql = substr($tsql,0,-2);
+		$tsql = $tsql." WHERE [ID]=".$id.";";
+		
+		$tsql2 = "UPDATE ".SCHEMA.".[ClientsPrivateData] SET ";
+		foreach($params2 as $key=>$value){
+            $tsql2 = $tsql2."[".$key."] = :".$key.", ";
+        }
+		$tsql2 = substr($tsql2,0,-2);
+		$tsql2 = $tsql2." WHERE [ID]=".$id.";";
+		
+        $statement = Database::getInstance()->prepare($tsql);
+		$statement2 = Database::getInstance()->prepare($tsql2);
+        try{
+            $statement->execute($params1);
+			$statement2->execute($params2);
+            return TRUE;
+        } catch(PDOException $e) {
+            API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
+            return FALSE;
+        }
+        }
+	
 	public static function getClient($id)
 	{
 		$tsql      = "SELECT * FROM " . SCHEMA . ".[Clients] WHERE [ID]=:ID;";
+		$statement = Database::getInstance()->prepare($tsql);
+		$params    = array(
+			'ID' => $id
+		);
+		$statement->execute($params);
+		$row = $statement->fetchAll(PDO::FETCH_ASSOC);
+		if (count($row) > 0) {
+			return $row[0];
+		} else {
+			return FALSE;
+		}
+	}
+	
+	public static function getClientData($id)
+	{
+		$tsql      = "SELECT * FROM " . SCHEMA . ".[ClientsPrivateData] WHERE [ID]=:ID;";
 		$statement = Database::getInstance()->prepare($tsql);
 		$params    = array(
 			'ID' => $id

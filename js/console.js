@@ -51,23 +51,23 @@ function getSMS(today0Input, todayInput, yesterday0Input, yesterdayInput, idInpu
 }
 
 function showNews() {
-
+var notifsDiv = $("#notifsDiv");
 	var data = $.get(
 		"/API/Notifications", {
 			mark_read: true
 		},
 		function (objResult) {
 			var obj = jQuery.parseJSON(objResult);
-
+			notifsDiv.html('');
 			if (obj.data) {
 				obj.data.forEach(function (entry) {
 					var t = (entry.timestamp).split(/[- :]/);
 					var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
 
 					if (entry.status) {
-						$("#notifsDiv").html('<div class="item" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + $("#notifsDiv").html());
+						notifsDiv.html('<div class="item" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + notifsDiv.html());
 					} else {
-						$("#notifsDiv").html('<div class="item item-new" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + $("#notifsDiv").html());
+						notifsDiv.html('<div class="item item-new" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + notifsDiv.html());
 					}
 				});
 			}
@@ -82,11 +82,11 @@ function notificationClick(id) {
 }
 
 function askQuestion(id) {
-
-	if ($('#ticket-text').val()) {
+	var ticketText = $("#ticket-text");
+	if (ticketText.val()) {
 		$.post(
 			"/API/Notifications/" + id, {
-				text: $('#ticket-text').val()
+				text: ticketText.val()
 			});
 		$('#exampleModal1').arcticmodal('close');
 	} else {
@@ -96,21 +96,30 @@ function askQuestion(id) {
 
 function addTicket() {
 
-	$(".g-hidden").html('<div class="box-modal" id="exampleModal1"><div class="box-modal_close arcticmodal-close">закрыть</div><h2>Введите свой вопрос</h2><input id="ticket-title" type="text" placeholder="Тема вопроса" data-default-value=""/><textarea id="ticket-text" rows="8" placeholder="Текст вопроса" data-default-value=""/><span style="float:right;" onclick="addTicketPost()" class="btn btn-primary">Отправить вопрос</span><div class="clear-fix"></div></div>');
+	$(".g-hidden").html('<div class="box-modal" id="exampleModal1">\
+			<div class="box-modal_close arcticmodal-close">закрыть</div>\
+			<h2>Введите свой вопрос</h2>\
+			<input id="ticket-title" type="text" placeholder="Тема вопроса" data-default-value=""/>\
+			<textarea id="ticket-text" rows="8" placeholder="Текст вопроса" data-default-value=""/>\
+			<span style="float:right;" onclick="addTicketPost()" class="btn btn-primary">Отправить вопрос</span>\
+			<div class="clear-fix"></div>\
+		</div>');
 	$('#exampleModal1').arcticmodal();
 }
 
 function addTicketPost() {
-	if ($('#ticket-text').val() && $('#ticket-title').val()) {
+var ticketText = $("#ticket-text");
+var ticketTitle = $("#ticket-title");
+	if (ticketText.val() && ticketTitle.val()) {
 		$.post(
 			"/API/Notifications", {
-				title: $('#ticket-title').val(),
-				text: $('#ticket-text').val()
+				title: ticketTitle.val(),
+				text: ticketText.val()
 			});
 		$('#exampleModal1').arcticmodal('close');
-	} else if (!$('#ticket-text').val() && $('#ticket-title').val()) {
+	} else if (!ticketText.val() && ticketTitle.val()) {
 		alert('Введите текст вопроса');
-	} else if ($('#ticket-text').val() && !$('#ticket-title').val()) {
+	} else if (ticketText.val() && !ticketTitle.val()) {
 		alert('Введите тему вопроса');
 	} else {
 		alert('Введите тему и текст вопроса');
