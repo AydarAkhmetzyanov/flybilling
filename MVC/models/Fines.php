@@ -20,6 +20,19 @@ class Fines extends Model
             $tsql.=' AND [client_ID]=:client_ID';
             $params['client_ID']=$data['client_ID'];
         }
+        if(isset($data['order'])){
+            $tsql.=" ORDER BY [$data[order]]";
+        } else {
+            $tsql.=' ORDER BY [localtimestamp]';
+        }
+        if(isset($data['offset'])){
+            $tsql.=" OFFSET $data[offset] ROW ";
+        } else {
+            $tsql.=' OFFSET 0 ROW ';
+        }
+        if(isset($data['limit'])){
+            $tsql.=" FETCH NEXT $data[limit] ROW ONLY ";
+        } 
         $statement = Database::getInstance()->prepare($tsql);
         try{
             $statement->execute($params);
