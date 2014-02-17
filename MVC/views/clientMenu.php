@@ -24,11 +24,11 @@
                     <a class="brand" href="/"></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li><a href="#">Home</a></li>
+                            <li><a href="/console">Home</a></li>
                             <li><a href="/console/services">Сервисы</a></li>
-                            <li><a href="#">Статистика</a></li>
-                            <li><a href="#">Помощь</a></li>
-                            <li><a href="#">Тикеты</a></li>
+                            <li><a href="/console/analytics">Статистика</a></li>
+                            <li><a href="/console/documentation">Помощь</a></li>
+                            <li><a href="/console">Тикеты</a></li>
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">
@@ -38,7 +38,7 @@
                                     <div class="dropdown">
                                         <a id="dLabel" data-toggle="dropdown" data-target="#" href="#"><?php echo $_SESSION['email']; ?> &#x25BC;</a>
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                            <li><a href="#">Настройки профиля</a></li>
+                                            <li><a href="/profile">Настройки профиля</a></li>
                                             <li role="presentation" class="divider"></li>
                                             <li><a href="/login/logout">Выход</a></li>
                                         </ul>

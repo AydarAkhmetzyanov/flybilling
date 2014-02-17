@@ -2,35 +2,35 @@ $(document).ready(function () {
     closeAll();
 });
 
-function responseEmail(){
+function responseEmail() {
 
-if (document.reg.email.value){
+    if (document.reg.email.value) {
         $.ajax({
             type: "POST",
             url: "/registration/validate",
             data: { action: 'email', email: document.reg.email.value },
             cache: false,
-            success: function(response){
-                 if(response == 'on'){
-                    $("#emailCheck").html("<em>E-mail занят</em>").css("color","red");
-					$("input[name='email']").css("background","#ffefef");
-					$('#completeReg').hide();
+            success: function (response) {
+                if (response == 'on') {
+                    $("#emailCheck").html("<em>E-mail занят</em>").css("color", "red");
+                    $("input[name='email']").css("background", "#ffefef");
+                    $('#completeReg').hide();
                     return false;
-                }else{
-                    $("#emailCheck").html("<em>E-mail свободен</em>").css("color","green");
-					$("input[name='email']").css("background","#f2ffef");
-					if (document.getElementById('submitCheck').checked) $('#completeReg').show();
+                } else {
+                    $("#emailCheck").html("<em>E-mail свободен</em>").css("color", "green");
+                    $("input[name='email']").css("background", "#f2ffef");
+                    if (document.getElementById('submitCheck').checked) $('#completeReg').show();
                     return true;
                 };
             }
         });
-		}
-		else {
-			$("#emailCheck").html("");
-			$("input[name='email']").css("background","white");
-			$('#completeReg').hide();
-		}
-    };
+    }
+    else {
+        $("#emailCheck").html("");
+        $("input[name='email']").css("background", "white");
+        $('#completeReg').hide();
+    }
+};
 	
 function captchaValidate(){
 

@@ -30,24 +30,22 @@ function showServices() {
 			<tbody></tbody>\
 			</table>');
 			var tbody = $('.table-striped tbody');
-			if (SMSServicesJSON.data)
-			{
-				SMSServicesJSON.data.forEach(function (entry) {
-					if (entry.status == 1)
-					{
-						tbody.html(tbody.html() + '<tr>\
-							<td>' + entry.prefix + '</td>\
+			if (SMSServicesJSON.data) {
+			    SMSServicesJSON.data.forEach(function (entry) {
+			        if (entry.status == 1) {
+			            tbody.html(tbody.html() + '<tr>\
+							<td>SMSService_' + entry.ID + '_' + entry.country + '</td>\
 							<td>SMS Service</td>\
 							<td>' + entry.country + '</td>\
 							<td>Активен</td>\
 							<td><span class="dotted-link" onclick="showServicePreferences(\'SMSServices\', ' + entry.ID + ')">Настройки</span></td>\
 							<td><a href="/console/analytics/SMSServices/' + entry.ID + '">Статистика</a></td>\
 							<td><a href="/docs/Premium_SMS_Protocol.docx">Документация</a></td>\
-							<td><button class="btn btn-mini btn-danger" data-id="SMSServices' + entry.ID +  '" onclick="deactivateService(\'SMSServices\', ' + entry.ID + ')">Деактивировать</button></td>\
+							<td><button class="btn btn-mini btn-danger" data-id="SMSServices' + entry.ID + '" onclick="deactivateService(\'SMSServices\', ' + entry.ID + ')">Деактивировать</button></td>\
 						</tr>');
-					}
-					else unactive.push(entry);
-				});
+			        }
+			        else unactive.push(entry);
+			    });
 			}
 			
 			if (SessionServicesJSON.data)
@@ -56,7 +54,7 @@ function showServices() {
 					if (entry.status == 1)
 					{
 						tbody.html(tbody.html() + '<tr>\
-							<td>' + entry.default_text + '</td>\
+							<td>SessionService_' + entry.ID + '_' + entry.country + '</td>\
 							<td>Session Service</td>\
 							<td>' + entry.country + '</td>\
 							<td>Активен</td>\
@@ -74,7 +72,7 @@ function showServices() {
 			{
 				unactive.forEach(function (entry) {
 					tbody.html(tbody.html() + '<tr style="color:#aaaaaa;">\
-						<td>' + entry.prefix + '</td>\
+						<td>SMSService_' + entry.ID + '_' + entry.country + '</td>\
 						<td>SMS Service</td>\
 						<td>' + entry.country + '</td>\
 						<td>Неактивен</td>\
@@ -90,7 +88,7 @@ function showServices() {
 			{
 				unactive2.forEach(function (entry) {
 					tbody.html(tbody.html() + '<tr style="color:#aaaaaa;">\
-						<td>' + entry.default_text + '</td>\
+						<td>SessionService_' + entry.ID + '_' + entry.country + '</td>\
 						<td>Session Service</td>\
 						<td>' + entry.country + '</td>\
 						<td>Неактивен</td>\
@@ -116,91 +114,240 @@ function deactivateService(type, id)
 	}
 }
 
-function showServicePreferences(type, id)
-{
+function showServicePreferences(type, id) {
+    var prefs_div = $(".g-hidden");
+    prefs_div.html('');
 	$.get(
 		"/API/" + type,
 		function( result ) {
 			var serviceJSON = (jQuery.parseJSON(result)).data;
 			var count = serviceJSON.length;
 			for (var i = 0; i < count; i++) {
-				if (serviceJSON[i].ID == id) {
-					$(".g-hidden").html('<div class="box-modal" id="exampleModal1">\
-							<div class="box-modal_close arcticmodal-close">закрыть</div>\
-							<h2>Настройки сервиса</h2>\
-							<div class="form-horizontal">\
-								<div class="control-group">\
-									<label class="control-label">ID сервиса</label>\
-									<div class="controls"><input type="text" disabled value="' + id + '"></div>\
-								</div>\
-								<div class="control-group">\
-									<label class="control-label">Тип сервиса</label>\
-									<div class="controls"><input type="text" disabled value="' + type + '"></div>\
-								</div>\
-								<div class="control-group">\
-									<label class="control-label">response_static</label>\
-									<div class="controls"><input id="response-static" type="text" value="' + serviceJSON[i].response_static + '"></div>\
-								</div>\
-								<div class="control-group">\
-									<label class="control-label">is_dynamic</label>\
-									<div class="controls" id="dynamic-radio">\
-										<label class="radio"><input name="dynamic" onclick="$(\'#dynamic-url\').removeAttr(\'disabled\');" type="radio" value="1">Да</label>\
-										<label class="radio"><input name="dynamic" onclick="$(\'#dynamic-url\').attr(\'disabled\', true);" type="radio" value="0">Нет</label>\
-									</div>\
-								</div>\
-								<div class="control-group">\
-									<label class="control-label">dynamic_responder_URL</label>\
-									<div class="controls"><input id="dynamic-url" type="text" value="' + serviceJSON[i].dynamic_responder_URL + '"></div>\
-								</div>\
-							</div>\
-							<button style="float:right;" onclick="editServicePreferences(\'' + type + '\', ' + id + ')" class="btn btn-primary">Изменить настройки</button>\
-							<div class="clear-fix"></div>\
-						</div>');
-					if (!serviceJSON[i].is_dynamic) {
-						$('#dynamic-radio label:nth-child(2) input').attr('checked', true);
-						$('#dynamic-url').attr('disabled', true);
-					}
-					else {
-						$('#dynamic-radio label:nth-child(1) input').attr('checked', true);					
-					}
-					$('#exampleModal1').arcticmodal();
-					i = count;
-				}
+			    if (serviceJSON[i].ID == id) {
+			        switch (type) {
+			            case 'SMSServices': {
+			                prefs_div.html('<div class="box-modal" id="exampleModal1">\
+							    <div class="box-modal_close arcticmodal-close">закрыть</div>\
+							    <h2>Настройки сервиса</h2>\
+							    <div class="form-horizontal">\
+								    <div class="control-group">\
+									    <label class="control-label">ID сервиса</label>\
+									    <div class="controls"><input type="text" disabled value="' + id + '"></div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">Тип сервиса</label>\
+									    <div class="controls"><input type="text" disabled value="' + type + '"></div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">Статический ответ</label>\
+									    <div class="controls"><input id="response-static" type="text" value="' + serviceJSON[i].response_static + '"></div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">Динамический обработчик</label>\
+									    <div class="controls" id="dynamic-radio">\
+										    <label class="radio"><input name="dynamic" onclick="$(\'#dynamic-url\').removeAttr(\'disabled\');" type="radio" value="1">Да</label>\
+										    <label class="radio"><input name="dynamic" onclick="$(\'#dynamic-url\').attr(\'disabled\', true);" type="radio" value="0">Нет</label>\
+									    </div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">URL динамического обработчика</label>\
+									    <div class="controls"><input id="dynamic-url" type="text" value="' + serviceJSON[i].dynamic_responder_URL + '"></div>\
+								    </div>\
+							    </div>\
+							    <button style="float:right;" onclick="editServicePreferences(\'' + type + '\', ' + id + ')" class="btn btn-primary">Изменить настройки</button>\
+							    <div class="clear-fix"></div>\
+						    </div>');
+			                if (!serviceJSON[i].is_dynamic) {
+			                    $('#dynamic-radio label:nth-child(2) input').attr('checked', true);
+			                    $('#dynamic-url').attr('disabled', true);
+			                }
+			                else {
+			                    $('#dynamic-radio label:nth-child(1) input').attr('checked', true);
+			                }
+
+
+			                break;
+			            }
+
+			            case 'SessionServices': {
+			                prefs_div.html('<div class="box-modal" id="exampleModal1">\
+							    <div class="box-modal_close arcticmodal-close">закрыть</div>\
+							    <h2>Настройки сервиса</h2>\
+							    <div class="form-horizontal">\
+								    <div class="control-group">\
+									    <label class="control-label">ID сервиса</label>\
+									    <div class="controls"><input type="text" disabled value="' + id + '"></div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">Тип сервиса</label>\
+									    <div class="controls"><input type="text" disabled value="' + type + '"></div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">Тест по умолчанию</label>\
+									    <div class="controls"><input id="default-text" type="text" value="' + serviceJSON[i].default_text + '"></div>\
+								    </div>\
+							    </div>\
+							    <button style="float:right;" onclick="editServicePreferences(\'' + type + '\', ' + id + ')" class="btn btn-primary">Изменить настройки</button>\
+							    <div class="clear-fix"></div>\
+						    </div>');
+
+			                break;
+			            }
+			        }
+			        $('#exampleModal1').arcticmodal();
+			        i = count;
+			    }
 			}
 		}
 	);
 }
 
 function editServicePreferences(type, id) {
-	$.post(
-		'/API/' + type + '/' + id, {
-			response_static: 'testing',
-			is_dynamic: 1,
-			dynamic_responder_URL: 'testing'
+    var url;
+    switch (type) {
+        case 'SMSServices': {
+            var radio = $('input:radio[name=dynamic]:checked');
+            var responseStatic = $('#response-static');
+            var dynamicUrl = $('#dynamic-url');
+
+
+            if (!responseStatic.val() || (radio.val() == 1 && !dynamicUrl.val())) {
+                alert('Введите данные');
+                return false;
+            }
+
+            url = '?response_static=' + responseStatic.val() + '&is_dynamic=' + radio.val();
+            if (radio.val() == 1) {
+                url = url + '&dynamic_responder_URL=' + dynamicUrl.val();
+            }
+            break;
+        }
+        case 'SessionServices': {
+            var defaultText = $('#default-text');
+            if (!defaultText.val()) {
+                alert('Введите данные');
+                return false;
+            }
+            url = '?default_text=' + defaultText.val();
+            break;
+        }
+    }
+
+    $('#exampleModal1 button').replaceWith('<span style="float:right; padding:5px 60px 5px 0;"><img src="/img/dots32.gif"></span>');
+
+    $.post('/API/' + type + '/' + id + url)
+		.done(function (msg) {
+		    $('#exampleModal1').arcticmodal('close');
 		})
-		
-		.done( function(msg) { alert(msg) } )
-		.fail( function(xhr, textStatus, errorThrown) {
-				var errorJSON = jQuery.parseJSON(xhr.responseText);
-				alert(errorJSON.reason);
+		.fail(function (xhr, textStatus, errorThrown) {
+		    var errorJSON = jQuery.parseJSON(xhr.responseText);
+		    alert(errorJSON.reason);
 		});
 }
 
-function createService(type) {
-	$.post(
-		'/API/' + type, {
-			response_static: $('#response-static2').val(),
-			is_dynamic: $('input:radio[name=dynamic2]:checked').val(),
-			dynamic_responder_URL: $('#dynamic-url2').val()
-		})
-		.done( function(msg) { alert(msg) } )
-		.fail( function(xhr, textStatus, errorThrown) {
-				var errorJSON = jQuery.parseJSON(xhr.responseText);
-				alert(errorJSON.reason);
-			});
+function showServiceCreation() {
+    var prefs_div = $(".g-hidden");
+    prefs_div.html('');
+    prefs_div.html('<div class="box-modal" id="exampleModal1">\
+							    <div class="box-modal_close arcticmodal-close">закрыть</div>\
+							    <h2>Создание сервиса</h2>\
+                                <div class="form-horizontal">\
+                                    <div class="control-group">\
+				                        <label class="control-label">Тип сервиса</label>\
+				                        <div class="controls" id="dynamic-radio">\
+					                        <label class="radio"><input name="service-type" type="radio" onclick="showCreationDiv(\'SessionServices\')" value="SessionServices">SessionServices</label>\
+					                        <label class="radio"><input name="service-type" type="radio" onclick="showCreationDiv(\'SMSServices\')" value="SMSServices">SMSServices</label>\
+				                        </div>\
+			                        </div>\
+                                </div>\
+                                <div id="cr-div"></div>\
+					</div>');
+    $('#exampleModal1').arcticmodal();
 }
 
-function showServiceCreation()
-{
-	$('#exampleModal2').arcticmodal();						
+function showCreationDiv(type) {
+    var crDiv = $('#cr-div');
+    crDiv.html('');
+
+    switch (type) {
+        case 'SMSServices': {
+            crDiv.html('<div class="form-horizontal">\
+								    <div class="control-group">\
+									    <label class="control-label">Статический ответ</label>\
+									    <div class="controls"><input id="response-static" type="text"></div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">Динамический обработчик</label>\
+									    <div class="controls" id="dynamic-radio">\
+										    <label class="radio"><input name="dynamic" onclick="$(\'#dynamic-url\').removeAttr(\'disabled\');" type="radio" checked value="1">Да</label>\
+										    <label class="radio"><input name="dynamic" onclick="$(\'#dynamic-url\').attr(\'disabled\', true);" type="radio" value="0">Нет</label>\
+									    </div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">URL динамического обработчика</label>\
+									    <div class="controls"><input id="dynamic-url" type="text"></div>\
+								    </div>\
+							    </div>\
+							    <button style="float:right;" onclick="createService(\'' + type + '\')" class="btn btn-primary">Создать сервис</button>\
+							    <div class="clear-fix"></div>');
+            break;
+        }
+        case 'SessionServices': {
+            crDiv.html('<div class="form-horizontal">\
+								    <div class="control-group">\
+									    <label class="control-label">Тест по умолчанию</label>\
+									    <div class="controls"><input id="default-text" type="text"></div>\
+								    </div>\
+							    </div>\
+							    <button style="float:right;" onclick="createService(\'' + type + '\')" class="btn btn-primary">Создать сервис</button>\
+							    <div class="clear-fix"></div>');
+            break;
+        }
+    }
+}
+
+
+
+function createService(type) {
+    var url;
+    switch (type) {
+        case 'SMSServices': {
+            var radio = $('input:radio[name=dynamic]:checked');
+            var responseStatic = $('#response-static');
+            var dynamicUrl = $('#dynamic-url');
+
+
+            if (!responseStatic.val() || (radio.val() == 1 && !dynamicUrl.val())) {
+                alert('Введите данные');
+                return false;
+            }
+
+            url = '?response_static=' + responseStatic.val() + '&is_dynamic=' + radio.val() + '&provider_ID=1';
+            if (radio.val() == 1) {
+                url = url + '&dynamic_responder_URL=' + dynamicUrl.val();
+            }
+            break;
+        }
+        case 'SessionServices': {
+            var defaultText = $('#default-text');
+            if (!defaultText.val()) {
+                alert('Введите данные');
+                return false;
+            }
+            url = '?default_text=' + defaultText.val() + '&provider_ID=1';
+            break;
+        }
+    }
+
+    $('#exampleModal1 button').replaceWith('<span style="float:right; padding:5px 60px 5px 0;"><img src="/img/dots32.gif"></span>');
+
+    $.post('/API/' + type + url)
+		.done(function (msg) {
+		    $('#exampleModal1').arcticmodal('close');
+		    showServices();
+		})
+		.fail(function (xhr, textStatus, errorThrown) {
+		    var errorJSON = jQuery.parseJSON(xhr.responseText);
+		    alert(errorJSON.reason);
+		});
 }

@@ -12,7 +12,7 @@ function onLogIn(data)
 {
     oresult = jQuery.parseJSON(data);
     switch(oresult.error)
-{
+    {
 case 0:
   window.location="/console/";
   break;
@@ -27,7 +27,7 @@ case 3:
   break;
 default:
   alert("Ошибка, попробуйте позже или обратитесь в техническую поддержку");
-}
+    }
 }
 
 function demoAccess() {

@@ -65,9 +65,9 @@ var notifsDiv = $("#notifsDiv");
 					var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
 
 					if (entry.status) {
-						notifsDiv.html('<div class="item" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + notifsDiv.html());
+					    notifsDiv.html('<div class="item" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, HH:MM") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + notifsDiv.html());
 					} else {
-						notifsDiv.html('<div class="item item-new" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, hh:mm") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + notifsDiv.html());
+					    notifsDiv.html('<div class="item item-new" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, HH:MM") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + notifsDiv.html());
 					}
 				});
 			}
@@ -210,15 +210,15 @@ function getDate(date) {
 		return now.format("yyyy-mm-dd") + ' 23:59';
 	case 'currentWeek':
 		now.setDate(now.getDate() - 7);
-		return now.format("yyyy-mm-dd hh:mm");
+		return now.format("yyyy-mm-dd HH:MM");
 	case 'pastWeek':
 		now.setDate(now.getDate() - 14);
-		return now.format("yyyy-mm-dd hh:mm");
+		return now.format("yyyy-mm-dd HH:MM");
 	case 'currentMonth':
 		now.setDate(now.getDate() - 30);
-		return now.format("yyyy-mm-dd hh:mm");
+		return now.format("yyyy-mm-dd HH:MM");
 	case 'pastMonth':
 		now.setDate(now.getDate() - 60);
-		return now.format("yyyy-mm-dd hh:mm");
+		return now.format("yyyy-mm-dd HH:MM");
 	}
 }

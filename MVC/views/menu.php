@@ -28,8 +28,8 @@
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#about">О нас</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#clients">Клиенты и отзывы</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#contacts">Контакты</a></li>
-                            <li class="spec"><a href="http://flybill.ru/reg">Регистрация</a></li>
-                            <li><a href="http://flybill.ru/login">Вход</a></li>
+                            <li class="spec"><a href="/registration">Регистрация</a></li>
+                            <li><a href="/login">Вход</a></li>
                         </ul>
                         <form class="pull-right">
                             <div class="fb-like" data-href="http://flybill.ru" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>

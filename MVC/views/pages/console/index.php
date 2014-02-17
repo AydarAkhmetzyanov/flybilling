@@ -51,7 +51,7 @@
                                     <div class="status"></div>
                                     <div class="count"><?php echo number_format(Clients::getInstance()->data['balance'], 2, ',', ' '); ?> <s>Р</s></div>
                                     <br>
-                                    <a href="#" class="btn btn-primary">Вывод средств</a>
+                                    <a href="/console/withdrawals" class="btn btn-primary">Вывод средств</a>
                                 </div>
                             </div>
                         </div>
