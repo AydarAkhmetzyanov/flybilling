@@ -22,10 +22,10 @@
         <div class="span3 contacts">
             <h4 id="contacts">Контакты</h4>
             <div class="item c-icq">
-                <i></i> 612450712
+                <i></i> 612450713
             </div>
             <div class="item c-email">
-                <i></i> <a href="mailto:info@flybill.ru">info@flybill.ru</a>
+                <i></i> <a href="mailto:info@flybill.ru">info@vertexbilling.com</a>
             </div>
         </div>
         <div class="span4">
