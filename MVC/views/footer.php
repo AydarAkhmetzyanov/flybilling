@@ -29,8 +29,9 @@
             </div>
         </div>
         <div class="span4">
-            <div class="fb-like-box" data-href="https://www.facebook.com/flybilling" data-width="300" data-height="180" data-show-faces="true" data-colorscheme="dark" data-stream="false" data-show-border="false" data-header="false"></div>
-        </div>
+            <!--<div class="fb-like-box" data-href="https://www.facebook.com/flybilling" data-width="300" data-height="180" data-show-faces="true" data-colorscheme="dark" data-stream="false" data-show-border="false" data-header="false"></div>
+        -->
+            </div>
     </div>
     <div class="footer-bottom">
         <div class="container">
