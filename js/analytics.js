@@ -11,39 +11,32 @@ $(document).ready(function () {
     dateFrom = getDate('currentMonth');
     dateTo = getDate('today');
 
-    if (serviceId) {
-        $.get(
-        "/API/" + serviceType + "/" + serviceId,
-        function (result) {
-            var serviceJSON = jQuery.parseJSON(result);
-            $('#service-select').html('<option value="none">' + serviceType.slice(0, -1) + '_' + serviceId + '_' + serviceJSON.data[0].country + '</option>');
-        });
+        var SMSGet = $.get("/API/SMSServices");
 
-        drawChart(dateFrom, dateTo, serviceId, serviceType);
-        showSMS(dateFrom, dateTo, serviceId, serviceType);
-    }
-    else {
-        serviceSelect = $('#service-select');
+        var SessionGet = $.get("/API/SessionServices");
 
-        $.get(
-        "/API/SMSServices",
-        function (result) {
-            var serviceJSON = jQuery.parseJSON(result);
-            serviceJSON.data.forEach(function (entry) {
+        $.when(SMSGet, SessionGet).done(function (SMSGetResult, SessionGetResult) {
+            serviceSelect = $('#service-select');
+
+            var SMSGetJSON = jQuery.parseJSON(SMSGetResult[0]);
+            SMSGetJSON.data.forEach(function (entry) {
                 serviceSelect.html(serviceSelect.html() + '<option value="SMSServices&' + entry.ID + '">SMSService_' + entry.ID + '_' + entry.country + '</option>');
             });
+
+            var SessionGetJSON = jQuery.parseJSON(SessionGetResult[0]);
+            SessionGetJSON.data.forEach(function (entry) {
+                serviceSelect.html(serviceSelect.html() + '<option value="SessionServices&' + entry.ID + '">SessionService_' + entry.ID + '_' + entry.country + '</option>');
+            });
+
+            if (serviceId) {
+                $('#service-select option[value="' + serviceType + '&' + serviceId + '"]').attr('selected', true);
+            }
+
+            serviceSelect.removeAttr('disabled');
         });
 
-        $.get(
-        "/API/SessionServices",
-        function (result) {
-            var serviceJSON = jQuery.parseJSON(result);
-            serviceJSON.data.forEach(function (entry) {
-                serviceSelect.html(serviceSelect.html() + '<option value="SessionServices&' + entry.ID + '">SessionService_' + entry.ID + '_' + entry.country + '</option>');
-                $('#service-select').removeAttr('disabled');
-            });
-        });
-    }
+            drawChart(dateFrom, dateTo, serviceId, serviceType);
+            showSMS(dateFrom, dateTo, serviceId, serviceType);
 
     $('#reportrange').daterangepicker(
     {

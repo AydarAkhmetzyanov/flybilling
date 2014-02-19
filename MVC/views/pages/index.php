@@ -139,5 +139,5 @@
         </div>
         
         <div class="footer-reg">
-            <a href="http://flybill.ru/reg">Стать нашим партнёром</a>
+            <a href="/registration">Стать нашим партнёром</a>
         </div>
