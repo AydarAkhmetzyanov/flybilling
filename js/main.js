@@ -7,7 +7,7 @@ $(function() {
 	if ($('body').hasClass('page-main')) {
 		scrollToId(window.location.hash, 1);	
 
-		$('.brand, .footer-logo').click(function() {
+		$('.footer-logo').click(function() {
 			$('html, body').animate({
 		        scrollTop: 0
 		    }, 2000);

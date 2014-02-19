@@ -21,7 +21,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="/"></a>
+                    <a class="brand" href="/console"></a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li><a href="/console">Home</a></li>

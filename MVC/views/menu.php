@@ -31,7 +31,7 @@
                             <li class="spec"><a href="/registration">Регистрация</a></li>
                             <li><a href="/login">Вход</a></li>
                         </ul>
-                        <form class="pull-right">
+                        <div class="pull-right">
                             <div class="fb-like" data-href="http://flybill.ru" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
 
                             <!-- Place this tag where you want the +1 button to render -->
@@ -52,7 +52,7 @@
                                 <a href="/" rel="nofollow" title="Русский" class="rus"></a>
                                 <a href="/en" title="English" class="eng"></a>
                             </div>
-                        </form>
+                        </div>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>

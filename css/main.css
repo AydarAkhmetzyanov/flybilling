@@ -51,6 +51,10 @@ a:hover {
 	max-width:140px !important;
 }
 
+.fb-like span {
+	vertical-align:baseline !important;
+}
+
 .navbar form {
     margin: 0;
 }
