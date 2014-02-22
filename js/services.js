@@ -32,7 +32,7 @@ function showServices() {
 			var tbody = $('.table-striped tbody');
 			if (SMSServicesJSON.data) {
 			    SMSServicesJSON.data.forEach(function (entry) {
-			        if (entry.status == 1) {
+			        if (entry.status) {
 			            tbody.html(tbody.html() + '<tr>\
 							<td>SMSService_' + entry.ID + '_' + entry.country + '</td>\
 							<td>SMS Service</td>\
@@ -51,7 +51,7 @@ function showServices() {
 			if (SessionServicesJSON.data)
 			{
 				SessionServicesJSON.data.forEach(function (entry) {
-					if (entry.status == 1)
+					if (entry.status)
 					{
 						tbody.html(tbody.html() + '<tr>\
 							<td>SessionService_' + entry.ID + '_' + entry.country + '</td>\
@@ -268,10 +268,28 @@ function showServiceCreation() {
 function showCreationDiv(type) {
     var crDiv = $('#cr-div');
     crDiv.html('');
+    $.get('/API/Countries', function (result) {
+        
 
-    switch (type) {
-        case 'SMSServices': {
-            crDiv.html('<div class="form-horizontal">\
+        var resultJSON = jQuery.parseJSON(result);
+        var countrySelect = '<select size="1" id="country-select" onchange="getProviders();" name="country">';
+        resultJSON.data.forEach(function (entry) {
+            countrySelect = countrySelect + '<option value="' + entry.code + '">' + entry.name + '</option>';
+        });
+        countrySelect = countrySelect + '</select>';
+
+
+        switch (type) {
+            case 'SMSServices': {
+                crDiv.html('<div class="form-horizontal">\
+                                    <div class="control-group">\
+									    <label class="control-label">Страна</label>\
+									    <div class="controls">' + countrySelect + '</div>\
+								    </div>\
+                                    <div class="control-group">\
+									    <label class="control-label">Провайдер</label>\
+									    <div class="controls"><select size="1" id="provider-select" name="provider"></select></div>\
+								    </div>\
 								    <div class="control-group">\
 									    <label class="control-label">Статический ответ</label>\
 									    <div class="controls"><input id="response-static" type="text"></div>\
@@ -290,26 +308,42 @@ function showCreationDiv(type) {
 							    </div>\
 							    <button style="float:right;" onclick="createService(\'' + type + '\')" class="btn btn-primary">Создать сервис</button>\
 							    <div class="clear-fix"></div>');
-            break;
-        }
-        case 'SessionServices': {
-            crDiv.html('<div class="form-horizontal">\
+                break;
+            }
+            case 'SessionServices': {
+                crDiv.html('<div class="form-horizontal">\
+                                    <div class="control-group">\
+									    <label class="control-label">Страна</label>\
+									    <div class="controls">' + countrySelect + '</div>\
+								    </div>\
+                                    <div class="control-group">\
+									    <label class="control-label">Провайдер</label>\
+									    <div class="controls"><select size="1" id="provider-select" name="provider"></select></div>\
+								    </div>\
 								    <div class="control-group">\
-									    <label class="control-label">Тест по умолчанию</label>\
+									    <label class="control-label">Текст по умолчанию</label>\
 									    <div class="controls"><input id="default-text" type="text"></div>\
 								    </div>\
 							    </div>\
 							    <button style="float:right;" onclick="createService(\'' + type + '\')" class="btn btn-primary">Создать сервис</button>\
 							    <div class="clear-fix"></div>');
-            break;
+                break;
+            }
         }
-    }
+        getProviders();
+    });
 }
 
 
 
 function createService(type) {
     var url;
+
+    if (!$('#provider-select').val()) {
+        alert('Выберите провайдера');
+        return false;
+    }
+
     switch (type) {
         case 'SMSServices': {
             var radio = $('input:radio[name=dynamic]:checked');
@@ -322,7 +356,7 @@ function createService(type) {
                 return false;
             }
 
-            url = '?response_static=' + responseStatic.val() + '&is_dynamic=' + radio.val() + '&provider_ID=1';
+            url = '?response_static=' + responseStatic.val() + '&is_dynamic=' + radio.val() + '&country=' + $('#country-select').val() + '&provider_ID=' + $('#provider-select').val();
             if (radio.val() == 1) {
                 url = url + '&dynamic_responder_URL=' + dynamicUrl.val();
             }
@@ -334,7 +368,7 @@ function createService(type) {
                 alert('Введите данные');
                 return false;
             }
-            url = '?default_text=' + defaultText.val() + '&provider_ID=1';
+            url = '?default_text=' + defaultText.val() + '&country=' + $('#country-select').val() + '&provider_ID=' + $('#provider-select').val();
             break;
         }
     }
@@ -350,4 +384,20 @@ function createService(type) {
 		    var errorJSON = jQuery.parseJSON(xhr.responseText);
 		    alert(errorJSON.reason);
 		});
+}
+
+function getProviders() {
+    var provSelect = $('#provider-select');
+    var countrySelect = $('#country-select');
+    provSelect.html('');
+
+    $.get('/API/SMSProviders', function (result) {
+        var resultJSON = jQuery.parseJSON(result);
+
+        resultJSON.data.forEach(function (entry) {
+            if (entry.code == countrySelect.val()) {
+                provSelect.html(provSelect.html() + '<option value="' + entry.ID + '">' + entry.name + '</option>');
+            }
+        });
+    });
 }

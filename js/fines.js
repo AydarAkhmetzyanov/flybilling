@@ -12,6 +12,7 @@ function showFines() {
 			{
 				tableDiv.html('<table class="table table-striped">\
 				<thead><tr>\
+					<th>Дата</th>\
 					<th>Размер</th>\
 					<th>Описание</th>\
 				</tr></thead>\
@@ -19,7 +20,11 @@ function showFines() {
 				</table>');
 				var tbody = $('.table-striped tbody');
 				finesJSON.data.forEach(function (entry) {
-					tbody.html(tbody.html() + '<tr>\
+				    var t = (entry.localtimestamp).split(/[- :]/);
+				    var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4]);
+
+				    tbody.html(tbody.html() + '<tr>\
+                        <td>' + d.format("dd mmmm yyyy, HH:MM") + '</td>\
 						<td>' + entry.summ + ' р.</td>\
 						<td>' + entry.description + '</td>\
 					</tr>');

@@ -1104,6 +1104,16 @@ width: 180px;
 margin-left: 200px;
 }
 
+.box-modal .form-horizontal select { 
+width: 100%;
+}
+
+.box-modal .datacheck { 
+color:red;
+padding: 5px 20px;
+float:right;
+}
+
 .analytics-pref .control-label { 
 width: 120px;
 }

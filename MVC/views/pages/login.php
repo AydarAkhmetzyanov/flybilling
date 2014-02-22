@@ -16,7 +16,7 @@
             <div class="polygon-2" data-stellar-ratio="0.3"  data-stellar-vertical-offset="250"></div>
 
             <div class="content-inner">
-<form id="logInForm" onSubmit="return logIn()" class="form-horizontal">
+<form id="logInForm" onSubmit="return logIn()" class="form-horizontal" style="margin-bottom:150px;">
     <p><span class="dotted-link" onclick="demoAccess();">Протестировать сервис</span></p>
 						<div class="control-group">
 							<label class="control-label" for="inputEmail">Email</label>

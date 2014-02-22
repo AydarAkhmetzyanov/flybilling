@@ -1,3 +1,4 @@
+<?php echo HTML::includeJS('lib/dateformat');?>
 <?php echo HTML::includeJS('fines');?>
 
 <div class="page-inner page-inner-console">

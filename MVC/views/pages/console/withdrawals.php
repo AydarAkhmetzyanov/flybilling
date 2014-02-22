@@ -1,4 +1,6 @@
 <?php echo HTML::includeJS('jquery.arcticmodal-0.3.min');?>
+<?php echo HTML::includeJS('lib/dateformat');?>
+<script>var summ = <?php echo number_format(Clients::getInstance()->data['balance'], 2, '.', ''); ?>;</script>
 <?php echo HTML::includeJS('withdrawals');?>
 
 <div class="page-inner page-inner-console">
