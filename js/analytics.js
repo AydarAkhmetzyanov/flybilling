@@ -11,32 +11,31 @@ $(document).ready(function () {
     dateFrom = getDate('currentMonth');
     dateTo = getDate('today');
 
-        var SMSGet = $.get("/API/SMSServices");
+    var SMSGet = $.get("/API/SMSServices");
 
-        var SessionGet = $.get("/API/SessionServices");
+    var SessionGet = $.get("/API/SessionServices");
 
-        $.when(SMSGet, SessionGet).done(function (SMSGetResult, SessionGetResult) {
-            serviceSelect = $('#service-select');
+    $.when(SMSGet, SessionGet).done(function (SMSGetResult, SessionGetResult) {
+        serviceSelect = $('#service-select');
 
-            var SMSGetJSON = jQuery.parseJSON(SMSGetResult[0]);
-            SMSGetJSON.data.forEach(function (entry) {
-                serviceSelect.html(serviceSelect.html() + '<option value="SMSServices&' + entry.ID + '">SMSService_' + entry.ID + '_' + entry.country + '</option>');
-            });
-
-            var SessionGetJSON = jQuery.parseJSON(SessionGetResult[0]);
-            SessionGetJSON.data.forEach(function (entry) {
-                serviceSelect.html(serviceSelect.html() + '<option value="SessionServices&' + entry.ID + '">SessionService_' + entry.ID + '_' + entry.country + '</option>');
-            });
-
-            if (serviceId) {
-                $('#service-select option[value="' + serviceType + '&' + serviceId + '"]').attr('selected', true);
-            }
-
-            serviceSelect.removeAttr('disabled');
+        var SMSGetJSON = jQuery.parseJSON(SMSGetResult[0]);
+        SMSGetJSON.data.forEach(function (entry) {
+            serviceSelect.html(serviceSelect.html() + '<option value="SMSServices&' + entry.ID + '">SMSService_' + entry.ID + '_' + entry.country + '</option>');
         });
 
-            drawChart(dateFrom, dateTo, serviceId, serviceType);
-            showSMS(dateFrom, dateTo, serviceId, serviceType);
+        var SessionGetJSON = jQuery.parseJSON(SessionGetResult[0]);
+        SessionGetJSON.data.forEach(function (entry) {
+            serviceSelect.html(serviceSelect.html() + '<option value="SessionServices&' + entry.ID + '">SessionService_' + entry.ID + '_' + entry.country + '</option>');
+        });
+
+        if (serviceId) {
+            $('#service-select option[value="' + serviceType + '&' + serviceId + '"]').attr('selected', true);
+        }
+
+        serviceSelect.removeAttr('disabled');
+    });
+
+    recount();
 
     $('#reportrange').daterangepicker(
     {
@@ -63,6 +62,7 @@ $(document).ready(function () {
         else $('#reportrange span').html(start.toString('d MMM yyyy') + ' - ' + end.toString('d MMM yyyy'));
         dateFrom = start.toString('yyyy-MM-dd') + ' 00:00';
         dateTo = end.toString('yyyy-MM-dd') + ' 23:59';
+        recount(1);
     }
 );
 
@@ -124,6 +124,68 @@ function drawChart(from, to, service_ID, service_type) {
 		    chart.draw(data, options);
 		}
 	);
+}
+
+function drawChartAll(from, to) {
+
+    var options = { from: from, timezone: 4, group: 'day', to: to };
+    var sType, client_share;
+
+    var SMSGet = $.get("/API/SMS", options);
+    var SessionGet = $.get("/API/SessionSMS", options);
+
+    $.when(SMSGet, SessionGet).done(function (SMSGetResult, SessionGetResult) {
+        var SMSGetJSON = jQuery.parseJSON(SMSGetResult[0]);
+        var dict = new Array();
+
+        var SessionGetJSON = jQuery.parseJSON(SessionGetResult[0]);
+        var dict2 = new Array();
+
+        if (SMSGetJSON.data) {
+            SMSGetJSON.data.forEach(function (entry) {
+                dict[entry.localtimestamp] = entry.client_share;
+            });
+        }
+
+        if (SessionGetJSON.data) {
+            SessionGetJSON.data.forEach(function (entry) {
+                dict2[entry.localtimestamp] = entry.client_cost;
+            });
+        }
+
+        var arr1 = new Array();
+        arr1[0] = new Array("Дата", "SMS Services", "Session Services");
+
+        var now = new Date(from);
+        var now2 = new Date(to);
+        var daysCount = (now2 - now) / (1000 * 60 * 60 * 24) + 1;
+
+        for (var i = 1; i < daysCount; i++) {
+            if (dict[now.format("yyyy-mm-dd")] && !dict2[now.format("yyyy-mm-dd")]) {
+                arr1[i] = new Array(now.format("dd-mm-yyyy"), dict[now.format("yyyy-mm-dd")], 0);
+            }
+            else if (!dict[now.format("yyyy-mm-dd")] && dict2[now.format("yyyy-mm-dd")]) {
+                arr1[i] = new Array(now.format("dd-mm-yyyy"), 0, dict2[now.format("yyyy-mm-dd")]);
+            }
+            else if (dict[now.format("yyyy-mm-dd")] && dict2[now.format("yyyy-mm-dd")]) {
+                arr1[i] = new Array(now.format("dd-mm-yyyy"), dict[now.format("yyyy-mm-dd")], dict2[now.format("yyyy-mm-dd")]);
+            }
+            else {
+                arr1[i] = new Array(now.format("dd-mm-yyyy"), 0, 0);
+            }
+            now.setDate(now.getDate() + 1);
+        }
+
+        var data = google.visualization.arrayToDataTable(arr1);
+
+        var options = {
+            title: '',
+            titlePosition: 'none'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    });
 }
 
 function getDate(date) {
@@ -291,21 +353,174 @@ function showSMS(from, to, service_ID, service_type) {
     }
 }
 
-function recount() {
-    if (serviceId) {
-        $('#chart_div').html('<img style="margin-top:90px;" src="/img/dots64.gif">');
-        $('#notifsDiv').html('<img src="/img/dots64.gif">');
+function showSMSAll(from, to) {
+
+    var options = { from: from, timezone: 4, to: to };
+    var groupSelect = $('#group-select');
+
+    if (groupSelect.val() == 'none') {
+        var SMSGet = $.get("/API/SMS", options);
+        var SessionGet = $.get("/API/SessionSMS", options);
+
+        $.when(SMSGet, SessionGet).done(function (SMSGetResult, SessionGetResult) {
+            var SMSGetJSON = jQuery.parseJSON(SMSGetResult[0]);
+            var SessionGetJSON = jQuery.parseJSON(SessionGetResult[0]);
+            var tableDiv = $('#notifsDiv');
+            tableDiv.html('');
+
+            if (SMSGetJSON.data || SessionGetJSON.data) {
+                tableDiv.html('<table class="table table-striped">\
+				        <thead><tr>\
+                            <th>Дата</th>\
+                            <th>Сервис</th>\
+					        <th>Текст</th>\
+                            <th>Номер телефона</th>\
+                            <th>Страна</th>\
+                            <th>Сервисный номер</th>\
+                            <th>Сумма</th>\
+				        </tr></thead>\
+				        <tbody></tbody>\
+				        </table>');
+                var tbody = $('.table-striped tbody');
+
+                SMSGetJSON.data.forEach(function (entry) {
+                    var t = (entry.localtimestamp).split(/[- :]/);
+                    var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4]);
+
+                    tbody.html(tbody.html() + '<tr>\
+						        <td>' + d.format("dd mmmm yyyy, HH:MM") + '</td>\
+                                <td>SMSService_' + entry.service_ID + '_' + entry.sender_country + '</td>\
+						        <td>' + entry.response_text + '</td>\
+						        <td>' + entry.sender_phone + '</td>\
+						        <td>' + entry.sender_country + '</td>\
+						        <td>' + entry.sender_service_number + '</td>\
+						        <td>' + entry.client_share + '</td>\
+					        </tr>');
+                });
+
+                SessionGetJSON.data.forEach(function (entry) {
+                    var t = (entry.localtimestamp).split(/[- :]/);
+                    var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4]);
+
+                    tbody.html(tbody.html() + '<tr>\
+						        <td>' + d.format("dd mmmm yyyy, HH:MM") + '</td>\
+                                <td>SessionService_' + entry.service_ID + '_' + entry.country + '</td>\
+						        <td>' + entry.text + '</td>\
+						        <td>' + entry.phone + '</td>\
+						        <td>' + entry.country + '</td>\
+						        <td>' + entry.service_number + '</td>\
+						        <td>' + entry.client_cost + '</td>\
+					        </tr>');
+                });
+            }
+            else {
+                tableDiv.html('За указанный промежуток ничего не найдено');
+            }
+        });
+    }
+    else {
+        options.group = groupSelect.val();
+
+        var SMSGet = $.get("/API/SMS", options);
+        var SessionGet = $.get("/API/SessionSMS", options);
+
+        $.when(SMSGet, SessionGet).done(function (SMSGetResult, SessionGetResult) {
+            var SMSGetJSON = jQuery.parseJSON(SMSGetResult[0]);
+            var SessionGetJSON = jQuery.parseJSON(SessionGetResult[0]);
+            var tableDiv = $('#notifsDiv');
+            tableDiv.html('');
+
+            if (SMSGetJSON.data || SessionGetJSON.data) {
+                tableDiv.html('<table class="table table-striped">\
+				        <thead><tr>\
+                            <th>Дата</th>\
+					        <th>Сумма</th>\
+                            <th>Количество</th>\
+				        </tr></thead>\
+				        <tbody></tbody>\
+				        </table>');
+                var tbody = $('.table-striped tbody');
+
+                SMSGetJSON.data.forEach(function (entry) {
+                    if (groupSelect.val() == 'year') {
+                        var date = entry.localtimestamp;
+                    }
+                    else {
+                        var t = (entry.localtimestamp).split(/[- :]/);
+                        var d = new Date();
+                        d.setFullYear(t[0]);
+                        var date = d.format("yyyy");
+                        if (t[1]) {
+                            d.setMonth(t[1] - 1);
+                            date = d.format("mmm yyyy");
+                        }
+                        if (t[2]) {
+                            d.setDate(t[2]);
+                            date = d.format("dd mmmm yyyy");
+                        }
+                        if (t[3]) {
+                            date = d.format("dd mmmm yyyy ") + t[3] + ':00';
+                        }
+                    }
+
+                    tbody.html(tbody.html() + '<tr>\
+						        <td>' + date + ' (SMS Services)</td>\
+						        <td>' + entry.client_share + '</td>\
+						        <td>' + entry.ID + '</td>\
+					        </tr>');
+                });
+
+                SessionGetJSON.data.forEach(function (entry) {
+                    if (groupSelect.val() == 'year') {
+                        var date = entry.localtimestamp;
+                    }
+                    else {
+                        var t = (entry.localtimestamp).split(/[- :]/);
+                        var d = new Date();
+                        d.setFullYear(t[0]);
+                        var date = d.format("yyyy");
+                        if (t[1]) {
+                            d.setMonth(t[1] - 1);
+                            date = d.format("mmm yyyy");
+                        }
+                        if (t[2]) {
+                            d.setDate(t[2]);
+                            date = d.format("dd mmmm yyyy");
+                        }
+                        if (t[3]) {
+                            date = d.format("dd mmmm yyyy ") + t[3] + ':00';
+                        }
+                    }
+
+                    tbody.html(tbody.html() + '<tr>\
+						        <td>' + date + ' (Session Services)</td>\
+						        <td>' + entry.client_cost + '</td>\
+						        <td>' + entry.ID + '</td>\
+					        </tr>');
+                });
+            }
+            else {
+                tableDiv.html('За указанный промежуток ничего не найдено');
+            }
+        });
+    }
+}
+
+function recount(test) {
+    $('#chart_div').html('<img style="margin-top:90px;" src="/img/dots64.gif">');
+    $('#notifsDiv').html('<img src="/img/dots64.gif">');
+
+    if (serviceId && !test) {
         drawChart(dateFrom, dateTo, serviceId, serviceType);
         showSMS(dateFrom, dateTo, serviceId, serviceType);
     }
     else {
-        if ($('#service-select option').length == 0) {
-            alert('Сервис не выбран');
+        if ($('#service-select').val() == 'all') {
+            drawChartAll(dateFrom, dateTo);
+            showSMSAll(dateFrom, dateTo);
         }
         else {
             var servicesArray = $('#service-select').val().split(/[&]/);
-            $('#chart_div').html('<img style="margin-top:90px;" src="/img/dots64.gif">');
-            $('#notifsDiv').html('<img src="/img/dots64.gif">');
             drawChart(dateFrom, dateTo, servicesArray[1], servicesArray[0]);
             showSMS(dateFrom, dateTo, servicesArray[1], servicesArray[0]);
         }

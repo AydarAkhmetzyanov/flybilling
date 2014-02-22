@@ -39,6 +39,7 @@
                                     <label class="control-label">Сервис</label>
 									<div class="controls">
 										<select size="1" id="service-select" disabled name="service">
+										<option value="all"> Все сервисы </option>
 										</select>
 									</div>
                                 </div>
@@ -54,14 +55,14 @@
 										</select>
 									</div>
                                 </div>
-                                <button class="btn btn-primary" onclick="recount()">Показать статистику</button>
+                                <button class="btn btn-primary" onclick="recount(1)">Обновить статистику</button>
                             </div>
                         </div>
                     </div>
                     <div class="span8">
                         <div class="console-block console-block-graph" style="height: 270px;">
                             <h2>График доходов</h2>
-							<div id="chart_div" style="width: 728px; height: 200px; margin-top:-25px; text-align:center;"></div>
+							<div id="chart_div" style="width: 750px; height: 200px; margin-top:-25px; margin-left:-20px; text-align:center;"></div>
                         </div>
                     </div>
                 </div>
