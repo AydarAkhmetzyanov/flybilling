@@ -37,7 +37,7 @@
             </div>
             <div class="footer-bottom">
                 <div class="container">
-                    <div class="copy">© 2012-2013, FlyBilling inc.</div>
+                    <div class="copy">© 2012-2014, VertexBilling</div>
                     <a href="javascript:void(0);" class="footer-logo" title="Лететь вверх!"></a>
                     <a href="" class="cs-logo">CreativeStripe</a>
                 </div>
