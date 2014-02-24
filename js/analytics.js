@@ -17,15 +17,31 @@ $(document).ready(function () {
 
     $.when(SMSGet, SessionGet).done(function (SMSGetResult, SessionGetResult) {
         serviceSelect = $('#service-select');
+        var unactive = new Array();
+        var unactive2 = new Array();
 
         var SMSGetJSON = jQuery.parseJSON(SMSGetResult[0]);
         SMSGetJSON.data.forEach(function (entry) {
-            serviceSelect.html(serviceSelect.html() + '<option value="SMSServices&' + entry.ID + '">SMSService_' + entry.ID + '_' + entry.country + '</option>');
+            if (entry.status) {
+                serviceSelect.html(serviceSelect.html() + '<option value="SMSServices&' + entry.ID + '">SMSService_' + entry.ID + '_' + entry.country + '</option>');
+            }
+            else unactive.push(entry);
         });
 
         var SessionGetJSON = jQuery.parseJSON(SessionGetResult[0]);
         SessionGetJSON.data.forEach(function (entry) {
-            serviceSelect.html(serviceSelect.html() + '<option value="SessionServices&' + entry.ID + '">SessionService_' + entry.ID + '_' + entry.country + '</option>');
+            if (entry.status) {
+                serviceSelect.html(serviceSelect.html() + '<option value="SessionServices&' + entry.ID + '">SessionService_' + entry.ID + '_' + entry.country + '</option>');
+            }
+            else unactive2.push(entry);
+        });
+
+        unactive.forEach(function (entry) {
+            serviceSelect.html(serviceSelect.html() + '<option style="color:#aaaaaa;" value="SMSServices&' + entry.ID + '">SMSService_' + entry.ID + '_' + entry.country + '</option>');
+        });
+
+        unactive2.forEach(function (entry) {
+            serviceSelect.html(serviceSelect.html() + '<option style="color:#aaaaaa;" value="SessionServices&' + entry.ID + '">SessionService_' + entry.ID + '_' + entry.country + '</option>');
         });
 
         if (serviceId) {
