@@ -32,9 +32,9 @@
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">
-                                <li><span class="hold" title="Холд">1 500 <s>Р</s></span> / <?php echo number_format(Clients::getInstance()->data['balance'], 2, ',', ' '); ?> <s>Р</s> / <a href="/console/withdrawals">Вывод</a></li>
+                                <li><?php echo number_format(Clients::getInstance()->data['balance'], 2, ',', ' '); ?> <s>Р</s> / <a href="/console/withdrawals">Вывод</a></li>
                                 <li>
-                                    <a href="#" class="notific" title="Уведомления"><span class="badge badge-success">21</span></a>
+                                    <!-- <a href="#" class="notific" title="Уведомления"><span class="badge badge-success">21</span></a> -->
                                     <div class="dropdown">
                                         <a id="dLabel" data-toggle="dropdown" data-target="#" href="#"><?php echo $_SESSION['email']; ?> &#x25BC;</a>
                                         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
