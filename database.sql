@@ -11,6 +11,18 @@
                     )
             );
 
+create table [dbo].[Currency] 
+            (
+                [ID] [int] IDENTITY(1,1) NOT NULL,
+                [rate] [smallmoney] NOT NULL,
+                [fromC] [char](3) NOT NULL,
+                [toC] [char](3) NOT NULL,
+                CONSTRAINT [PK_Currency] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
+
 create table [dbo].[Clients]  
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
@@ -419,6 +431,21 @@ INSERT INTO [dbo].[Countries] (ID, name, code, a1) VALUES
 (65, N'ЮАР', N'za', 63),
 (68, N'Австралия', N'au', 162),
 (70, N'Абхазия', N'ab', 0);
+
+create table [dbo].[Agregators] 
+            (
+                [ID] [int] IDENTITY(1,1) NOT NULL,
+                [name] [nvarchar](255) NULL
+                CONSTRAINT [PK_Agregators] PRIMARY KEY CLUSTERED
+                    (
+                        [ID] ASC
+                    )
+            );
+
+SET IDENTITY_INSERT [dbo].[Agregators] ON;
+
+INSERT INTO [dbo].[Agregators]  (ID, name) VALUES
+(1,N'I-Free');
 
 create table [dbo].[Numbers] 
             (

@@ -5,8 +5,12 @@ class Numbers extends Model
 
     public static function getNumbersByCountryJSON($country){ //fixed
                 $tsql = "
-                            SELECT [ID] AS id,* FROM ".SCHEMA.".[Numbers] WHERE [country_id]=:c ORDER BY [price] DESC
+                            SELECT Numbers.[ID] AS id,Numbers.*,agregators.[name] as provider
+                            FROM ".SCHEMA.".[Numbers] Numbers
+                            LEFT JOIN ".SCHEMA.".[Agregators] agregators ON Numbers.[agregator_id]=agregators.[ID]
+                            WHERE [country_id]=:c ORDER BY [price] DESC
                     ";
+
         $stmt = Database::getInstance()->prepare($tsql);
         try{
             $stmt->execute(array(

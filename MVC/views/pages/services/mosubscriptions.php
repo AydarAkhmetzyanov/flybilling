@@ -37,7 +37,7 @@
 
 
 
-                <div class="row" id="priceRow" pers="0.93">
+               <div class="row" id="priceRow" pers="<?php if(isset($_GET['offer'])){echo base64_decode($_GET['offer']);} else {echo '0.93';}?>">
         <div class="span3">
         
         
@@ -52,7 +52,6 @@
                             <label>Выберите короткий номер</label>
 						</fieldset>
         <table class="table table-hover table-striped">
-  <thead><tr><th>Короткий номер</th><th>Цена для абонента</th><th>Предпрефикс</th></tr></thead>
             <tbody id="numbersTBody"></tbody>
 </table>
 

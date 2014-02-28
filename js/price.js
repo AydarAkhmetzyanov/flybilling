@@ -5,20 +5,38 @@ $(document).ready(function () {
 
 function countrySelected(){
     $.get("/price/getNumbers/" + $('#countrySelect').val(), function (data) {
-        
         renderNumberTable(jQuery.parseJSON(data));
     });
 }
 
+
 function renderNumberTable(data){
     $("#numbersTBody").html('');
-	var appendhtml;
+	
+	var providerarray=new Array();
 	$.each(data, function (key, value) {
-	    if (key == 0) {
-	        numberSelected(value.id);
-	    }
-	    appendhtml = '<tr onclick="numberSelected(' + value.id + ')" class="numberSelect"><td>' + value.number + '</td><td>~ ' + value.price / 100 + ' р.</td><td>'+ value.preprefix+ '</td></tr>';
-	    $("#numbersTBody").append(appendhtml);
+		if($.inArray(value.provider,providerarray)==-1){
+		    providerarray.push(value.provider);
+		}
+	});
+	
+	$.each(providerarray, function (pron, providerk) {
+	    var appendhtml='';
+	    appendhtml = appendhtml+'<table class="table table-hover table-striped"><thead><tr><th>Короткий номер</th><th>Цена для абонента</th></tr></thead>';
+		
+		appendhtml = appendhtml+'<h3>'+providerk+'</h3><tbody>';
+	    $.each(data, function (key, value) {
+			    if(providerk==value.provider){
+	                if (key == 0) {
+	                    numberSelected(value.id);
+	                }
+	                appendhtml = appendhtml+'<tr onclick="numberSelected(' + value.id + ')" class="numberSelect"><td>' + value.number + '</td><td>~ ' + value.price / 100 + ' р.</td></tr>';
+	            }
+		});
+		
+		
+		appendhtml =appendhtml+'</tbody></table>';
+		$("#numbersTBody").append(appendhtml);
 	});
 }
 
