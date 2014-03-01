@@ -23,6 +23,9 @@ class SMS_PL3 extends SMS
         $this->sender_country = $_GET['country'];
         $this->sender_cost = 0;
         $this->sender_text = base64_decode($_GET['smsText']);
+        if($_GET['profitCurrency']!='RUB'){
+            $this->external_share=Currency::convert($_GET['profit'],$_GET['profitCurrency'],'RUB') * 1.01;
+        }
         $this->external_share = $_GET['profit'];
         $this->sender_service_number = $_GET['serviceNumber'];
         $this->external_ID = $_GET['evtId'];
