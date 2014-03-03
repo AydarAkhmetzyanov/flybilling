@@ -25,6 +25,7 @@ function showServices() {
 				<th>Название сервиса</th>\
 				<th>Тип</th>\
 				<th>Страна</th>\
+                <th>Информация</th>\
 				<th>Статус</th>\
 			</tr></thead>\
 			<tbody></tbody>\
@@ -33,10 +34,14 @@ function showServices() {
 			if (SMSServicesJSON.data) {
 			    SMSServicesJSON.data.forEach(function (entry) {
 			        if (entry.status) {
+			            var prefix = '';
+			            if (entry.prefix) prefix = 'Prefix: ' + entry.prefix;
+
 			            tbody.html(tbody.html() + '<tr>\
 							<td>SMSService_' + entry.ID + '_' + entry.country + '</td>\
 							<td>SMS Service</td>\
 							<td>' + entry.country + '</td>\
+							<td>' + prefix + '</td>\
 							<td>Активен</td>\
 							<td><span class="dotted-link" onclick="showServicePreferences(\'SMSServices\', ' + entry.ID + ')">Настройки</span></td>\
 							<td><a href="/console/analytics/SMSServices/' + entry.ID + '">Статистика</a></td>\
@@ -57,6 +62,7 @@ function showServices() {
 							<td>SessionService_' + entry.ID + '_' + entry.country + '</td>\
 							<td>Session Service</td>\
 							<td>' + entry.country + '</td>\
+							<td>Client Service ID: ' + entry.client_service_ID + '</td>\
 							<td>Активен</td>\
 							<td><span class="dotted-link" onclick="showServicePreferences(\'SessionServices\', ' + entry.ID + ')">Настройки</span></td>\
 							<td><a href="/console/analytics/SessionServices/' + entry.ID + '">Статистика</a></td>\
@@ -70,11 +76,16 @@ function showServices() {
 			
 			if (unactive.length)
 			{
-				unactive.forEach(function (entry) {
+			    unactive.forEach(function (entry) {
+			        var prefix = '';
+			        if (entry.prefix) prefix = 'Prefix: ' + entry.prefix;
+
+
 					tbody.html(tbody.html() + '<tr style="color:#aaaaaa;">\
 						<td>SMSService_' + entry.ID + '_' + entry.country + '</td>\
 						<td>SMS Service</td>\
 						<td>' + entry.country + '</td>\
+						<td>' + prefix + '</td>\
 						<td>Неактивен</td>\
 						<td></td>\
 						<td><a href="/console/analytics/SMSServices/' + entry.ID + '">Статистика</a></td>\
@@ -91,6 +102,7 @@ function showServices() {
 						<td>SessionService_' + entry.ID + '_' + entry.country + '</td>\
 						<td>Session Service</td>\
 						<td>' + entry.country + '</td>\
+						<td>Client Service ID: ' + entry.client_service_ID + '</td>\
 						<td>Неактивен</td>\
 						<td></td>\
 						<td><a href="/console/analytics/SessionServices/' + entry.ID + '">Статистика</a></td>\
@@ -320,6 +332,21 @@ function showCreationDiv(type) {
 									    <label class="control-label">Провайдер</label>\
 									    <div class="controls"><select size="1" id="provider-select" name="provider"></select></div>\
 								    </div>\
+                                    <div class="control-group">\
+									    <label class="control-label">Статический ответ</label>\
+									    <div class="controls"><input id="response-static" type="text"></div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">Динамический обработчик</label>\
+									    <div class="controls" id="dynamic-radio">\
+										    <label class="radio"><input name="dynamic" onclick="$(\'#dynamic-url\').removeAttr(\'disabled\');" type="radio" checked value="1">Да</label>\
+										    <label class="radio"><input name="dynamic" onclick="$(\'#dynamic-url\').attr(\'disabled\', true);" type="radio" value="0">Нет</label>\
+									    </div>\
+								    </div>\
+								    <div class="control-group">\
+									    <label class="control-label">URL динамического обработчика</label>\
+									    <div class="controls"><input id="dynamic-url" type="text"></div>\
+								    </div>\
 								    <div class="control-group">\
 									    <label class="control-label">Текст по умолчанию</label>\
 									    <div class="controls"><input id="default-text" type="text"></div>\
@@ -364,11 +391,20 @@ function createService(type) {
         }
         case 'SessionServices': {
             var defaultText = $('#default-text');
-            if (!defaultText.val()) {
+            var radio = $('input:radio[name=dynamic]:checked');
+            var responseStatic = $('#response-static');
+            var dynamicUrl = $('#dynamic-url');
+
+
+            if (!defaultText.val() || !responseStatic.val() || (radio.val() == 1 && !dynamicUrl.val())) {
                 alert('Введите данные');
                 return false;
             }
-            url = '?default_text=' + defaultText.val() + '&country=' + $('#country-select').val() + '&provider_ID=' + $('#provider-select').val();
+
+            url = '?response_static=' + responseStatic.val() + '&is_dynamic=' + radio.val() + '&default_text=' + defaultText.val() + '&country=' + $('#country-select').val() + '&provider_ID=' + $('#provider-select').val();
+            if (radio.val() == 1) {
+                url = url + '&dynamic_responder_URL=' + dynamicUrl.val();
+            }
             break;
         }
     }

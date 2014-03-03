@@ -542,3 +542,11 @@ function recount(test) {
         }
     }
 }
+
+$('#service-select').change(function () {
+    recount(1);
+});
+
+$('#group-select').change(function () {
+    recount(1);
+});

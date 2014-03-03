@@ -5,7 +5,6 @@
 <?php echo HTML::includeJS('lib/dateformat');?>
 <?php echo HTML::includeJS('lib/date');?>
 <?php echo HTML::includeJS('lib/daterangepicker');?>
-<?php echo HTML::includeJS('analytics');?>
 
 
 <div class="page-inner page-inner-console">
@@ -55,7 +54,6 @@
 										</select>
 									</div>
                                 </div>
-                                <button class="btn btn-primary" onclick="recount(1)">Обновить статистику</button>
                             </div>
                         </div>
                     </div>
@@ -80,3 +78,5 @@
         </div>
         
 </div>
+
+<?php echo HTML::includeJS('analytics');?>
