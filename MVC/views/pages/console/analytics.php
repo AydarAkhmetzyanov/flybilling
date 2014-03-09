@@ -5,6 +5,7 @@
 <?php echo HTML::includeJS('lib/dateformat');?>
 <?php echo HTML::includeJS('lib/date');?>
 <?php echo HTML::includeJS('lib/daterangepicker');?>
+<?php echo HTML::includeJS('lib/moment.min');?>
 
 
 <div class="page-inner page-inner-console">

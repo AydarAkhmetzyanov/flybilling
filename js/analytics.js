@@ -87,7 +87,12 @@ $(document).ready(function () {
 
 function drawChart(from, to, service_ID, service_type) {
 
-    var options = { from: from, timezone: 4, group: 'day', to: to };
+    var groupSelect = $('#group-select');
+    var options = { from: from, timezone: 4, to: to };
+    if (groupSelect.val() == 'hour') options.group = 'hour';
+    else if (groupSelect.val() == 'month') options.group = 'month';
+    else if (groupSelect.val() == 'year') options.group = 'year';
+    else options.group = 'day';
     if (service_ID) options.service_ID = service_ID;
     var sType, client_share;
 
@@ -117,16 +122,57 @@ function drawChart(from, to, service_ID, service_type) {
 
 		    var now = new Date(from);
 		    var now2 = new Date(to);
-		    var daysCount = (now2 - now) / (1000 * 60 * 60 * 24) + 1;
 
-		    for (var i = 1; i < daysCount; i++) {
-		        if (dict[now.format("yyyy-mm-dd")]) {
-		            arr1[i] = new Array(now.format("dd-mm-yyyy"), dict[now.format("yyyy-mm-dd")]);
 
-		        } else {
-		            arr1[i] = new Array(now.format("dd-mm-yyyy"), 0);
+		    if (groupSelect.val() == 'hour') {
+
+		        var hoursCount = Math.ceil(moment(now2).diff(moment(now), 'hours', true));
+
+		        for (var i = 1; i <= hoursCount; i++) {
+		            if (dict[now.format("yyyy-mm-dd HH")]) {
+		                arr1[i] = new Array(now.format("HH:00 dd-mm-yyyy"), dict[now.format("yyyy-mm-dd HH")]);
+		            } else {
+		                arr1[i] = new Array(now.format("HH:00 dd-mm-yyyy"), 0);
+		            }
+		            now.setHours(now.getHours() + 1);
 		        }
-		        now.setDate(now.getDate() + 1);
+		    }
+		    else if (groupSelect.val() == 'month') {
+		        var monthsCount = (now2.getFullYear() * 12 - (12 - now2.getMonth())) - (now.getFullYear() * 12 - (12 - now.getMonth())) + 1;
+
+		        for (var i = 1; i <= monthsCount; i++) {
+		            if (dict[now.format("yyyy-mm")]) {
+		                arr1[i] = new Array(now.format("mmm yyyy"), dict[now.format("yyyy-mm")]);
+		            } else {
+		                arr1[i] = new Array(now.format("mmm yyyy"), 0);
+		            }
+		            now.setMonth(now.getMonth() + 1);
+		        }
+		    }
+		    else if (groupSelect.val() == 'year') {
+		        var yearsCount = now2.getFullYear() - now.getFullYear() + 1;
+
+		        for (var i = 1; i <= yearsCount; i++) {
+		            if (dict[now.format("yyyy")]) {
+		                arr1[i] = new Array(now.format("yyyy"), dict[now.format("yyyy")]);
+		            } else {
+		                arr1[i] = new Array(now.format("yyyy"), 0);
+		            }
+		            now.setFullYear(now.getFullYear() + 1);
+		        }
+		    }
+		    else {
+		        var daysCount = Math.ceil(moment(now2).diff(moment(now), 'days', true));
+
+		        for (var i = 1; i <= daysCount; i++) {
+		            if (dict[now.format("yyyy-mm-dd")]) {
+		                arr1[i] = new Array(now.format("dd-mm-yyyy"), dict[now.format("yyyy-mm-dd")]);
+
+		            } else {
+		                arr1[i] = new Array(now.format("dd-mm-yyyy"), 0);
+		            }
+		            now.setDate(now.getDate() + 1);
+		        }
 		    }
 
 		    var data = google.visualization.arrayToDataTable(arr1);
@@ -144,7 +190,12 @@ function drawChart(from, to, service_ID, service_type) {
 
 function drawChartAll(from, to) {
 
-    var options = { from: from, timezone: 4, group: 'day', to: to };
+    var groupSelect = $('#group-select');
+    var options = { from: from, timezone: 4, to: to };
+    if (groupSelect.val() == 'hour') options.group = 'hour';
+    else if (groupSelect.val() == 'month') options.group = 'month';
+    else if (groupSelect.val() == 'year') options.group = 'year';
+    else options.group = 'day';
     var sType, client_share;
 
     var SMSGet = $.get("/API/SMS", options);
@@ -174,22 +225,83 @@ function drawChartAll(from, to) {
 
         var now = new Date(from);
         var now2 = new Date(to);
-        var daysCount = (now2 - now) / (1000 * 60 * 60 * 24) + 1;
 
-        for (var i = 1; i < daysCount; i++) {
-            if (dict[now.format("yyyy-mm-dd")] && !dict2[now.format("yyyy-mm-dd")]) {
-                arr1[i] = new Array(now.format("dd-mm-yyyy"), dict[now.format("yyyy-mm-dd")], 0);
+        if (groupSelect.val() == 'hour') {
+
+            var hoursCount = Math.ceil(moment(now2).diff(moment(now), 'hours', true));
+
+            for (var i = 1; i <= hoursCount; i++) {
+                if (dict[now.format("yyyy-mm-dd HH")] && !dict2[now.format("yyyy-mm-dd HH")]) {
+                    arr1[i] = new Array(now.format("HH:00 dd-mm-yyyy"), dict[now.format("yyyy-mm-dd HH")], 0);
+                }
+                else if (!dict[now.format("yyyy-mm-dd HH")] && dict2[now.format("yyyy-mm-dd HH")]) {
+                    arr1[i] = new Array(now.format("HH:00 dd-mm-yyyy"), 0, dict2[now.format("yyyy-mm-dd HH")]);
+                }
+                else if (dict[now.format("yyyy-mm-dd HH")] && dict2[now.format("yyyy-mm-dd HH")]) {
+                    arr1[i] = new Array(now.format("HH:00 dd-mm-yyyy"), dict[now.format("yyyy-mm-dd HH")], dict2[now.format("yyyy-mm-dd HH")]);
+                }
+                else {
+                    arr1[i] = new Array(now.format("HH:00 dd-mm-yyyy"), 0, 0);
+                }
+                now.setHours(now.getHours() + 1);
             }
-            else if (!dict[now.format("yyyy-mm-dd")] && dict2[now.format("yyyy-mm-dd")]) {
-                arr1[i] = new Array(now.format("dd-mm-yyyy"), 0, dict2[now.format("yyyy-mm-dd")]);
+        }
+        else if (groupSelect.val() == 'month') {
+            var monthsCount = (now2.getFullYear() * 12 - (12 - now2.getMonth())) - (now.getFullYear() * 12 - (12 - now.getMonth())) + 1;
+
+            for (var i = 1; i <= monthsCount; i++) {
+                if (dict[now.format("yyyy-mm")] && !dict2[now.format("yyyy-mm")]) {
+                    arr1[i] = new Array(now.format("mmm yyyy"), dict[now.format("yyyy-mm")], 0);
+                }
+                else if (!dict[now.format("yyyy-mm")] && dict2[now.format("yyyy-mm")]) {
+                    arr1[i] = new Array(now.format("mmm yyyy"), 0, dict2[now.format("yyyy-mm")]);
+                }
+                else if (dict[now.format("yyyy-mm")] && dict2[now.format("yyyy-mm")]) {
+                    arr1[i] = new Array(now.format("mmm yyyy"), dict[now.format("yyyy-mm")], dict2[now.format("yyyy-mm")]);
+                }
+                else {
+                    arr1[i] = new Array(now.format("mmm yyyy"), 0, 0);
+                }
+                now.setMonth(now.getMonth() + 1);
             }
-            else if (dict[now.format("yyyy-mm-dd")] && dict2[now.format("yyyy-mm-dd")]) {
-                arr1[i] = new Array(now.format("dd-mm-yyyy"), dict[now.format("yyyy-mm-dd")], dict2[now.format("yyyy-mm-dd")]);
+        }
+        else if (groupSelect.val() == 'year') {
+            var yearsCount = now2.getFullYear() - now.getFullYear() + 1;
+
+            for (var i = 1; i <= yearsCount; i++) {
+                if (dict[now.format("yyyy")] && !dict2[now.format("yyyy")]) {
+                    arr1[i] = new Array(now.format("yyyy"), dict[now.format("yyyy")], 0);
+                }
+                else if (!dict[now.format("yyyy")] && dict2[now.format("yyyy")]) {
+                    arr1[i] = new Array(now.format("yyyy"), 0, dict2[now.format("yyyy")]);
+                }
+                else if (dict[now.format("yyyy")] && dict2[now.format("yyyy")]) {
+                    arr1[i] = new Array(now.format("yyyy"), dict[now.format("yyyy")], dict2[now.format("yyyy")]);
+                }
+                else {
+                    arr1[i] = new Array(now.format("yyyy"), 0, 0);
+                }
+                now.setFullYear(now.getFullYear() + 1);
             }
-            else {
-                arr1[i] = new Array(now.format("dd-mm-yyyy"), 0, 0);
+        }
+        else {
+            var daysCount = Math.ceil(moment(now2).diff(moment(now), 'days', true));
+
+            for (var i = 1; i <= daysCount; i++) {
+                if (dict[now.format("yyyy-mm-dd")] && !dict2[now.format("yyyy-mm-dd")]) {
+                    arr1[i] = new Array(now.format("dd-mm-yyyy"), dict[now.format("yyyy-mm-dd")], 0);
+                }
+                else if (!dict[now.format("yyyy-mm-dd")] && dict2[now.format("yyyy-mm-dd")]) {
+                    arr1[i] = new Array(now.format("dd-mm-yyyy"), 0, dict2[now.format("yyyy-mm-dd")]);
+                }
+                else if (dict[now.format("yyyy-mm-dd")] && dict2[now.format("yyyy-mm-dd")]) {
+                    arr1[i] = new Array(now.format("dd-mm-yyyy"), dict[now.format("yyyy-mm-dd")], dict2[now.format("yyyy-mm-dd")]);
+                }
+                else {
+                    arr1[i] = new Array(now.format("dd-mm-yyyy"), 0, 0);
+                }
+                now.setDate(now.getDate() + 1);
             }
-            now.setDate(now.getDate() + 1);
         }
 
         var data = google.visualization.arrayToDataTable(arr1);
