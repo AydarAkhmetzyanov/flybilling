@@ -20,3 +20,8 @@ define ('DEFAULT_LANGUAGE',getenv('DEFAULT_LANGUAGE'));
 
 define('SCHEMA',getenv('SCHEMA'));
 define('DEFAULT_SHARE',getenv('DEFAULT_SHARE'));
+define('API_URL',getenv('API_URL'));
+define('SITE',getenv('SITE'));
+define('BRAND',getenv('BRAND'));
+define('BRAND',getenv('SHORT_BRAND'));
+define('BRAND',getenv('EMAIL'));

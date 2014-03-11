@@ -8,8 +8,8 @@ class Mail
 		$mail = new SendGrid\Mail();
 		  $mail->
 		  addTo($email)->
-		  setFrom('info@flybill.ru')->
-		  setSubject('Подтверждение регистрации FlyBill.ru')->
+		  setFrom(EMAIL)->
+		  setSubject('Подтверждение регистрации'.BRAND)->
 		  setText($activateLink)->
 		  setHtml('
 <!DOCTYPE hmtl>
@@ -30,10 +30,10 @@ class Mail
 
 <table style="width: 100%" cellpadding="0" cellspacing="0" style="font: 16px Arial, Tahoma, Verdana; color: #000;">
 	<tr height="60" style="color: #fff;">
-		<td style="background: #2C2C2C; padding: 20px; text-align: center;"><a href="http://'.$_SERVER["HTTP_HOST"].'" target="_blank"><img src="http://'.$_SERVER["HTTP_HOST"].'/img/logo-flybill.png"></a></td>
+		<td style="background: #2C2C2C; padding: 20px; text-align: center;"><a href="/'.SITE.'" target="_blank"><img src="'.SITE.'/img/logo-flybill.png"></a></td>
 	</tr>
 	<tr style="color: #fff;">
-		<td style="background: #338DDC url(http://'.$_SERVER["HTTP_HOST"].'/img/promo-top-bottom.png) no-repeat right 25px; padding: 20px 20px 30px; font-weight: bold; font-size: 26px;">Подтверждение регистрации FlyBill.ru</td>
+		<td style="background: #338DDC url(http://'.$_SERVER["HTTP_HOST"].'/img/promo-top-bottom.png) no-repeat right 25px; padding: 20px 20px 30px; font-weight: bold; font-size: 26px;">Подтверждение регистрации</td>
 	</tr>
 	<tr style="color: #000;">
 		<td style="background: url(http://'.$_SERVER["HTTP_HOST"].'/img/polygon-1.png) no-repeat right center; padding: 20px;">

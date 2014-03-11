@@ -5,7 +5,7 @@ class IndexController extends Controller {
 	public function index($change=0){
 		if(Clients::isAuth()){
 			$data = array();
-			$data['title'] = 'VertexBilling СМС Биллинг';
+			$data['title'] = SHORT_BRNAD.' СМС Биллинг';
 
 			HTML::setUserLanguage('ru');
 			$data['newGuest']=false;
@@ -21,7 +21,7 @@ class IndexController extends Controller {
 		}
 		else {
 			$data = array();
-			$data['title'] = 'VertexBilling СМС Биллинг';
+			$data['title'] = BRAND.' СМС Биллинг';
 
 			HTML::setUserLanguage('ru');
 			$data['newGuest']=false;

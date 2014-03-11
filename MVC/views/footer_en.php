@@ -1,5 +1,5 @@
 <div class="footer-reg">
-            <a href="http://flybill.ru/reg">Start earning with us</a>
+            <a href="<?=SITE?>/reg">Start earning with us</a>
         </div>
 
         <div class="footer">
@@ -28,18 +28,19 @@
                         <i></i> 612450712
                     </div>
                     <div class="item c-email">
-                        <i></i> <a href="mailto:info@flybill.ru">info@flybill.ru</a>
+                        <i></i> <a href="mailto:<?=EMAIL?>"><?=EMAIL?></a>
                     </div>
                 </div>
                 <div class="span4">
-                    <div class="fb-like-box" data-href="https://www.facebook.com/flybilling" data-width="300" data-height="180" data-show-faces="true" data-colorscheme="dark" data-stream="false" data-show-border="false" data-header="false"></div>
-                </div>
+                    <!--<div class="fb-like-box" data-href="https://www.facebook.com/flybilling" data-width="300" data-height="180" data-show-faces="true" data-colorscheme="dark" data-stream="false" data-show-border="false" data-header="false"></div>
+                -->
+                    </div>
             </div>
             <div class="footer-bottom">
                 <div class="container">
-                    <div class="copy">© 2012-2014, VertexBilling</div>
+                    <div class="copy">© 2012-2014, <?=BRAND?></div>
                     <a href="javascript:void(0);" class="footer-logo" title="Лететь вверх!"></a>
-                    <a href="" class="cs-logo">CreativeStripe</a>
+                    <!--<a href="" class="cs-logo">CreativeStripe</a>-->
                 </div>
             </div>
             <div class="polygon-4" data-stellar-ratio="1.5"  data-stellar-vertical-offset="500"></div>

@@ -25,7 +25,7 @@
                 <i></i> 612450713
             </div>
             <div class="item c-email">
-                <i></i> <a href="mailto:info@flybill.ru">info@vertexbilling.com</a>
+                <i></i> <a href="mailto:<?=EMAIL?>"><?=EMAIL?></a>
             </div>
         </div>
         <div class="span4">
@@ -35,9 +35,9 @@
     </div>
     <div class="footer-bottom">
         <div class="container">
-            <div class="copy">© 2012-2014, VertexBilling</div>
+            <div class="copy">© 2012-2014, <?=BRAND?></div>
             <a href="javascript:void(0);" class="footer-logo" title="Лететь вверх!"></a>
-            <a href="" class="cs-logo">CreativeStripe</a>
+            <!--<a href="" class="cs-logo">CreativeStripe</a>-->
         </div>
     </div>
         </div>

@@ -32,10 +32,10 @@
                             <li><a href="/login">Вход</a></li>
                         </ul>
                         <div class="pull-right">
-                            <div class="fb-like" data-href="http://flybill.ru" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
+                            <div class="fb-like" data-href="<?=SITE?>" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
 
                             <!-- Place this tag where you want the +1 button to render -->
-                            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="http://flybill.ru"></div>
+                            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="<?=SITE?>"></div>
 
                             <!-- Place this render call where appropriate -->
                             <script type="text/javascript">

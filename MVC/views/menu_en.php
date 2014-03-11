@@ -28,14 +28,14 @@
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#about">About us</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#clients">Clients</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#contacts">Contacts</a></li>
-                            <li class="spec"><a href="http://flybill.ru/reg">Sign up</a></li>
-                            <li><a href="http://flybill.ru/login">Sign in</a></li>
+                            <li class="spec"><a href="<?=SITE?>/reg">Sign up</a></li>
+                            <li><a href="<?=SITE?>/login">Sign in</a></li>
                         </ul>
                         <form class="pull-right">
-                            <div class="fb-like" data-href="http://flybill.ru" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
+                            <div class="fb-like" data-href="<?=SITE?>" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
 
                             <!-- Place this tag where you want the +1 button to render -->
-                            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="http://flybill.ru"></div>
+                            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="<?=SITE?>"></div>
 
                             <!-- Place this render call where appropriate -->
                             <script type="text/javascript">

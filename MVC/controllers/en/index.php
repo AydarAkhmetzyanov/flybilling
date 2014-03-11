@@ -4,7 +4,7 @@ class IndexController extends Controller {
     
 	public function index(){
 	    $data = array();
-        $data['title'] = 'FlyBill SMS Billing';
+        $data['title'] = 'Vertex SMS Billing';
 
         HTML::setUserLanguage('en');
         $data['newGuest']=false;

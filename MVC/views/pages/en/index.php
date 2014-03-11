@@ -5,10 +5,10 @@
                 <div class="hero-unit">
                     <h1>Best SMS Billing</h1>
                     <div class="promo-descr span6">
-                    <p>SMS billing FlyBilling targeted on modern business, which require micropayments. FlyBilling - young and effective solution. We provide unique benefits, like modern platform and best rates for your purpose.</p>
+                    <p>SMS billing <?=BRAND?> targeted on modern business, which require micropayments. <?=BRAND?> - young and effective solution. We provide unique benefits, like modern platform and best rates for your purpose.</p>
                     <p>
-                        <a href="http://flybill.ru/reg" class="reg-btn">Sign up</a>
-                        <a href="http://flybill.ru/login" class="enter-btn">Sign In</a>
+                        <a href="<?=SITE?>/reg" class="reg-btn">Sign up</a>
+                        <a href="<?=SITE?>/login" class="enter-btn">Sign In</a>
                     </p>
                     </div>
                 </div>
