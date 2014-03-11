@@ -24,7 +24,7 @@ class Tickets extends Model
   FROM [dbo].[Questions]
   WHERE [notification_ID]=$data[ID] 
 )
-    ORDER BY [timestamp] ;";
+    ORDER BY [timestamp] DESC;";
         $statement = Database::getInstance()->prepare($tsql);
         try{
             $statement->execute();

@@ -40,9 +40,9 @@ class Notifications extends Model
             $params['ID']=$data['ID'];
         }
         if(isset($data['order'])){
-            $tsql.=" ORDER BY [$data[order]]";
+            $tsql.=" ORDER BY [$data[order]] DESC";
         } else {
-            $tsql.=' ORDER BY [localtimestamp]';
+            $tsql.=' ORDER BY [localtimestamp] DESC';
         }
         if(isset($data['offset'])){
             $tsql.=" OFFSET $data[offset] ROW ";

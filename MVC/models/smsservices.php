@@ -11,7 +11,7 @@ class SMSServices extends Model
         } else {
             $tsql.=", [timestamp] as [localtimestamp]";
         }
-        $tsql.=" FROM ".SCHEMA.".[SMSServices] WHERE 1=1 ";
+        $tsql.=" FROM ".SCHEMA.".[SMSServices] ORDER BY [ID] DESC WHERE 1=1 ";
         if(isset($data['ID'])){
             $tsql.=' AND [ID]=:ID';
             $params['ID']=$data['ID'];

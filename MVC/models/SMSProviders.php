@@ -6,7 +6,7 @@ class SMSProviders extends Model
     public static function get($data){
         $params=array();
         $tsql="SELECT *";
-        $tsql.=" FROM ".SCHEMA.".[SMSProviders] WHERE 1=1 ";
+        $tsql.=" FROM ".SCHEMA.".[SMSProviders] ORDER BY [ID] DESC WHERE 1=1 ";
         if(isset($data['ID'])){
             $tsql.=' AND [ID]=:ID';
             $params['ID']=$data['ID'];

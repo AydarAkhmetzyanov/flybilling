@@ -21,9 +21,9 @@ class Withdrawals extends Model
             $params['client_ID']=$data['client_ID'];
         }
         if(isset($data['order'])){
-            $tsql.=" ORDER BY [$data[order]]";
+            $tsql.=" ORDER BY [$data[order]] DESC";
         } else {
-            $tsql.=' ORDER BY [localtimestamp]';
+            $tsql.=' ORDER BY [localtimestamp] DESC';
         }
         if(isset($data['offset'])){
             $tsql.=" OFFSET $data[offset] ROW ";
