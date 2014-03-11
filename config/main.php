@@ -23,5 +23,5 @@ define('DEFAULT_SHARE',getenv('DEFAULT_SHARE'));
 define('API_URL',getenv('API_URL'));
 define('SITE',getenv('SITE'));
 define('BRAND',getenv('BRAND'));
-define('BRAND',getenv('SHORT_BRAND'));
-define('BRAND',getenv('EMAIL'));
+define('SHORT_BRAND',getenv('SHORT_BRAND'));
+define('EMAIL',getenv('EMAIL'));
