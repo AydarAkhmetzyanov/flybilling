@@ -27,9 +27,9 @@ class SessionServicesController extends Controller {
     protected function indexGET($options){
         $resultData=SessionServices::get($options);
         if($resultData!=FALSE){
-            foreach($resultData as &$value){
-                unset($value['share']);
-            }
+            //foreach($resultData as &$value){
+            //    unset($value['share']);
+            //}
         }
         unset($value);
         API_helper::successResponse($resultData);
