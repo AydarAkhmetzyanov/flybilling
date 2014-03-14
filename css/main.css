@@ -643,7 +643,7 @@ h3 {
 }
 
 .footer-bottom {
-	margin-top: 50px;
+	/*margin-top: 50px;*/
 	background: url(../img/footer-grad.png) repeat-x;
 	position: relative;
 	z-index: 3;

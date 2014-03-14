@@ -1,7 +1,7 @@
 
-<div class="footer">
+<div class="footer" id="contacts">
     <div class="container">
-        <div class="span4 news">
+        <div class="span4 contacts">
             <!--
             <h4>Новости</h4>
             <div class="item">
@@ -17,13 +17,13 @@
             <a href="#" class="title">Заголовок более старой новости, который не влазит в одну строку</a>
             </div>
             -->
-
-        </div>
-        <div class="span3 contacts">
-            <h4 id="contacts">Контакты</h4>
             <div class="item c-icq">
-                <i></i> 612450713
+                <i></i> 695172147
             </div>
+        </div>
+        <div class="span4 contacts">
+            <!--<h4>Контакты</h4>-->
+            
             <div class="item c-email">
                 <i></i> <a href="mailto:<?=EMAIL?>"><?=EMAIL?></a>
             </div>
@@ -33,6 +33,9 @@
         -->
             </div>
     </div>
+
+
+
     <div class="footer-bottom">
         <div class="container">
             <div class="copy">© 2012-2014, <?=BRAND?></div>
