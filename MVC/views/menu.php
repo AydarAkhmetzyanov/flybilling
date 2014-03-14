@@ -26,16 +26,16 @@
                         <ul class="nav">
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#services">Услуги</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#about">О нас</a></li>
-                            <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#clients">Клиенты и отзывы</a></li>
+                            <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#clients">Как мы работаем?</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#contacts">Контакты</a></li>
                             <li class="spec"><a href="/registration">Регистрация</a></li>
                             <li><a href="/login">Вход</a></li>
                         </ul>
-                        <div class="pull-right">
-                            <div class="fb-like" data-href="<?=SITE?>" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
+                        <div class="pull-right fbstyle">
+                            <div class="fb-like" data-href="http://flybill.ru" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
 
                             <!-- Place this tag where you want the +1 button to render -->
-                            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="<?=SITE?>"></div>
+                            <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="http://flybill.ru"></div>
 
                             <!-- Place this render call where appropriate -->
                             <script type="text/javascript">

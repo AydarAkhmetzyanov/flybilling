@@ -1,8 +1,8 @@
 
 <div class="footer">
     <div class="container">
-        <div class="span4 news">
-            <!--
+        <!--<div class="row span4 news">
+            
             <h4>Новости</h4>
             <div class="item">
             <div class="date">17 июл</div>
@@ -16,28 +16,28 @@
             <div class="date">5 апр</div>
             <a href="#" class="title">Заголовок более старой новости, который не влазит в одну строку</a>
             </div>
-            -->
+            
 
         </div>
-        <div class="span3 contacts">
+        
+            <div class="span12 contacts">
             <h4 id="contacts">Контакты</h4>
             <div class="item c-icq">
-                <i></i> 612450713
+                <i></i> 664179978
             </div>
             <div class="item c-email">
-                <i></i> <a href="mailto:<?=EMAIL?>"><?=EMAIL?></a>
+                <i></i> <a href="mailto:info@payway.org">info@payway.org</a>
             </div>
-        </div>
-        <div class="span4">
-            <!--<div class="fb-like-box" data-href="https://www.facebook.com/flybilling" data-width="300" data-height="180" data-show-faces="true" data-colorscheme="dark" data-stream="false" data-show-border="false" data-header="false"></div>
-        -->
-            </div>
+        </div>-->
+         |  <a href="/services/premium">Премиум-SMS</a>  |  <a href="/services/mosubscriptions">Псевдо подписки</a>  |  <a href="/services/mtsubscriptions">МТ подписки</a> | 
+       
+        
     </div>
-    <div class="footer-bottom">
+    <div class=" footer-bottom">
         <div class="container">
-            <div class="copy">© 2012-2014, <?=BRAND?></div>
-            <a href="javascript:void(0);" class="footer-logo" title="Лететь вверх!"></a>
-            <!--<a href="" class="cs-logo">CreativeStripe</a>-->
+            <div class="copy">© 2012-2014, PayWay</div>
+            <a href="javascript:void(0);" class="footer-logo" title="ВВЕРХ"></a>
+            <a href="http://crb-sale.ru" class="cs-logo">PalatidisInc</a>
         </div>
     </div>
         </div>
