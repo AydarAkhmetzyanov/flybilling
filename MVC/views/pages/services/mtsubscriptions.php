@@ -10,9 +10,9 @@
            
         </div>
 
-        <div class="container content">
+        <div class="row content">
             
-
+            <div class="container">
             <div class="content-inner">
                 <h2>Описание услуги</h2>
                 <p>
