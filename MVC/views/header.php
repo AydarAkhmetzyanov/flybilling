@@ -10,7 +10,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <meta itemprop="name" content="<?=BRNAD?>">
+        <meta itemprop="name" content="<?=BRAND?>">
         <meta itemprop="description" content="<?=SHORT_BRAND?> — лучший СМС биллинг">
 
 		<?php echo HTML::includeCSS('bootstrap.min');?>
