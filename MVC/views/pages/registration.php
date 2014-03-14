@@ -1,20 +1,19 @@
 <?php echo HTML::includeJS('registration');?>
-
-        <div class="top-promo">
+        <div class="top-promo-bgsub"><img src="img/hero-bg.png"></div>
+        <div class="top-promosub">
             <div class="container">
                 <div class="hero-unit">
+                    <br><br>
                     <h1><?=$title?></h1>
-                    <div class="promo-3angl-1" data-stellar-ratio="2" data-stellar-vertical-offset="80" data-stellar-horizontal-offset="100"></div>
-                    <div class="promo-3angl-2" data-stellar-ratio="1.5"  data-stellar-vertical-offset="80" data-stellar-horizontal-offset="100"></div>
+                    
                 </div>
             </div>
-            <div class="promo-3angl-3" data-stellar-ratio="1.5"  data-stellar-vertical-offset="70"></div>
-            <div class="promo-top-bottom"></div>
+           
         </div>
 
-        <div class="container content">
-            <div class="polygon-2" data-stellar-ratio="0.3"  data-stellar-vertical-offset="250"></div>
-
+        <div class="row content">
+            
+            <div class="container">
             <div class="content-inner">
 	<form action="/registration/submit" name="reg" method="post" class="form-horizontal">	
 		<div class="control-group">
@@ -347,5 +346,6 @@
 		</div>
 		<span class="red">*Поля, отмеченные звездочкой, обязательны для заполнения</span>
 	</form>
+</div>
 </div>
 </div>
