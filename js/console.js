@@ -65,9 +65,9 @@ var notifsDiv = $("#notifsDiv");
 					var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
 
 					if (entry.status) {
-					    notifsDiv.html('<div class="item" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, HH:MM") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + notifsDiv.html());
+					    notifsDiv.html(notifsDiv.html() + '<div class="item" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, HH:MM") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>');
 					} else {
-					    notifsDiv.html('<div class="item item-new" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, HH:MM") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>' + notifsDiv.html());
+					    notifsDiv.html(notifsDiv.html() + '<div class="item item-new" onclick="notificationClick(' + entry.ID + ')" data-id="' + entry.ID + '"><div class="date">' + d.format("dd mmmm yyyy, HH:MM") + '</div><span class="notif-body">' + entry.title_ru + '</span></div>');
 					}
 				});
 			}

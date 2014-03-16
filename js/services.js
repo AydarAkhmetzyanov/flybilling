@@ -2,6 +2,10 @@ $(document).ready(function () {
 	showServices();
 });
 
+function utf8_to_b64(str) {
+    return encodeURIComponent(window.btoa(decodeURI(encodeURIComponent(str))));
+}
+
 function showServices() {
 	var SMSServices = $.get(
 		"/API/SMSServices"
@@ -46,6 +50,7 @@ function showServices() {
 							<td><span class="dotted-link" onclick="showServicePreferences(\'SMSServices\', ' + entry.ID + ')">Настройки</span></td>\
 							<td><a href="/console/analytics/SMSServices/' + entry.ID + '">Статистика</a></td>\
 							<td><a href="/docs/Premium_SMS_Protocol.docx">Документация</a></td>\
+							<td><a href="/services/premium?offer=' + utf8_to_b64(entry.share) + '">Тарифы</a></td>\
 							<td><button class="btn btn-mini btn-danger" data-id="SMSServices' + entry.ID + '" onclick="deactivateService(\'SMSServices\', ' + entry.ID + ')">Деактивировать</button></td>\
 						</tr>');
 			        }
@@ -67,6 +72,7 @@ function showServices() {
 							<td><span class="dotted-link" onclick="showServicePreferences(\'SessionServices\', ' + entry.ID + ')">Настройки</span></td>\
 							<td><a href="/console/analytics/SessionServices/' + entry.ID + '">Статистика</a></td>\
 							<td><a href="/docs/Pseudo_Session_SMS_Protocol.docx">Документация</a></td>\
+						    <td></td>\
 							<td><button class="btn btn-mini btn-danger" data-id="SessionServices' + entry.ID +  '" onclick="deactivateService(\'SessionServices\', ' + entry.ID + ')">Деактивировать</button></td>\
 						</tr>');
 					}
@@ -91,6 +97,7 @@ function showServices() {
 						<td><a href="/console/analytics/SMSServices/' + entry.ID + '">Статистика</a></td>\
 						<td></td>\
 						<td></td>\
+						<td></td>\
 					</tr>');
 				});
 			}
@@ -106,6 +113,7 @@ function showServices() {
 						<td>Неактивен</td>\
 						<td></td>\
 						<td><a href="/console/analytics/SessionServices/' + entry.ID + '">Статистика</a></td>\
+						<td></td>\
 						<td></td>\
 						<td></td>\
 					</tr>');
