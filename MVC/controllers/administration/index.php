@@ -7,9 +7,7 @@ class IndexController extends Controller {
 	    $data = array();
         $data['title'] = 'Панель администратора';
 		
-		HTML::setUserLanguage('ru');
         $data['newGuest']=false;
-        $data['locale']='ru_RU';
         
 		renderView('header', $data);
         echo '<body class="page-main"><div id="wrap">';
