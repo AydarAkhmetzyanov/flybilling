@@ -47,7 +47,7 @@
                                 <li class="last">
                                     <div class="langs">
                                         <a href="/" rel="nofollow" title="Русский" class="rus"></a>
-                                        <a href="/en" title="English" class="eng"></a>
+                                       <!-- <a href="/en" title="English" class="eng"></a>-->
                                     </div>
                                 </li>
                             </ul>

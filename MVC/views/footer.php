@@ -1,3 +1,6 @@
+<div class="footer-reg">
+            <a href="/registration">Стать нашим партнёром</a>
+        </div>
 
 <div class="footer" id="contacts">
     <div class="container">

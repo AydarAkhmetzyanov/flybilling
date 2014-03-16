@@ -1,5 +1,5 @@
 <div class="footer-reg">
-            <a href="<?=SITE?>/reg">Start earning with us</a>
+            <a href="/registration">Start earning with us</a>
         </div>
 
      <div class="footer" id="contacts">
@@ -54,6 +54,7 @@
 <?php echo HTML::includeJS('lib/bootstrap.min');?>
 <?php echo HTML::includeJS('lib/jquery.stellar.min');?>
 <?php echo HTML::includeJS('lib/jquery.bxslider.min');?>
-<?php echo HTML::includeJS('main');?>
+<?php echo HTML::includeJS('scripts');?>
+<?php echo HTML::includeJS('main-page');?>
     </body>
 </html>
