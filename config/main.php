@@ -25,4 +25,5 @@ define('SITE',getenv('SITE'));
 define('BRAND',getenv('BRAND'));
 define('SHORT_BRAND',getenv('SHORT_BRAND'));
 define('EMAIL',getenv('EMAIL'));
-define('SECRET',getenv('SECRET'));
+define('ADMIN_LOGIN','Admin');
+define('SECRET',md5('135813'));

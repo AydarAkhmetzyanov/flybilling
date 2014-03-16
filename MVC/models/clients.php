@@ -35,6 +35,15 @@ class Clients extends Model
 			return false;
 		}
 	}
+	
+	public static function isAdmin()
+	{
+		if (isset($_SESSION['isAdmin'])) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
     public static function update($data){
         $params=array();
@@ -315,6 +324,22 @@ class Clients extends Model
 					'password' => 0
 				);
 			}
+		return $arr;
+	}
+	
+	public static function checkAdminLoginData($login, $password)
+	{	
+		if ($login == ADMIN_LOGIN && md5($password) == SECRET) {
+			$_SESSION['isAdmin']       = 1;
+			$arr = array(
+					'error' => 0
+				);
+		}
+		else {
+			$arr = array(
+					'error' => 1
+				);
+		}
 		return $arr;
 	}
 	

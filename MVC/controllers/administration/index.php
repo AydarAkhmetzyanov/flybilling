@@ -3,7 +3,7 @@
 class IndexController extends Controller {
     
 	public function index($change=0){
-		if(Clients::isAuth() /*&& Clients::isAdmin()*/){
+		if(Clients::isAdmin()){
 	    $data = array();
         $data['title'] = 'Панель администратора';
 		
@@ -29,6 +29,13 @@ class IndexController extends Controller {
 			renderView('menu', $data);
 			renderView('pages/administration/login', $data);
 			renderView('footer', $data);
+        }
+	}
+	
+	public function login(){
+	    if(isset($_POST['login']) && isset($_POST['password'])){
+		    $arr = Clients::checkAdminLoginData($_POST['login'], $_POST['password']);
+            echo json_encode($arr);
         }
 	}
 	
