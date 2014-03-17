@@ -5,7 +5,7 @@ class Countries extends Model
 
         public static function getCountries(){ //fixed
                 $tsql = "
-                            SELECT * FROM ".SCHEMA.".[countries]
+                            SELECT * FROM ".SCHEMA.".[Countries]
                     ";
 
        $stmt = Database::getInstance()->prepare($tsql);
@@ -14,14 +14,11 @@ class Countries extends Model
         } catch(PDOException $e) {
             echo($e);
         }
-        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if(count($rows)>0){
-            return $rows;
-        } else {
-            return FALSE;
-        }
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+            //var_dump($stmt->fetchAll());
         return $stmt;
-        }
+	}
 
     public static function getExCountries(){ //fixed
         

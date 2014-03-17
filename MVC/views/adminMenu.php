@@ -21,8 +21,8 @@
                             <li><a href="/administration/tickets">Tickets</a></li>
                             <li><a href="/administration/withdrawals">Withdrawals</a></li>
                             <li><a href="/administration/services">Services</a></li>
-                            <li><a href="/administration/rates">Rates</a></li>
-                            <li><a href="/administration/fines">Fines</a></li>
+                            <li><a href="/administration/rates/">Rates</a></li>
+                            <li><a href="/administration/fines/">Fines</a></li>
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">

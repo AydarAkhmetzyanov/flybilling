@@ -21,23 +21,24 @@ WHERE [number]=(SELECT [number] from ".SCHEMA.".[Numbers] where [ID]=$number) an
         }
 
     public static function getPrices($number){
-            global $db;
-                $stmt = $db->prepare("
-                            SELECT * FROM `prices` WHERE `number`=(SELECT `number` from `numbers` where `id`=:number) and `code`=(SELECT `code` from `countries` WHERE `id`=(SELECT `country_id` FROM `numbers` WHERE `id`=:number))
+            $stmt = Database::getInstance()->prepare("
+                            SELECT * FROM ".SCHEMA.".[prices] 
+                            WHERE [number]=(SELECT [number] from ".SCHEMA.".[numbers] where [ID]=$number) 
+                            and [code]=(SELECT [code] from ".SCHEMA.".[countries] WHERE [ID]=(SELECT [country_id] FROM ".SCHEMA.".[numbers] WHERE [ID]=$number));
                     ");
-        $stmt->execute(array('number' => $number));
-        if($stmt->rowCount()>0){
-            $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        } else {
-            $stmt=FALSE;
-        }
+          try{
+               $stmt->execute();
+          } catch(PDOException $e) {
+               echo($e);
+          }
+         $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            //var_dump($stmt->fetchAll());
         return $stmt;
         }
 
     public static function getForCSV($percent){//deprecated
-            global $db;
-            $stmt = $db->prepare("
-                            SELECT * FROM `prices`
+            $stmt = Database::getInstance()->prepare("
+                            SELECT * FROM ".SCHEMA.".[prices]
                     ");
             $stmt->execute();
        if($stmt->rowCount()>0){
@@ -49,9 +50,9 @@ WHERE [number]=(SELECT [number] from ".SCHEMA.".[Numbers] where [ID]=$number) an
         }
 
     public static function addPrice(){//deprecated
-            global $db;
-        $stmt = $db->prepare("
-                            SELECT * FROM `prices` WHERE `operator_short_name`=:operator_short_name AND `number`=:number
+    print_r($_POST);
+            $stmt = Database::getInstance()->prepare("
+                            SELECT * FROM ".SCHEMA.".[prices] WHERE [operator_short_name]=:operator_short_name AND [number]=:number
                     ");
         $stmt->execute( array(
                             'operator_short_name' => $_POST['operator'],
@@ -59,36 +60,52 @@ WHERE [number]=(SELECT [number] from ".SCHEMA.".[Numbers] where [ID]=$number) an
                                     ));
         if($stmt->rowCount()==0){
             $data = array(
-            $_POST['number'],$_POST['cost']*100,$_POST['share']*100,$_POST['operator'],$_POST['operator']
+            $_POST['number'],$_POST['cost']*100,$_POST['share']*100,$_POST['operator'],$_POST['number']
             );  
-            $stmt = $db->prepare('
-                            INSERT INTO `prices`(`number`, `cost`, `share`, `operator_short_name`,`code`) VALUES ((SELECT `number` from `numbers` where `id`=?),?,?,?,(SELECT `code` from `operators` where `short_name`=?))
-                    ');
-            $stmt->execute($data);
+            $stmt = Database::getInstance()->prepare("
+                            INSERT INTO ".SCHEMA.".[prices]([number], [cost], [share], [operator_short_name],[code]) VALUES ((SELECT [number] from ".SCHEMA.".[numbers] where [ID]=?),?,?,?,
+                            (SELECT [code] from ".SCHEMA.".[countries] WHERE [ID]=(SELECT [country_id] FROM ".SCHEMA.".[numbers] WHERE [ID]=?))
+                            )
+                    ");
+            try{
+               $stmt->execute($data);
+          } catch(PDOException $e) {
+               echo($e);
+          }
         }
                 
         }
 
     public static function savePrice(){//deprecated
-            global $db;
+            
                 $data = array(
             $_POST['number'],$_POST['cost']*100,$_POST['share']*100,$_POST['operator'],$_POST['id']
             );  
-            $stmt = $db->prepare('
-                            UPDATE `prices` SET `number`=?,`cost`=?,`share`=?,`operator_short_name`=? WHERE `id`=?
-                    ');
-            $stmt->execute($data);
+          $stmt = Database::getInstance()->prepare("
+                            UPDATE ".SCHEMA.".[prices] SET [number]=(SELECT [number] FROM ".SCHEMA.".[numbers] WHERE [ID]=?),[cost]=?,[share]=?,[operator_short_name]=? WHERE [ID]=?
+                    ");
+
+            
+             try{
+               $stmt->execute($data);
+          } catch(PDOException $e) {
+               echo($e);
+          }
         }
 
     public static function deletePrice($id){//deprecated
-            global $db;
+           
                 $data = array(
             $id
             );  
-            $stmt = $db->prepare('
-                            DELETE FROM `prices` WHERE `id`=?
-                    ');
-            $stmt->execute($data);
+           $stmt = Database::getInstance()->prepare("
+                            DELETE FROM ".SCHEMA.".[prices] WHERE [ID]=?
+                    ");
+            try{
+               $stmt->execute($data);
+          } catch(PDOException $e) {
+               echo($e);
+          }
         }
 
 
