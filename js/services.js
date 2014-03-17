@@ -41,12 +41,16 @@ function showServices() {
 			            var prefix = '';
 			            if (entry.prefix) prefix = 'Prefix: ' + entry.prefix;
 
+			            var stat;
+			            if (entry.status == '2') stat = 'Проверка';
+			            else stat = 'Активен';
+
 			            tbody.html(tbody.html() + '<tr>\
 							<td>SMSService_' + entry.ID + '_' + entry.country + '</td>\
 							<td>SMS Service</td>\
 							<td>' + entry.country + '</td>\
 							<td>' + prefix + '</td>\
-							<td>Активен</td>\
+							<td>' + stat + '</td>\
 							<td><span class="dotted-link" onclick="showServicePreferences(\'SMSServices\', ' + entry.ID + ')">Настройки</span></td>\
 							<td><a href="/console/analytics/SMSServices/' + entry.ID + '">Статистика</a></td>\
 							<td><a href="/docs/Premium_SMS_Protocol.docx">Документация</a></td>\
@@ -63,12 +67,16 @@ function showServices() {
 				SessionServicesJSON.data.forEach(function (entry) {
 					if (entry.status)
 					{
+					    var stat;
+					    if (entry.status == '2') stat = 'Проверка';
+					    else stat = 'Активен';
+
 						tbody.html(tbody.html() + '<tr>\
 							<td>SessionService_' + entry.ID + '_' + entry.country + '</td>\
 							<td>Session Service</td>\
 							<td>' + entry.country + '</td>\
 							<td>Client Service ID: ' + entry.client_service_ID + '</td>\
-							<td>Активен</td>\
+							<td>' + stat + '</td>\
 							<td><span class="dotted-link" onclick="showServicePreferences(\'SessionServices\', ' + entry.ID + ')">Настройки</span></td>\
 							<td><a href="/console/analytics/SessionServices/' + entry.ID + '">Статистика</a></td>\
 							<td><a href="/docs/Pseudo_Session_SMS_Protocol.docx">Документация</a></td>\
@@ -171,7 +179,7 @@ function showServicePreferences(type, id) {
 								    </div>\
 								    <div class="control-group">\
 									    <label class="control-label">URL динамического обработчика</label>\
-									    <div class="controls"><input id="dynamic-url" type="text" value="' + serviceJSON[i].dynamic_responder_URL + '"></div>\
+									    <div class="controls"><input id="dynamic-url" type="url" value="' + serviceJSON[i].dynamic_responder_URL + '"></div>\
 								    </div>\
 							    </div>\
 							    <button style="float:right;" onclick="editServicePreferences(\'' + type + '\', ' + id + ')" class="btn btn-primary">Изменить настройки</button>\
@@ -231,7 +239,7 @@ function editServicePreferences(type, id) {
             var dynamicUrl = $('#dynamic-url');
 
 
-            if (!responseStatic.val() || (radio.val() == 1 && !dynamicUrl.val())) {
+            if (!responseStatic.val()) {
                 alert('Введите данные');
                 return false;
             }
@@ -323,7 +331,7 @@ function showCreationDiv(type) {
 								    </div>\
 								    <div class="control-group">\
 									    <label class="control-label">URL динамического обработчика</label>\
-									    <div class="controls"><input id="dynamic-url" type="text"></div>\
+									    <div class="controls"><input id="dynamic-url" type="url"></div>\
 								    </div>\
 							    </div>\
 							    <button style="float:right;" onclick="createService(\'' + type + '\')" class="btn btn-primary">Создать сервис</button>\
@@ -353,7 +361,7 @@ function showCreationDiv(type) {
 								    </div>\
 								    <div class="control-group">\
 									    <label class="control-label">URL динамического обработчика</label>\
-									    <div class="controls"><input id="dynamic-url" type="text"></div>\
+									    <div class="controls"><input id="dynamic-url" type="url"></div>\
 								    </div>\
 								    <div class="control-group">\
 									    <label class="control-label">Текст по умолчанию</label>\
@@ -386,7 +394,7 @@ function createService(type) {
             var dynamicUrl = $('#dynamic-url');
 
 
-            if (!responseStatic.val() || (radio.val() == 1 && !dynamicUrl.val())) {
+            if (!responseStatic.val()) {
                 alert('Введите данные');
                 return false;
             }
@@ -404,7 +412,7 @@ function createService(type) {
             var dynamicUrl = $('#dynamic-url');
 
 
-            if (!defaultText.val() || !responseStatic.val() || (radio.val() == 1 && !dynamicUrl.val())) {
+            if (!defaultText.val() || !responseStatic.val()) {
                 alert('Введите данные');
                 return false;
             }
