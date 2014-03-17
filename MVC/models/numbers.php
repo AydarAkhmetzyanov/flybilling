@@ -70,10 +70,10 @@ class Numbers extends Model
         print_r($_POST);
            
                 $data = array(
-            $_POST['price']*100,$_POST['agregator'],$_POST['country'],$_POST['number'],$_POST['preprefix'],$_POST['number']
+            $_POST['price']*100,$_POST['agregator'],$_POST['number'],$_POST['preprefix'],$_POST['number']
             );  
            $stmt = Database::getInstance()->prepare("
-                            UPDATE ".SCHEMA.".[numbers] SET [price]=?,[agregator_id]=?,[country_id]=?,[number]=?,[preprefix]=? WHERE [number]=?
+                            UPDATE ".SCHEMA.".[numbers] SET [price]=?,[agregator_id]=?,[country_id]=$_POST[country],[number]=?,[preprefix]=? WHERE [number]=?
                     ");
             $stmt->execute($data);
         }
