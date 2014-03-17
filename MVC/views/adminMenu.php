@@ -16,17 +16,20 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li><a href="/administration">Home</a></li>
-                            <li><a href="/administration/services">Сервисы</a></li>
-                            <li><a href="/administration/analytics">Статистика</a></li>
-                            <li><a href="/administration/documentation">Помощь</a></li>
-                            <li><a href="/administration">Тикеты</a></li>
+                            <li><a href="/administration/users">Users</a></li>
+                            <li><a href="/administration/analytics">Analytics</a></li>
+                            <li><a href="/administration/tickets">Tickets</a></li>
+                            <li><a href="/administration/withdrawals">Withdrawals</a></li>
+                            <li><a href="/administration/services">Services</a></li>
+                            <li><a href="/administration/rates">Rates</a></li>
+                            <li><a href="/administration/fines">Fines</a></li>
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">
                                 <li>
                                     <!-- <a href="#" class="notific" title="Уведомления"><span class="badge badge-success">21</span></a> -->
                                    
-                                            <li><a href="/login/logout">Выход</a></li>
+                                            <li><a href="/login/logout">Logout</a></li>
                                        
                                 </li>
                                 <li class="last">
