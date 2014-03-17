@@ -15,6 +15,7 @@ class SMSProviders extends Model
             $tsql.=' AND [code]=:code';
             $params['code']=$data['code'];
         }
+        $tsql.=' ORDER BY [ID] DESC ';
         $statement = Database::getInstance()->prepare($tsql);
         try{
             $statement->execute($params);
