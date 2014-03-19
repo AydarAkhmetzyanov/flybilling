@@ -249,6 +249,14 @@ class Clients extends Model
 			$_SESSION['accountType'] = $table3['accountType'];
 			$_SESSION['serviceName'] = $table3['serviceName'];
 			
+
+            //welcome and actions notification
+            $options['text']='Для активации услуг создайте соответствующий сервис в разделе <a href="/console/services">сервисы</a>.';
+            $options['title']='Добро пожаловать';
+            $options['client_ID']='';
+            $resultData=Notifications::insertnew($options);
+
+
 			return TRUE;
 		}
 		catch (PDOException $e) {
