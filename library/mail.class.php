@@ -37,8 +37,11 @@ class Mail
 	</tr>
 	<tr style="color: #000;">
 		<td style="background: url('.SITE.'/img/polygon-1.png) no-repeat right center; padding: 20px;">
-			<p style="margin-bottom: 10px;">Для завершения регистрации перейдите по ссылке ниже:</p>
+            <p style="margin-bottom: 10px;"><strong>Добро пожаловать в '.BRAND.'!</strong></p>
+            <p style="margin-bottom: 10px;">Мы рады что вы выбрали нас. Наша компания готова предложить вам современные инструменты которые помогут вашему бизнесу. Мы всегда стремимся к взаимовыгодному сотрудничеству.</p>
+			<p style="margin-bottom: 10px;"><strong>Для завершения регистрации перейдите по ссылке ниже:</strong></p>
 			<p style="margin-bottom: 10px;"><a target="_blank" href="'.$activateLink.'">Завершить регистрацию</a></p>
+            <p style="margin-bottom: 10px;">Если вы не регистрировались в '.BRAND.' проигнорируйте это сообщение.</p>
 		</td>
 	</tr>
 	<tr height="62">
