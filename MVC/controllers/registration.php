@@ -52,7 +52,7 @@ class RegistrationController extends Controller
     public function complete($secret, $email)
     {
         Clients::regComplete($secret, $email);
-        redirect('');
+        redirect('console');
     }
 	
 	public function validate()
