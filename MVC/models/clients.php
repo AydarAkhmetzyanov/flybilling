@@ -252,7 +252,7 @@ class Clients extends Model
 
             //welcome and actions notification
             $options['text']='Для активации услуг создайте соответствующий сервис в разделе <a href="/console/services">сервисы</a>.';
-            $options['title']='Добро пожаловать';
+            $options['title']='Добро пожаловать! Нажмите на это уведомление для просмотра.';
             $options['client_ID']=$table['ID'];
             $resultData=Notifications::insertnew($options);
 
