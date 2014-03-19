@@ -9,7 +9,7 @@ class Mail
 		  $mail->
 		  addTo($email)->
 		  setFrom(EMAIL)->
-		  setSubject('Подтверждение регистрации'.BRAND)->
+		  setSubject('Подтверждение регистрации '.BRAND)->
 		  setText($activateLink)->
 		  setHtml('
 <!DOCTYPE hmtl>
@@ -30,22 +30,22 @@ class Mail
 
 <table style="width: 100%" cellpadding="0" cellspacing="0" style="font: 16px Arial, Tahoma, Verdana; color: #000;">
 	<tr height="60" style="color: #fff;">
-		<td style="background: #2C2C2C; padding: 20px; text-align: center;"><a href="/'.SITE.'" target="_blank"><img src="'.SITE.'/img/logo-flybill.png"></a></td>
+		<td style="background: #2C2C2C; padding: 20px; text-align: center;"><a href="'.SITE.'" target="_blank"><img src="'.SITE.'/img/logo-flybill.png"></a></td>
 	</tr>
 	<tr style="color: #fff;">
-		<td style="background: #338DDC url(http://'.$_SERVER["HTTP_HOST"].'/img/promo-top-bottom.png) no-repeat right 25px; padding: 20px 20px 30px; font-weight: bold; font-size: 26px;">Подтверждение регистрации</td>
+		<td style="background: #338DDC url('.SITE.'/img/promo-top-bottom.png) no-repeat right 25px; padding: 20px 20px 30px; font-weight: bold; font-size: 26px;">Подтверждение регистрации</td>
 	</tr>
 	<tr style="color: #000;">
-		<td style="background: url(http://'.$_SERVER["HTTP_HOST"].'/img/polygon-1.png) no-repeat right center; padding: 20px;">
+		<td style="background: url('.SITE.'/img/polygon-1.png) no-repeat right center; padding: 20px;">
 			<p style="margin-bottom: 10px;">Для завершения регистрации перейдите по ссылке ниже:</p>
-			<p style="margin-bottom: 10px;"><a target="_blank" href="'.$activateLink.'">'.$activateLink.'</a></p>
+			<p style="margin-bottom: 10px;"><a target="_blank" href="'.$activateLink.'">Завершить регистрацию</a></p>
 		</td>
 	</tr>
 	<tr height="62">
-		<td style="background: url(http://'.$_SERVER["HTTP_HOST"].'/img/advant-top.jpg) no-repeat 50% 0;"></td>
+		<td style="background: url('.SITE.'/img/advant-top.jpg) no-repeat 50% 0;"></td>
 	</tr>
 	<tr>
-		<td style="background: #D7E6F3; padding: 0 20px 20px; text-align: center; color: #88A1B6; font-size: 13px;">© 2012-2013, ООО «ФлайБиллинг»</td>
+		<td style="background: #D7E6F3; padding: 0 20px 20px; text-align: center; color: #88A1B6; font-size: 13px;"><a href="'.SITE.'" target="_blank">'.BRAND.'</a></td>
 	</tr>
 </table>
 
