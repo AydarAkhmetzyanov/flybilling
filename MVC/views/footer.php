@@ -42,7 +42,7 @@
     <div class="footer-bottom">
         <div class="container">
             <div class="copy">© 2012-2014, <?=BRAND?></div>
-            <a href="javascript:void(0);" class="footer-logo" title="Лететь вверх!"></a>
+            <a href="javascript:void(0);" class="footer-logo"></a>
             <!--<a href="" class="cs-logo">CreativeStripe</a>-->
         </div>
     </div>
