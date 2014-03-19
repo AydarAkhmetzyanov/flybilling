@@ -227,7 +227,7 @@ class Clients extends Model
 			$statement = Database::getInstance()->prepare($tsql);
 			$statement->execute($params);
 			
-			$tsql2      = "SELECT [id] FROM " . SCHEMA . ".[Clients] WHERE [email] = :email;";
+			$tsql2      = "SELECT [ID] FROM " . SCHEMA . ".[Clients] WHERE [email] = :email;";
 			$statement2 = Database::getInstance()->prepare($tsql2);
 			$statement2->execute(array(
 				'email' => $email
@@ -235,13 +235,13 @@ class Clients extends Model
 			
 			$statement2->setFetchMode(PDO::FETCH_ASSOC);
 			$table             = $statement2->fetch();
-			$_SESSION['id']    = $table['id'];
+			$_SESSION['id']    = $table['ID'];
 			$_SESSION['email'] = $email;
 			
-			$tsql3      = "SELECT [accountType], [serviceName] FROM " . SCHEMA . ".[ClientsPrivateData] WHERE [id] = :id;";
+			$tsql3      = "SELECT [accountType], [serviceName] FROM " . SCHEMA . ".[ClientsPrivateData] WHERE [ID] = :ID;";
 			$statement3 = Database::getInstance()->prepare($tsql3);
 			$statement3->execute(array(
-				'id' => $_SESSION['id']
+				'ID' => $_SESSION['id']
 			));
 			
 			$statement3->setFetchMode(PDO::FETCH_ASSOC);
@@ -253,7 +253,7 @@ class Clients extends Model
             //welcome and actions notification
             $options['text']='Для активации услуг создайте соответствующий сервис в разделе <a href="/console/services">сервисы</a>.';
             $options['title']='Добро пожаловать';
-            $options['client_ID']='';
+            $options['client_ID']=$table['ID'];
             $resultData=Notifications::insertnew($options);
 
 
