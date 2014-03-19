@@ -22,18 +22,13 @@
         <link rel="icon" type="image/x-icon" href="favicon.ico" />
         <?php echo HTML::includeJS('lib/modernizr-2.6.2-respond-1.1.0.min');?>
 
-        <!-- Yandex.Metrika informer -->
-<a href="https://metrika.yandex.ru/stat/?id=24354985&amp;from=informer"
-target="_blank" rel="nofollow"><img src="//bs.yandex.ru/informer/24354985/3_1_FFFFFFFF_EFEFEFFF_0_pageviews"
-style="width:88px; height:31px; border:0;" alt="Яндекс.Метрика" title="Яндекс.Метрика: данные за сегодня (просмотры, визиты и уникальные посетители)" onclick="try{Ya.Metrika.informer({i:this,id:24354985,lang:'ru'});return false}catch(e){}"/></a>
-<!-- /Yandex.Metrika informer -->
-
-<!-- Yandex.Metrika counter -->
+       <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
 (function (d, w, c) {
     (w[c] = w[c] || []).push(function() {
         try {
             w.yaCounter24354985 = new Ya.Metrika({id:24354985,
+                    webvisor:true,
                     clickmap:true,
                     trackLinks:true,
                     accurateTrackBounce:true});
