@@ -1,4 +1,4 @@
-<?php echo HTML::includeJS('login');?>
+<?php echo HTML::includeJS('loginAdmin');?>
 
         <div class="top-promosub">
             <div class="container">
@@ -15,7 +15,7 @@
             
 
             <div class="content-inner">
-<form id="logInForm" onSubmit="return logIn()" class="form-horizontal" style="margin-bottom:150px;">
+					<form id="logInForm" onSubmit="return logIn()" class="form-horizontal" style="margin-bottom:150px;">
 						<div class="control-group">
 							<label class="control-label" for="inputEmail">Логин</label>
 							<div class="controls">
@@ -34,5 +34,5 @@
 							</div>
 						</div>
 					</form>
-</div>
-</div>
+			</div>
+		</div>

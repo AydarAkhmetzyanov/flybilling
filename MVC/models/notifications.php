@@ -66,7 +66,7 @@ class Notifications extends Model
         }
 	}
 
-    public static function insert($data){
+    public static function insert($data){ //refactor to new pattern
         $requiredParams=array('text_ru'=>'',
                               'text_en'=>'',
                               'title_ru'=>'Тикет: '.$data['title'],
@@ -75,6 +75,32 @@ class Notifications extends Model
         $tsql="INSERT INTO ".SCHEMA.".[Notifications] 
                (text_ru,text_en,title_ru,title_en,client_ID,notification_ID,status)  
                VALUES (:text_ru,:text_en,:title_ru,:title_en,:client_ID,NULL,1)  ;";
+        $statement = Database::getInstance()->prepare($tsql);
+        try{
+            $statement->execute($requiredParams);
+            $notification_ID=Database::getInstance()->lastInsertId();
+            $questonData=array('text'=>$data['text'],
+                              'client_ID'=>$data['client_ID'],
+                              'ID'=>$notification_ID,
+                              );
+            $resultData=Tickets::insert($questonData);
+            return $notification_ID;
+        } catch(PDOException $e) {
+            API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
+            return FALSE;
+        }
+
+	}
+
+    public static function insertnew($data){ //refactor to new pattern
+        $requiredParams=array('text_ru'=>$data['text'],
+                              'text_en'=>$data['text'],
+                              'title_ru'=>$data['title'],
+                              'title_en'=>$data['title'],
+                              'client_ID'=>$data['client_ID']);
+        $tsql="INSERT INTO ".SCHEMA.".[Notifications] 
+               (text_ru,text_en,title_ru,title_en,client_ID,notification_ID,status)  
+               VALUES (:text_ru,:text_en,:title_ru,:title_en,:client_ID,NULL,0)  ;";
         $statement = Database::getInstance()->prepare($tsql);
         try{
             $statement->execute($requiredParams);

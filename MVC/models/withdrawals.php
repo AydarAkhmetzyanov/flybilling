@@ -53,7 +53,7 @@ class Withdrawals extends Model
         if(Clients::getInstance()->data['balance']<$data['summ']){ API_helper::failResponse('balance lower then required summ',406); exit(); } 
         try{
             Database::getInstance()->beginTransaction();
-            $tsql="UPDATE ".SCHEMA.".[Clients] SET [balance]=[balance] - :summ WHERE [ID]=:client_ID ;";
+            $tsql="UPDATE ".SCHEMA.".[Clients] SET [balance]=[balance] - :summ WHERE [client_ID]=:client_ID ;";
             $statement = Database::getInstance()->prepare($tsql);
             $params=array( 'summ'=>$data['summ'], 'client_ID'=>Clients::getInstance()->data['ID'] );
             $statement->execute($params);
@@ -72,4 +72,21 @@ class Withdrawals extends Model
             return FALSE;
         }
 	}
+
+    public static function confirm($ID){
+        try{
+            $tsql="UPDATE ".SCHEMA.".[Withdrawals] SET [status]=1 WHERE [ID]=:ID ;";
+            $statement = Database::getInstance()->prepare($tsql);
+            $params=array( 'ID'=>$ID );
+            $statement->execute($params);
+            //send confirmation
+            return TRUE;
+        } catch(PDOException $e) {
+            API_helper::failResponse($e->getMessage().' SQL query: '.$tsql,500); exit();
+            return FALSE;
+        }
+	}
+
+
+
 }

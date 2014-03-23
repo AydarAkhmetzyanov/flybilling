@@ -5,7 +5,7 @@ class IndexController extends Controller {
 	public function index($change=0){
 		if(Clients::isAuth()){
 			$data = array();
-			$data['title'] = SHORT_BRNAD.' СМС Биллинг';
+			$data['title'] = SHORT_BRAND.' СМС Биллинг';
 
 			HTML::setUserLanguage('ru');
 			$data['newGuest']=false;
@@ -17,11 +17,11 @@ class IndexController extends Controller {
 			if(Clients::isAuth()) renderView('clientMenu', $data);
 			else renderView('menu', $data);
 			renderView('pages/index', $data);
-			renderView('consoleFooter', $data);
+			renderView('footer', $data);
 		}
 		else {
 			$data = array();
-			$data['title'] = BRAND.' СМС Биллинг';
+			$data['title'] = SHORT_BRAND.' СМС Биллинг';
 
 			HTML::setUserLanguage('ru');
 			$data['newGuest']=false;

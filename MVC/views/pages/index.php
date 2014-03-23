@@ -159,7 +159,12 @@
             </div>
 
             
+<<<<<<< HEAD
             <!--<div class="row responses">
+=======
+            <!--
+            <div class="row responses">
+>>>>>>> origin/master
                 <h2>Отзывы наших клиентов</h2>
                 <div class="resp-slider">
                     <div class="resp-slider-slides">
@@ -181,6 +186,7 @@
                     <div class="arrow to-left"></div>
                     <div class="arrow to-right"></div>
                 </div> 
+<<<<<<< HEAD
             </div>-->
             
 
@@ -224,3 +230,11 @@
                         
             </div>
         </div>
+=======
+            </div>
+            -->
+
+        </div>
+        
+        
+>>>>>>> origin/master
