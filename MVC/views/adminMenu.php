@@ -24,7 +24,7 @@
                             <li><a href="/administration/rates/">Rates</a></li>
                             <li><a href="/administration/fines/">Fines</a></li>
                             <li><a href="/administration/sql">SQL</a></li>
-                            <li><a href="/administration/sql?query">System errors</a></li>
+                            <li><a href="/administration/sql?query=SELECT+*+FROM+<?=SCHEMA?>.%5BErrorLog%5D%3B">System errors</a></li>
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">
