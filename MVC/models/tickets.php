@@ -11,7 +11,7 @@ class Tickets extends Model
             $tsql.=", [timestamp] as [localtimestamp]";
         }
         $tsql.="
-  FROM [dbo].[Notifications]
+  FROM ".SCHEMA.".[Notifications]
   WHERE [ID]=$data[ID] or [notification_ID]=$data[ID] 
    UNION 
  SELECT [timestamp],[text] [text_ru],[text] [text_en],NULL [title_ru],NULL [title_en],[status] ,'q' [type]";
@@ -21,7 +21,7 @@ class Tickets extends Model
             $tsql.=", [timestamp] as [localtimestamp]";
         }
         $tsql.="
-  FROM [dbo].[Questions]
+  FROM ".SCHEMA.".[Questions]
   WHERE [notification_ID]=$data[ID] 
 )
     ORDER BY [timestamp] DESC;";

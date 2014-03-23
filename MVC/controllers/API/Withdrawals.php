@@ -34,4 +34,11 @@ class WithdrawalsController extends Controller {
         API_helper::successResponse($resultData);
     }
 
+    public function confirm($ID){ 
+        if(!API_helper::isAdmin()){ API_helper::failResponse('admin access required',400); exit(); }
+        $resultData=Withdrawals::confirm($ID);
+        if($resultData==FALSE){ API_helper::failResponse('unknown error',500); exit(); } 
+        API_helper::successResponse($resultData);
+    }
+
 }

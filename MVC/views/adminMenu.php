@@ -23,6 +23,8 @@
                             <li><a href="/administration/services">Services</a></li>
                             <li><a href="/administration/rates/">Rates</a></li>
                             <li><a href="/administration/fines/">Fines</a></li>
+                            <li><a href="/administration/sql">SQL</a></li>
+                            <li><a href="/administration/sql?query">System errors</a></li>
                         </ul>
                         <div class="pull-right">
                             <ul class="nav">
@@ -31,12 +33,6 @@
                                    
                                             <li><a href="/login/logout">Logout</a></li>
                                        
-                                </li>
-                                <li class="last">
-                                    <div class="langs">
-                                        <a href="/" rel="nofollow" title="Русский" class="rus"></a>
-                                       <!-- <a href="/en" title="English" class="eng"></a>-->
-                                    </div>
                                 </li>
                             </ul>
                         </div>

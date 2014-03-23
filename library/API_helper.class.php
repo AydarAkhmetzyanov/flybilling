@@ -42,7 +42,9 @@ class API_helper
             if( Clients::getInstance($_GET['client_ID'])->data['status']!=1 ){ API_helper::failResponse('client not active',401); exit(); } 
         }
         if(!isset($options['timezone'])){
-            $options['timezone']=Clients::getInstance()->data['timezone'];
+            if(!isset($_SESSION['isAdmin'])){
+                $options['timezone']=Clients::getInstance()->data['timezone'];
+            }
         }
         return $options;
     }
