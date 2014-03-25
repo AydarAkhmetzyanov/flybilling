@@ -8,7 +8,7 @@ class SMS_session_create_pl3
     public $text;
 
     public $cost=0.13;
-    public $projectnum='3-511-8743';
+    public $projectnum=pl3_pseudo_async_ru;
 
 	public function send($service_number, $phone, $text){
 	    $this->service_number=$service_number;
@@ -26,7 +26,7 @@ class SMS_session_create_pl3
             if(is_object($result)){
                 if( $result->NetworkNameInternational=='MTS' ) {
                     $this->cost=40;
-                    $this->projectnum='3-511-8868';
+                    $this->projectnum=pl3_pseudo_async_ru_mts;
                 } elseif ( $result->NetworkNameInternational=='Megafon' ) {
                     $this->cost=33;
                 }
