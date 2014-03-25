@@ -13,3 +13,7 @@ define('API_URL',getenv('API_URL'));
 define('SCHEMA',getenv('SCHEMA'));
 
 define('EMPTY_RECIEVER_TEXT','Thanks for SMS');
+
+
+define('pl3_pseudo_async_ru',getenv('pl3_pseudo_async_ru'));
+define('pl3_pseudo_async_ru_mts',getenv('pl3_pseudo_async_ru_mts'));

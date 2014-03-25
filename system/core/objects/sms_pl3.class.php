@@ -78,7 +78,7 @@ class SMS_PL3 extends SMS
     protected function asyncResponseQuery(){
         date_default_timezone_set("UTC");
         $now=date('YmdHis');
-        $baseString=$this->external_ID.'sms'.base64_encode($this->response_text).$now."OZahvTTn";
+        $baseString=$this->external_ID.'sms'.base64_encode($this->response_text).$now."@D|Xw~_p";
         $hash=strtoupper(md5($baseString));
         $queryParams = array('evtID'=>$this->external_ID,
                              'type'=>'sms',
