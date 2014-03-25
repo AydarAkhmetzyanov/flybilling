@@ -38,7 +38,7 @@ if($result!=false){
 ?>
                     <div>
                         <h3>Result</h3>
-                    <table class="table table-striped table-condensed">
+                    <table class="table table-striped table-condensed table-bordered table-hover">
   <thead>
     <tr>
       <th><?php echo implode('</th><th>', array_keys($result[0])); ?></th>

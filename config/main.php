@@ -26,4 +26,4 @@ define('BRAND',getenv('BRAND'));
 define('SHORT_BRAND',getenv('SHORT_BRAND'));
 define('EMAIL',getenv('EMAIL'));
 define('ADMIN_LOGIN','Admin');
-define('SECRET',md5('135813'));
+define('SECRET','d785c99d298a4e9e6e13fe99e602ef42');

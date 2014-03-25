@@ -8,7 +8,7 @@ class Database{
     public static function getInstance() {
         if (!self::$instance){
             try {
-                self::$instance = new PDO ( "sqlsrv:server = tcp:g25tmfm7rt.database.windows.net,1433; Database = dev", "flybilling", "CXquWUMa!");
+                self::$instance = new PDO ( "sqlsrv:server = tcp:g25tmfm7rt.database.windows.net,1433; Database = dev; MultipleActiveResultSets=true", "flybilling", "CXquWUMa!");
                 self::$instance-> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //PDO::ATTR_PERSISTENT 
             } catch ( PDOException $e ) {  
                 print( "Error connecting to SQL Server." );  
