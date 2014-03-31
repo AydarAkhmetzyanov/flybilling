@@ -15,9 +15,14 @@ class Countries extends Model
             echo($e);
         }
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-
+            $row = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if(count($row)>0){
+            return $row;
+        } else {
+            return FALSE;
+        }
             //var_dump($stmt->fetchAll());
-        return $stmt;
+        return $row;
 	}
 
     public static function getExCountries(){ //fixed

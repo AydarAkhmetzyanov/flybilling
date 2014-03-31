@@ -395,6 +395,8 @@ INSERT INTO [vertex].[Countries] (ID, name, code, a1) VALUES
 (68, N'Австралия', N'au', 162),
 (70, N'Абхазия', N'ab', 0);
 
+UPDATE [vertex].[Countries] SET [is_available]=1;
+
 create table [vertex].[Agregators] 
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
@@ -424,8 +426,6 @@ create table [vertex].[Numbers]
                     )
             );
 
-SET IDENTITY_INSERT [vertex].[Numbers] ON;
-
 create table [vertex].[Prices] 
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
@@ -440,5 +440,4 @@ create table [vertex].[Prices]
                     )
             );
 
-SET IDENTITY_INSERT [vertex].[Prices] ON;
 

@@ -392,6 +392,8 @@ INSERT INTO [payway].[Countries] (ID, name, code, a1) VALUES
 (68, N'Австралия', N'au', 162),
 (70, N'Абхазия', N'ab', 0);
 
+UPDATE [payway].[Countries] SET [is_available]=1;
+
 create table [payway].[Agregators] 
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
@@ -421,8 +423,6 @@ create table [payway].[Numbers]
                     )
             );
 
-SET IDENTITY_INSERT [payway].[Numbers] ON;
-
 create table [payway].[Prices] 
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
@@ -436,6 +436,4 @@ create table [payway].[Prices]
                         [ID] ASC
                     )
             );
-
-SET IDENTITY_INSERT [payway].[Prices] ON;
 
