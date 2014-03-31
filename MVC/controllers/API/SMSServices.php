@@ -5,7 +5,6 @@ class SMSServicesController extends Controller {
 	public function index($id=0){
         //possible get options from,to,client_ID,timezone,service_ID,signature,order,offset,limit
         $options=$_GET;
-        print_r($_SESSION);
         parse_str(file_get_contents('php://input'), $_POST);
         if($id!=0){
             $options['ID']=$id;
