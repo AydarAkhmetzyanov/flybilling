@@ -1,4 +1,3 @@
 <?php
-
-print_r($_SERVER);
+unset($_SESSION['isAdmin']);
 ?>
