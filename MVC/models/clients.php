@@ -20,6 +20,7 @@ class Clients extends Model
 		} else {
 			$this->data = Clients::getClient($id);
 		}
+        print_r($this->data);
 	}
 	
 	public static function logOut()
@@ -269,7 +270,7 @@ class Clients extends Model
 	public static function checkLoginData($email, $password)
 	{		
 		try {
-			$tsql      = "SELECT [id], [password], [emailActivated] FROM " . SCHEMA . ".[Clients] WHERE [email] = :email;";
+			$tsql      = "SELECT [ID], [password], [emailActivated] FROM " . SCHEMA . ".[Clients] WHERE [email] = :email;";
 			$statement = Database::getInstance()->prepare($tsql);
 			$statement->execute(array(
 				'email' => $email
@@ -286,13 +287,13 @@ class Clients extends Model
 		
 		$statement->setFetchMode(PDO::FETCH_ASSOC);
 		$table  = $statement->fetch();
-		$tempId = $table['id'];
+		$tempId = $table['ID'];
 		
 		try {
-			$tsql2      = "SELECT [accountType], [serviceName] FROM " . SCHEMA . ".[ClientsPrivateData] WHERE [id] = :id;";
+			$tsql2      = "SELECT [accountType], [serviceName] FROM " . SCHEMA . ".[ClientsPrivateData] WHERE [ID] = :ID;";
 			$statement2 = Database::getInstance()->prepare($tsql2);
 			$statement2->execute(array(
-				'id' => $tempId
+				'ID' => $tempId
 			));
 		}
 		catch (PDOException $e) {
@@ -311,10 +312,10 @@ class Clients extends Model
 				if ($table['emailActivated'] == 1) {
 					$arr = array(
 						'error' => 0,
-						'uid' => $table['id'],
+						'uid' => $table['ID'],
 						'password' => $table['password']
 					);
-					$_SESSION['id']          = $table['id'];
+					$_SESSION['id']          = $table['ID'];
 					$_SESSION['email']       = $email;
 					$_SESSION['accountType'] = $table2['accountType'];
 					$_SESSION['serviceName'] = $table2['serviceName'];
