@@ -34,6 +34,10 @@ class API_helper
             if(!isset($_SESSION['isAdmin'])){
                 if(!isset($_SESSION['id'])){ API_helper::failResponse('auth required',401); exit(); } 
                 $options['client_ID']=Clients::getInstance()->data['ID'];
+            } else {
+                if(isset($_SESSION['id'])){
+                    unset($_SESSION['isAdmin']);
+                }
             }
         } else {
             if(!isset($_GET['client_ID'])){ API_helper::failResponse('client_ID option required',401); exit(); } 
