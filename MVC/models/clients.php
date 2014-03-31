@@ -20,7 +20,6 @@ class Clients extends Model
 		} else {
 			$this->data = Clients::getClient($id);
 		}
-        print_r($this->data);
 	}
 	
 	public static function logOut()
