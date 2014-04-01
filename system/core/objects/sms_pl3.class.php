@@ -86,18 +86,18 @@ class SMS_PL3 extends SMS
                              'now'=>$now,
                              'md5key'=>$hash);
         $response = Http_query::sendParamQuery('http://infoflows.partnersystem.i-free.ru/Send.aspx', $queryParams);
-        print_r($response);
         if($response === FALSE){
-            Logger::logError($response);
             return FALSE;
         } else {
             $result = new SimpleXMLElement($response);
             if(!is_object($result)){
+                Logger::logError($response);
                 return FALSE;
             } else {
                 if( $result['status']==1 ) {
                     return TRUE;
                 } else {
+                    Logger::logError($response);
                     return FALSE;
                 }
             }
