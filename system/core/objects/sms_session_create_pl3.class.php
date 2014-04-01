@@ -7,7 +7,7 @@ class SMS_session_create_pl3
 	public $phone;
     public $text;
 
-    public $cost=0.13;
+    public $cost=0.35;
     public $projectnum=pl3_pseudo_async_ru;
 
 	public function send($service_number, $phone, $text){
@@ -25,10 +25,10 @@ class SMS_session_create_pl3
             $result = new SimpleXMLElement($res);
             if(is_object($result)){
                 if( $result->NetworkNameInternational=='MTS' ) {
-                    $this->cost=40;
+                    $this->cost=0.26;
                     $this->projectnum=pl3_pseudo_async_ru_mts;
                 } elseif ( $result->NetworkNameInternational=='Megafon' ) {
-                    $this->cost=33;
+                    $this->cost=0.54;
                 }
             }
         }
