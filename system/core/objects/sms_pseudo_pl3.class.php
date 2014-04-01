@@ -93,11 +93,13 @@ class SMS_PSEUDO_PL3 extends SMS_PSEUDO
         } else {
             $result = new SimpleXMLElement($response);
             if(!is_object($result)){
+                Logger::logError($response);
                 return FALSE;
             } else {
                 if( $result['status']==1 ) {
                     return TRUE;
                 } else {
+                    Logger::logError($response);
                     return FALSE;
                 }
             }
