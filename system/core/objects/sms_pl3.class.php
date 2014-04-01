@@ -86,6 +86,7 @@ class SMS_PL3 extends SMS
                              'now'=>$now,
                              'md5key'=>$hash);
         $response = Http_query::sendParamQuery('http://infoflows.partnersystem.i-free.ru/Send.aspx', $queryParams);
+        print_r($response);
         if($response === FALSE){
             return FALSE;
         } else {
