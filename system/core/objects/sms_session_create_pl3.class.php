@@ -7,7 +7,7 @@ class SMS_session_create_pl3
 	public $phone;
     public $text;
 
-    public $cost=0.35;
+    public $cost=0.36;
     public $projectnum=pl3_pseudo_async_ru;
 
 	public function send($service_number, $phone, $text){

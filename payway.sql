@@ -48,7 +48,7 @@ create table [payway].[Clients]
 
 INSERT INTO [payway].[Clients] 
 (email, tech_key, balance, password, timezone, language, ip, country, status, emailActivationCode, emailActivated) 
-VALUES (N'test@test.ru',N'1234',10,'$2y$10$o0/f3x6Q5VyrOTTUr5AD/eIzzLKg.b9ertCrrAfKuqdQiEViXZ0lq',4.0,'ru','87.117.176.162','ru',1, 'qwertyuiopasdfgh', 1);
+VALUES (N'test@test.ru',N'1234',0,'$2y$10$o0/f3x6Q5VyrOTTUr5AD/eIzzLKg.b9ertCrrAfKuqdQiEViXZ0lq',4.0,'ru','87.117.176.162','ru',1, 'qwertyuiopasdfgh', 1);
 
 create table [payway].[ClientsPrivateData] 
             (
@@ -281,10 +281,10 @@ INSERT INTO [payway].[SMSCorePrefixes]
 VALUES (N'hmqtr', 'ru', 1); --test
 INSERT INTO [payway].[SMSCorePrefixes] 
 (prefix, country, provider_ID) 
-VALUES (N'981336', 'ru', 1);
+VALUES (N'981337', 'ru', 1);
 INSERT INTO [payway].[SMSCorePrefixes] 
 (prefix, country, provider_ID) 
-VALUES (N'981337', 'ru', 1);
+VALUES (N'981336', 'ru', 1);
 
 
 create table [payway].[SMSProviders] 
@@ -436,4 +436,5 @@ create table [payway].[Prices]
                         [ID] ASC
                     )
             );
+
 
