@@ -9,15 +9,14 @@
 <div class="top-promosub">
             <div class="container">
                 <div class="hero-unit">
-<<<<<<< HEAD
+
                     <br><br>
-                    <h1>Вывод средств</h1>
                     
-=======
+                    
+
                     <h1><?=$title?></h1>
-                    <div class="promo-3angl-1" data-stellar-ratio="2" data-stellar-vertical-offset="80" data-stellar-horizontal-offset="100"></div>
-                    <div class="promo-3angl-2" data-stellar-ratio="1.5"  data-stellar-vertical-offset="80" data-stellar-horizontal-offset="100"></div>
->>>>>>> origin/master
+                    
+
                 </div>
             </div>
            

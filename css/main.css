@@ -882,16 +882,11 @@ h4 {
 }
 
 .footer {
-<<<<<<< HEAD
+
     border-top: 1px solid #fff;
 	background: rgba(153, 153, 153, 0.298);
 	padding-top: 10px;
 	color: #666;
-=======
-	background: #2c2c2c;
-	padding-top: 35px;
-	color: #fff;
->>>>>>> origin/master
 	position: relative;
 }
 
@@ -962,13 +957,7 @@ h4 {
 }
 
 .footer-bottom {
-<<<<<<< HEAD
-	
-	
-=======
-	/*margin-top: 50px;*/
-	background: url(../img/footer-grad.png) repeat-x;
->>>>>>> origin/master
+
 	position: relative;
 	z-index: 3;
 }
