@@ -1,6 +1,4 @@
-<div class="footer-reg">
-            <a href="/registration">Стать нашим партнёром</a>
-        </div>
+    
 
 <div class="footer" id="contacts">
     <div class="container">
@@ -18,11 +16,6 @@
             <div class="copy">© 2012-2014, PayWay</div>
             <a href="javascript:void(0);" class="footer-logo" title="ВВЕРХ"></a>
             <a href="http://crb-sale.ru" class="cs-logo">PalatidisInc</a>
-
-
-
-
-   
         </div>
     </div>
         </div>

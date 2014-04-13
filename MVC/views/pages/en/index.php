@@ -1,138 +1,204 @@
-
-        
+<div class="top-promo-bg"><img src="img/hero-bg.png"></div>
+<div id="services" class="serv"></div>
+<div id="about" class="advantsc"></div>
+<div id="clients" class="clientssc"></div>
+<div id="is-main-page"></div>
         <div class="top-promo">
             <div class="container">
-                <div class="hero-unit">
-                    <h1>Best SMS Billing</h1>
-                    <div class="promo-descr span6">
-                    <p>SMS billing <?=BRAND?> targeted on modern business, which require micropayments. <?=BRAND?> - young and effective solution. We provide unique benefits, like modern platform and best rates for your purpose.</p>
+                <div  class="hero-unit">
+                    <br><br>
+                    <h1>SMS-billing of the new standards. </h1>
+                    <div class="promo-descr span7">
                     <p>
-                        <a href="<?=SITE?>/reg" class="reg-btn">Sign up</a>
-                        <a href="<?=SITE?>/login" class="enter-btn">Sign In</a>
+                        SMS-billing of the new standards. Aggregator sms-payments PayWay - the company that meets the expectations and trust of their clients. Our billing will become a reliable and powerful partner to monetize your work.
+                        <?php //if(!(Clients::isAuth())) : ?>
+                    <p>
+                        <br>
+                        <a href="/registration" class="reg-btn"></a>
+                        <a href="/login"        class="enter1">Enter</a>/<a href="#" class="enter2">Forgot password?</a><br>
+                        
                     </p>
+					<?php //endif; ?>
                     </div>
+                    
                 </div>
-                <div class="promo-phone"></div>
-                <div class="promo-3angl-1" data-stellar-ratio="2" data-stellar-vertical-offset="80" data-stellar-horizontal-offset="100"></div>
-                <div class="promo-3angl-2" data-stellar-ratio="1.5"  data-stellar-vertical-offset="80" data-stellar-horizontal-offset="100"></div>
+                
+                
             </div>
-            <div class="promo-3angl-3" data-stellar-ratio="1.1"  data-stellar-vertical-offset="20"></div>
-            <div class="promo-top-bottom"></div>
+            
+            
         </div>
 
-
-        <div class="container">
-            <div class="row services">
-                <h2 id="services">SMS Billing services</h2>
-                <div class="row billing-services">
-                    <div class="polygon-1" data-stellar-ratio="0.8"  data-stellar-vertical-offset="550"></div>
-                    <div class="span6">
-                        <div class="premium-sms-circle">
-                            <div class="premium-sms-content">
-                                <a href="/en/services/premium" class="title"><h3>Premium SMS</h3></a>
-                                <p>Most popular micropayment type. Subscriber sends sms to short number and pay for your service. Price is fixed by service provider.</p>
-                                <div class="more-tariffs"><a href="/en/services/premium">More</a><a href="/en/services/premium#rates">Rates</a></div>
-                            </div>
-                            <div class="premium-sms-3angle" data-stellar-ratio="1.3"  data-stellar-vertical-offset="150" data-stellar-horizontal-offset="160"></div>
-                        </div>
-                    </div>
-                    <div class="span6">
-                        <a href="/en/services/mosubscriptions" class="title"><h3>Pseudo SMS Subscriptions</h3></a>
-                        <p>Your service sends sms to subscriber from short number and all sms messages from that subscriber become linked to your account. Rates are the same as premium sms. </p>
-                        <div class="more-tariffs"><a href="/en/services/mosubscriptions">More</a><a href="/en/services/mosubscriptions#rates">Rates</a></div>
-
-                        <a href="/en/services/mtsubscriptions" class="title"><h3>MT Subscriptions</h3></a>
-                        <p>Payment without outcomming message. Subscriber enter his number in your site, we send code to his number and subscriber enter that code in form. Now suscbription is activated and you recieves recurrent payment with choiced rate and payment period.</p>
-                        <div class="more-tariffs"><a href="/en/services/mtsubscriptions">More</a><a href="/en/services/mtsubscriptions#rates">Rates</a></div>
-                   </div>
-                </div>
+        <div class="row top-cont">
+            <div  class="container">
+                <div class="conts span3">
+                    <img src="img/telephone.png"><p>8 (987) 291-15-42</p>
+                 </div> 
+                <div class="conts span3">
+                    <img src="img/icq.png"><p>664179978</p>
+                </div> 
+                <div class="conts span3">
+                    <img src="img/skype.png"><p>borov_gosu</p>
+                </div> 
+                <div class="conts1 span3">
+                    <img src="img/mail.png"><p>info@payway.org</p>
+                </div>   
+                        
             </div>
+        </div>
+
+        <div class="row services">
+           <div class="row billing-services">
+               <br><br>
+             <div class="container">
+                 
+                 <div class="span4 bs1">
+                      <a href="/services/premium" class="title"><h4>Premium SMS</h4></a>
+                     <a href="#" class="ic1"></a>
+                    <p>The most popular. Subscriber sends an SMS to a short code and the operator removes the sum according to the tariff.</p>
+                     
+                     <a class="butmore" href="/services/premium">More...</a> | <a class="butmore" href="/services/premium#rates">Tariffs...</a>
+                     <br>
+                 </div>
+                 <div class="span4 bs2">
+                      <a href="/services/mosubscriptions" class="title"><h4>Pseudo subscription</h4></a>
+                     <a href="#" class="ic2"></a>
+                    <p>User enters the site his phone number, then he receives a message on the answering that, he gets his service.</p><br>
+                     <a class="butmore" href="/services/mosubscriptions">More...</a> | <a class="butmore" href="/services/mosubscriptions#rates">Tariffs...</a>
+                 </div>
+                 <div class="span4 bs3">
+                      <a href="/services/mtsubscriptions" class="title"><h4>МТ subscription</h4></a>
+                     <a href="#" class="ic3"></a>
+                    <p>Payment without outgoing message. People enters their room online, to them comes sms code that is entered on the same site, to activate.</p>
+                     <a class="butmore" href="/services/mtsubscriptions">More...</a> | <a class="butmore" href="/services/mtsubscriptions#rates">Tariffs...</a>
+                 </div>
+             </div>
+           </div>
+
+            
         </div>
 
         <div class="row advant">
-            <div class="advant-top"></div>
-            <h2 id="about">Benefits</h2>
+            <br>
+            <h2 id="">6 reasons to work with us</h2></h2><br>
             <div class="container">
-                <div class="span5 item">
-                    <img src="img/advant-1.jpg" alt="" />
+                <div class="span4 item advant1">
+                    <img src="img/azure.png" alt="" />
                     <div class="text">
-                        <h3>Cloud based</h3>
-                        <p>Our system based on Microsoft Azure Cloud platform, so we provide high availability with SLA 99,9%</p>
+                        <h4>High-quality and highly reliable platform</h4>
+                        <p>We choose the best for our customers, which is why our billing works on the cloud platform <b>Microsoft Azure</b>, which provides the highest availability with <b>SLA 99%</b></p>
                     </div>
                 </div>
-                <div class="span5 item">
-                    <img src="img/advant-2.jpg" alt="" />
+                <div class="span4 item advant2">
+                    <img src="img/money.png" alt="" />
                     <div class="text">
-                        <h3>Good rates</h3>
-                        <p>We can provide individual rates, that satisfy your business requirements.</p>
+                        <h4>High charges</h4>
+                        <p>Emphasize once again - <b><u>HIGH</u></b>. Cooperating with us you will get the most favorable conditions. Moreover with increasing traffic you just  <b>growing payouts</b>.  Inspires you?</p>
                     </div>
                 </div>
-                <div class="span5 item">
-                    <img src="img/advant-3.jpg" alt="" />
+                <div class="span4 item advant3">
+                    <img src="img/smska.png" alt="" />
                     <div class="text">
-                        <h3>Different payment types</h3>
-                        <p>You can use any payment type, you business require — <a href="/en/services/premium">Premium SMS</a>, <a href="/en/services/mosubscriptions">Pseudo SMS subscriptions</a> и  <a href="/en/services/mtsubscriptions">MT subscriptions</a>.</p>
+                        <h4>For all tastes</h4>
+                        <p>Choose from all modern types of mobile payments -<a href="/services/premium">Premium SMS</a>, <a href="/services/mosubscriptions">Pseudo subscription</a> и  <a href="/services/mtsubscriptions">МТ subscription</a>.</p>
+                    </div>
+                </div><br>
+                <div class="span4 item advant1">
+                    <img src="img/world.png" alt="" />
+                    <div class="text">
+                        <h4>Works around the world</h4>
+                        <p>We invite you to work with mobile payments worldwide. For our customers, there is no any limits. Scale your projects far beyond your country. </p>
                     </div>
                 </div>
-                <div class="span5 item">
-                    <img src="img/advant-4.jpg" alt="" />
+                <div class="span4 item advant2">
+                    <img src="img/stats.png" alt="" />
                     <div class="text">
-                        <h3>Wide range of regions</h3>
-                        <p>We provide services for any country you need. With us you wont be limited by specific country.</p>
+                        <h4>Statistics on SMS in real time</h4>
+                        <p>With us, you will always be aware of your sms latest statistics. Your personal account is totally adaptive for mobile devices.</p>
+                    </div>
+                </div>
+                <div class="span4 item advant3">
+                    <img src="img/support.png" alt="" />
+                    <div class="text">
+                        <h4>Round the clock technical support</h4>
+                        <p>Our consultants will advise you at any time of the day or night. We appreciate your trust.</p>
                     </div>
                 </div>
             </div>
-            <div class="advant-3angl-1" data-stellar-ratio="1.5"  data-stellar-vertical-offset="100"></div>
-            <div class="advant-3angl-2" data-stellar-ratio="1.1"  data-stellar-vertical-offset="100"></div>
-            <div class="polygon-2" data-stellar-ratio="0.8"  data-stellar-vertical-offset="550"></div>
-            <div class="polygon-3" data-stellar-ratio="0.8"  data-stellar-vertical-offset="550"></div>
-            <div class="advant-bottom"></div>
+            
+           
+           
         </div>
 
-        <div class="container">
-            <div class="row clients">
-                <h2 id="clients">Our clients</h2>
+        <div class="row clients">
+            <div class="container "><br>
+                <h2 id="">How do we work?</h2><br>
 
-                <div class="span4">
-                    <h3>Web sites and social networks</h3>
-                    <p>SMS micropayments are most easy way to generate income for any type of web site. Access to private area, advertisments, bonuses for clients, turning off spped limits for file sharing and a lot other cases where micropayments are the best solution. </p>
+                <div class="span3 cl1">
+                    <h4>Subscriber sends an SMS message</h4>
+                    <img src="img/smssent.png" alt="" /><div class="arrow"></div>
+                    <p>Anyone who wishes to get the service sends an SMS with specific text to Your Room. </p>
                 </div>
-                <div class="span4">
-                    <h3>Online games</h3><br />
-                    <p>Because of accessability for clients, SMS payments are most popular way to get profit from online games. Micropayments provides most easy and fast conditions for customers in online game market.</p>    
+                <div class="span3 cl2">
+                    <h4>Withdraw funds from subscribers account</h4>
+                    <img src="img/dollar.png" alt="" /><div class="arrow"></div>
+                     <p>The cost of SMS is removed together with the tax from the account of number. </p>
+               </div>
+                <div class="span3 cl3">
+                    <h4>Cash receipts on our account</h4>
+                    <img src="img/percent.png" alt="" /><div class="arrow"></div>
+                    <p>Mobile operator, taking 30-50%, sends the money to us. After taking away his commission, we send money to your account.</p>
                 </div>
-                <div class="span4">
-                    <h3>Partner networks</h3><br />
-                    <p>Profit sharing partner networks are fast and reliable solution for increasing profit for specific business types such as dating services, private sites and online shops.</p>
+                <div class="span3 cl4">
+                    <h4>Payments to your account within the specified period</h4>
+                    <img src="img/umoney.png" alt="" /><div class="proff"></div>
+                    <p>You get money for your services.</p>
                 </div>
-
 
             </div>
 
-            <!--
-            <div class="row responses">
-                <h2>Отзывы наших клиентов</h2>
-                <div class="resp-slider">
-                    <div class="resp-slider-slides">
-                        <div class="slide span8">
-                            <img src="img/client-photo.jpg" class="photo" />
-                            <div class="text">
-                                <p>Самый простой способ монетизировать сайт или социальную сеть невзирая на тематику сайта. Это может быть продажа доступа в приватный раздел  получения привилегированного аккаунта, снятие рекламы, начисление бонусов в торрент трекерах, увеличение скорости скачивания файлов. Аналогичные сервисы могут быть введены в социальных сетях. И это только пример того как можно монетизировать ваши существующие или будущие проекты.</p>
-                                <p class="author">Имя Фамилия, ItCompany</p>
-                            </div>
-                        </div>
-                        <div class="slide span8">
-                            <img src="img/client-photo.jpg" class="photo" />
-                            <div class="text">
-                                <p>Самый простой способ монетизировать сайт или социальную сеть невзирая на тематику сайта. Это может быть продажа доступа в приватный раздел  получения привилегированного аккаунта, снятие рекламы, начисление бонусов в торрент трекерах, увеличение скорости скачивания файлов. Аналогичные сервисы могут быть введены в социальных сетях. И это только пример того как можно монетизировать ваши существующие или будущие проекты.</p>
-                                <p class="author">Имя Фамилия, ItCompany</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="arrow to-left"></div>
-                    <div class="arrow to-right"></div>
+            
+
+            
+
+        </div>
+        
+        <div class="footer-reg">
+            <a href="/registration">Connect to the payment system</a>
+        </div>
+
+        <div id="contacts" class="footer-cont">
+            <div class="container">
+                 <div class="conts">
+                    <img src="img/telephone.png"><p  >8 (987) 291-15-42</p>
+                 </div> 
+                <div class="conts">
+                    <img src="img/icq.png"><p>664179978</p>
                 </div> 
+                <div class="conts">
+                    <img src="img/skype.png"><p>borov_gosu</p>
+                </div> 
+                <div class="conts">
+                    <img src="img/mail.png"><p>info@payway.org</p>
+                </div>   
+                        
             </div>
-            -->
-
         </div>
+        <div class="row top-cont">
+            <div  class="container">
+                <div class="conts span3">
+                    <img src="img/telephone.png"><p>8 (987) 291-15-42</p>
+                 </div> 
+                <div class="conts span3">
+                    <img src="img/icq.png"><p>664179978</p>
+                </div> 
+                <div class="conts span3">
+                    <img src="img/skype.png"><p>borov_gosu</p>
+                </div> 
+                <div class="conts1 span3">
+                    <img src="img/mail.png"><p>info@payway.org</p>
+                </div>   
+                        
+            </div>
+        </div>
+

@@ -25,13 +25,13 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#services">Services</a></li>
-                            <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#about">About us</a></li>
-                            <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#clients">Clients</a></li>
+                            <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#about">About Us</a></li>
+                            <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#clients">How do we work?</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#contacts">Contacts</a></li>
-                            <li class="spec"><a href="http://flybill.ru/reg">Sign up</a></li>
-                            <li><a href="http://flybill.ru/login">Sign in</a></li>
+                            <li class="spec"><a href="/registration">Registration</a></li>
+                            <li><a href="/login">Enter</a></li>
                         </ul>
-                        <form class="pull-right">
+                        <div class="pull-right fbstyle">
                             <div class="fb-like" data-href="http://flybill.ru" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
 
                             <!-- Place this tag where you want the +1 button to render -->
@@ -50,9 +50,9 @@
 
                             <div class="langs">
                                 <a href="/" rel="nofollow" title="Русский" class="rus"></a>
-                               <!-- <a href="/en" title="English" class="eng"></a>-->
+                                <a href="/en" title="English" class="eng"></a>
                             </div>
-                        </form>
+                        </div>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
