@@ -15,7 +15,9 @@ class IndexController extends Controller {
 
             $data['agregators'] = Agregators::getAgregators()->fetchAll();
 
-            $data['countries'] = Countries::getCountries()->fetchAll();
+                $data['countries'] = Countries::getCountries();
+            
+            
         
             $data['numbers'] = Numbers::getNumbers();
             if($data['numbers']!=false){
