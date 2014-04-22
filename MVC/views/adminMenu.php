@@ -16,13 +16,13 @@
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li><a href="/administration">Home</a></li>
-                            <li><a href="/administration/users">Users</a></li>
+                            <li><a href="/administration/sql?query=SELECT+*+FROM+<?=SCHEMA?>.%5BClients%5D%2C<?=SCHEMA?>.%5BClientsPrivateData%5D+WHERE+<?=SCHEMA?>.%5BClients%5D.%5BID%5D%3D<?=SCHEMA?>.%5BClientsPrivateData%5D.%5BID%5D%3B">Users</a></li>
                             <li><a href="/administration/analytics">Analytics</a></li>
                             <li><a href="/administration/tickets">Tickets</a></li>
                             <li><a href="/administration/withdrawals">Withdrawals</a></li>
-                            <li><a href="/administration/services">Services</a></li>
+                            <li><a href="/administration/sql?query=SELECT+*+FROM+<?=SCHEMA?>.%5BSMSServices%5D%3B">Services</a></li>
                             <li><a href="/administration/rates/">Rates</a></li>
-                            <li><a href="/administration/fines/">Fines</a></li>
+                            <li><a href="/administration/sql?query=SELECT+*+FROM+<?=SCHEMA?>.%5BFines%5D%3B">Fines</a></li>
                             <li><a href="/administration/sql">SQL</a></li>
                             <li><a href="/administration/sql?query=SELECT+*+FROM+<?=SCHEMA?>.%5BErrorLog%5D%3B">System errors</a></li>
                         </ul>
