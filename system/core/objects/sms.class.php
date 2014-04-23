@@ -94,7 +94,7 @@ abstract class SMS
                 if($this->handler_is_async==0){
                     if($this->response_is_dynamic==1){
                         $dynamicResponse = $this->getDynamicResponse();
-                        if($dynamicResponse == FALSE){
+                        if($dynamicResponse == FALSE || empty($dynamicResponse)){
                             $this->response_text=$this->service_response_static;
                         } else {
                             $decodedResponse=json_decode($dynamicResponse, true);
