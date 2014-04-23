@@ -6,20 +6,21 @@ $data = Clients::getClientData($id);
 <?php echo HTML::includeJS('profile');?>
 <div class="page-inner page-inner-console">
 
-<div class="top-promo">
+<div class="top-promo-bgsub"><img src="img/hero-bg.png"></div>
+        <div class="top-promosub">
             <div class="container">
                 <div class="hero-unit">
+                    <br><br>
+                    
                     <h1>Редактирование профиля</h1>
-                    <div class="promo-3angl-1" data-stellar-ratio="2" data-stellar-vertical-offset="80" data-stellar-horizontal-offset="100"></div>
-                    <div class="promo-3angl-2" data-stellar-ratio="1.5"  data-stellar-vertical-offset="80" data-stellar-horizontal-offset="100"></div>
+                    
                 </div>
             </div>
-            <div class="promo-3angl-3" data-stellar-ratio="1.5"  data-stellar-vertical-offset="70"></div>
-            <div class="promo-top-bottom"></div>
+            
         </div>
 
         <div class="container content">
-            <div class="polygon-2" data-stellar-ratio="0.3"  data-stellar-vertical-offset="250"></div>
+          
 
         <div class="content-inner">
 		<form action="/profile/submit" id="profile-form" name="reg" method="post" class="form-horizontal">	
