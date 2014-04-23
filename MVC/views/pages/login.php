@@ -1,5 +1,5 @@
 <?php echo HTML::includeJS('login');?>
-<div class="top-promo-bgsub"><img src="img/hero-bg.png"></div>
+
         <div class="top-promosub">
             <div class="container">
                 <div class="hero-unit">
