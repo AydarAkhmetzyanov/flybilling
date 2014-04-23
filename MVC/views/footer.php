@@ -6,7 +6,7 @@
             </div>
         </div>
       
-         |  <a href="/services/premium">Премиум-SMS</a>  |  <a href="/services/mosubscriptions">Псевдо подписки</a>  |  <a href="/services/mtsubscriptions">МТ подписки</a> | 
+       <!--|  <a href="/services/premium">Премиум-SMS</a>  |  <a href="/services/mosubscriptions">Псевдо подписки</a>  |  <a href="/services/mtsubscriptions">МТ подписки</a> | -->  
        
         
     </div>

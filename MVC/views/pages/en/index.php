@@ -41,7 +41,7 @@
                     <img src="img/skype.png"><p>borov_gosu</p>
                 </div> 
                 <div class="conts1 span3">
-                    <img src="img/mail.png"><p>info@payway.org</p>
+                    <img src="img/mail.png"><p>infopayway@gmail.com</p>
                 </div>   
                         
             </div>
@@ -179,7 +179,7 @@
                     <img src="img/skype.png"><p>borov_gosu</p>
                 </div> 
                 <div class="conts">
-                    <img src="img/mail.png"><p>info@payway.org</p>
+                    <img src="img/mail.png"><p>infopayway@gmail.com</p>
                 </div>   
                         
             </div>
@@ -196,7 +196,7 @@
                     <img src="img/skype.png"><p>borov_gosu</p>
                 </div> 
                 <div class="conts1 span3">
-                    <img src="img/mail.png"><p>info@payway.org</p>
+                    <img src="img/mail.png"><p>infopayway@gmail.com<</p>
                 </div>   
                         
             </div>

@@ -972,6 +972,7 @@ h4 {
 
 .footer .copy {
 	float: left;
+    width: 200px;
 }
 
 .footer-logo {

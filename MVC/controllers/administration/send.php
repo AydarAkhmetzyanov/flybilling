@@ -1,16 +1,27 @@
 <?php
+error_reporting(1); ini_set('display_errors', 'on'); error_reporting( E_ALL | !E_STRICT );   
+class SendController extends Controller {
+    
+	public function index(){
+	        $data = array();
+            $data['title'] = 'Рассылка';
+		
+            $data['newGuest']=false;
 
-class Mail
-{
-	public static function sendEmailValidation($email, $activateLink)
-	{
-		$sendgrid = new SendGrid('azure_fa53844c48b1208b55c8053f0ad07bf3@azure.com', 'zrwxw7cd');
+            $source='aydar@creativestripe.ru;palatidis@gmail.com';
+
+        $base = explode(';',$source);
+
+        print_r($base);
+
+            foreach($base as $email){
+            $sendgrid = new SendGrid('azure_5045b82a4a098fff04fb3a1e2d07af03@azure.com', 'Lpzr8OmBZ1WIgkV');
 		$mail = new SendGrid\Mail();
 		  $mail->
 		  addTo($email)->
-		  setFrom(EMAIL)->
+		  setFrom('send@payway.org')->
 		  setSubject('Подтверждение регистрации '.BRAND)->
-		  setText($activateLink)->
+		  setText('123')->
 		  setHtml('
 <!DOCTYPE hmtl>
 <html>
@@ -40,7 +51,7 @@ class Mail
             <p style="margin-bottom: 10px;"><strong>Добро пожаловать в '.BRAND.'!</strong></p>
             <p style="margin-bottom: 10px;">Мы рады что вы выбрали нас. Наша компания готова предложить вам современные инструменты которые помогут вашему бизнесу. Мы всегда стремимся к взаимовыгодному сотрудничеству.</p>
 			<p style="margin-bottom: 10px;"><strong>Для завершения регистрации перейдите по ссылке ниже:</strong></p>
-			<p style="margin-bottom: 10px;"><a target="_blank" href="'.$activateLink.'">Завершить регистрацию</a></p>
+			<p style="margin-bottom: 10px;"><a target="_blank" href="'.'">Завершить регистрацию</a></p>
             <p style="margin-bottom: 10px;">Если вы не регистрировались в '.BRAND.' проигнорируйте это сообщение.</p>
 		</td>
 	</tr>
@@ -54,6 +65,18 @@ class Mail
 
 </body>
 </html>');
-		  return $sendgrid->smtp->send($mail);
-	}
+if(isset($_GET['send'])){
+    $sendgrid->smtp->send($mail);
+}
+
+
+		  echo '<br>send to:'.$email.'<br>';
+            
+        }
+
+	
+	
+
+}
+
 }
