@@ -1,0 +1,41 @@
+<?php
+
+class SuccessController extends Controller {
+    
+	public function index($change=0){
+		if(Clients::isAuth()){
+			$data = array();
+			$data['title'] = SHORT_BRAND.' СМС Биллинг';
+
+			HTML::setUserLanguage('ru');
+			$data['newGuest']=false;
+			$data['locale']='ru_RU';
+
+			
+			renderView('header', $data);
+			echo '<body class="page-main">';
+			if(Clients::isAuth()) renderView('clientMenu', $data);
+			else renderView('menu', $data);
+			renderView('pages/success', $data);
+			renderView('footer', $data);
+		}
+		else {
+			$data = array();
+			$data['title'] = SHORT_BRAND.' СМС Биллинг';
+
+			HTML::setUserLanguage('ru');
+			$data['newGuest']=false;
+			$data['locale']='ru_RU';
+
+			
+			renderView('header', $data);
+			echo '<body class="page-main">';
+			if(Clients::isAuth()) renderView('clientMenu', $data);
+			else renderView('menu', $data);
+			renderView('pages/success', $data);
+			renderView('footer', $data);
+		}
+	}
+	
+
+}

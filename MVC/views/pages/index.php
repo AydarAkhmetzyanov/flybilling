@@ -15,7 +15,7 @@
 					<?php //if(!(Clients::isAuth())) : ?>
                     <p>
                         <br>
-                        <a href="/registration" class="reg-btn"></a>
+                        <a href="#reg"  class="reg-btn" data-toggle="modal"></a>
                         <a href="/login" class="enter1">Войти</a>/<a href="#" class="enter2">Забыли пароль?</a><br>
                         
                     </p>
@@ -203,3 +203,35 @@
             </div>
         </div>
 
+<div id="reg"   class="modal hide fade" style="width: 950px;  left: 50%; margin-left:  -475px;">
+	<div class="modal-header" style="background:  #e9e9e9; box-shadow: 0px 8px 20px -7px #000000;">
+		<button type="button" class="close"  data-dismiss="modal" aria-hidden="true">×</button>
+		<h3>Быстрая регистрация</h3>
+        
+	</div>
+	<div class="modal-body">             
+        
+            <form accept-charset="utf-8" action="https://app.getresponse.com/add_contact_webform.html?u=COKA" method="post">
+
+                <img src="img/logo-payway-reg.png"><br>
+                
+
+                <input type="text" placeholder="Как вас зовут?" class="form-control" name="name" >
+                <input type="text" placeholder="E-mail" class="form-control" name="email">
+                <input type="text" placeholder="icq или skype" class="form-control" name="custom_icq">
+                <select  name="custom_trafic"
+                                id="custom_trafic">
+                                    <option>Белый трафик</option>
+                                    <option>Серый трафик</option>
+                                    <option>Черный трафик</option>
+                                </select>
+                <div class="modal-footer" style="background: #fff;">
+                    <input type="submit" class="btn btn-warning btn-large" style="text-decoration: none; float: right;"  name="submit" value="Завершить регистрацию"></input>
+                </div> 
+                <input type="hidden" name="webform_id" value="3023104" />
+            </form> 
+          
+        
+    </div>
+<script type="text/javascript" src="http://app.getresponse.com/view_webform.js?wid=3023104&mg_param1=1&u=COKA"></script>
+</div>
