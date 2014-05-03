@@ -165,7 +165,7 @@
         </div>
         
         <div class="footer-reg">
-            <a href="/registration">Подключиться к платежной системе</a>
+            <a href="#reg" data-toggle="modal">Подключиться к платежной системе</a>
         </div>
 
         <div id="contacts" class="footer-cont">
