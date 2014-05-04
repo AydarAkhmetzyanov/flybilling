@@ -44,6 +44,7 @@ create table [dbo].[Clients]
                     )
             );
 
+
 INSERT INTO [dbo].[Clients] 
 (email, tech_key, balance, password, timezone, language, ip, country, status, emailActivationCode, emailActivated) 
 VALUES (N'aydar@creativestripe.ru',N'1234',10,'$2a$04$wM.DTWJ4ejRsn9bW.4buxuvwrMTj2GMFML3BF9CFv.6XCBbKkrdx2',4.0,'ru','87.117.176.162','ru',1, 'qwertyuiopasdfgh', 1);
@@ -227,6 +228,8 @@ create table [dbo].[SMS]
                         [ID] ASC
                     )
             );
+
+            
 			
 INSERT INTO [dbo].[SMS] 
 (response_text, response_is_sent, response_is_dynamic, sender_phone, sender_country, sender_cost, sender_service_number, sender_text, client_share, client_ID, service_ID, provider_ID
@@ -258,7 +261,7 @@ create table [dbo].[SMSServices]
                         [ID] ASC
                     )
             );
-			
+ALTER TABLE [dbo].[SMSServices]  ADD [notice] [nvarchar](255) NULL;
 INSERT INTO [dbo].[SMSServices] 
 (country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID,is_pseudo) 
 VALUES ('ru', N'kmbord566', 'response_static', 1, 'http://flybill.ru/test.php', 55, 1, 1, 1, 0);
