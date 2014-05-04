@@ -54,7 +54,7 @@ function showServices() {
 							<td><span class="dotted-link" onclick="showServicePreferences(\'SMSServices\', ' + entry.ID + ')">Настройки</span></td>\
 							<td><a href="/console/analytics/SMSServices/' + entry.ID + '">Статистика</a></td>\
 							<td><a href="/docs/Premium_SMS_Protocol.docx">Документация</a></td>\
-							<td><a href="/services/premium?offer=' + utf8_to_b64(entry.share) + '" target="_blank">Тарифы</a></td>\
+							<td><a href="/services/premium?offer=' + utf8_to_b64(entry.share/100) + '" target="_blank">Тарифы</a></td>\
 							<td><button class="btn btn-mini btn-danger" data-id="SMSServices' + entry.ID + '" onclick="deactivateService(\'SMSServices\', ' + entry.ID + ')">Деактивировать</button></td>\
 						</tr>');
 			        }
