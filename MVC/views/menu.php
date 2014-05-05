@@ -28,7 +28,7 @@
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#about">О нас</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#clients">Как мы работаем?</a></li>
                             <li><a href="<?php if(CONTROLLER!='index') echo '/';?>#contacts">Контакты</a></li>
-                            <li class="spec"><a href="#reg" data-toggle="modal">Регистрация</a></li>
+                            <li class="spec"><a href="/registration">Регистрация</a></li>
                             <li><a href="/login">Вход</a></li>
                         </ul>
                         <div class="pull-right fbstyle">
