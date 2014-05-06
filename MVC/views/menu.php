@@ -31,13 +31,18 @@
                             <li class="spec"><a href="/registration">Регистрация</a></li>
                             <li><a href="/login">Вход</a></li>
                         </ul>
-                        <div class="pull-right fbstyle">
+                        <div id="google_translate_element"></div><script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({pageLanguage: 'ru', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+}
+</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                        <!--<div class="pull-right fbstyle">
                             <div class="fb-like" data-href="http://flybill.ru" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-font="arial" data-colorscheme="dark"></div>
 
-                            <!-- Place this tag where you want the +1 button to render -->
+                            <!-- Place this tag where you want the +1 button to render
                             <div class="g-plusone" data-size="medium" data-annotation="inline" data-width="200" data-href="http://flybill.ru"></div>
 
-                            <!-- Place this render call where appropriate -->
+                            <!-- Place this render call where appropriate 
                             <script type="text/javascript">
                               window.___gcfg = {lang: 'ru'};
 
@@ -52,7 +57,7 @@
                                 <a href="/" rel="nofollow" title="Русский" class="rus"></a>
                                 <a href="/en" title="English" class="eng"></a>
                             </div>
-                        </div>
+                        </div>-->
                     </div><!--/.nav-collapse -->
                 </div>
             </div>

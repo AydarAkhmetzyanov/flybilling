@@ -32,5 +32,5 @@
   ga('send', 'pageview');
 
 </script>
-
+<meta name="google-translate-customization" content="64710371f291d102-98b82ca08188f56b-g9182c03cadb5a28f-a"></meta>
     </head>
