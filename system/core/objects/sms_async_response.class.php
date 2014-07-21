@@ -14,7 +14,7 @@ class SMS_async_response
         if($this->auth() == FALSE) { API_response::failResponse('wrong hash'); exit(); }
         $this->saveResponse();
         API_response::successResponse();
-        Http_query::sendAsync(API_URL.'/system/WORKERS/sms_async_send.php',array());
+        //Http_query::sendAsync(API_URL.'/system/WORKERS/sms_async_send.php',array());
     }
 
     protected function checkParams(){
