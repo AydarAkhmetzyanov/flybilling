@@ -15,7 +15,7 @@ class Clients extends Model
 	
 	private function __construct($id)
 	{
-		if ($id == 0) {
+		if ($id === 0) {
 			$this->data = Clients::getClient($_SESSION['id']);
 		} else {
 			$this->data = Clients::getClient($id);
