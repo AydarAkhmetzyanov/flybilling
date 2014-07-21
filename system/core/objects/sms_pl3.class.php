@@ -90,6 +90,7 @@ class SMS_PL3 extends SMS
         if($response === FALSE){
             return FALSE;
         } else {
+            echo $response;
             $result = new SimpleXMLElement($response);
             if(!is_object($result)){
                 Logger::logError($response);
