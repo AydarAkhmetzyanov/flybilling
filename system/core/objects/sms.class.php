@@ -72,7 +72,7 @@ abstract class SMS
         if( (empty($this->response_text)) || (!isset($this->response_text)) || ($this->response_text=='') ){
             
         } else {
-            if($this->asyncResponseQuery()==false){
+            if($this->asyncResponseQuery()===false){
                 $this->response_is_sent=0;
             } else {
                 $this->response_is_sent=1;
