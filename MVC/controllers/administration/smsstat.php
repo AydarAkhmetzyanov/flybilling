@@ -1,24 +1,17 @@
 <?php
 
-class SqlController extends Controller {
+class SmsstatController extends Controller {
     
 	public function index(){
 		if(Clients::isAdmin()){
 	        $data = array();
-            $data['title'] = 'Database SQL query';
+            $data['title'] = 'Database SmS Statistics';
 		
             $data['newGuest']=false;
         
 		    renderView('header', $data);
             echo '<body class="page-main"><div id="wrap">';
             renderView('adminMenu', $data);
-
-
-
-
-
-
-
 
 
             
@@ -42,10 +35,10 @@ class SqlController extends Controller {
 		        
             } else {
                 $data['result']=false;
-                $data['query']='SELECT * FROM '.SCHEMA.'.[Clients];';
+                $data['query']='SELECT * FROM '.SCHEMA.'.[sms];';
             }
 
-		    renderView('pages/administration/sql', $data);
+		    renderView('pages/administration/smsstat', $data);
 		    renderView('consoleFooter', $data);
 		} else {
             redirect('administration');
