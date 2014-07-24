@@ -41,7 +41,7 @@ class SmsstatController extends Controller {
 		    renderView('pages/administration/smsstat', $data);
 		    renderView('consoleFooter', $data);
 		} else {
-            redirect('administration');
+            redirect('administration/smsstat');
         }
 	}
 
