@@ -72,7 +72,7 @@ abstract class SMS
         if( (empty($this->response_text)) || (!isset($this->response_text)) || ($this->response_text=='') ){
             
         } else {
-            if($this->asyncResponseQuery()===false){
+            if($this->asyncResponseQuery()==false){
                 $this->response_is_sent=0;
             } else {
                 $this->response_is_sent=1;
@@ -122,7 +122,7 @@ abstract class SMS
             if(empty($this->ID)){
                 $this->saveData();
             }
-            Http_query::sendAsync(API_URL.'/system/WORKERS/sms_async_send.php',array());
+            //Http_query::sendAsync(API_URL.'/system/WORKERS/sms_async_send.php',array());
         } else {
             $this->sendResponse();
             $this->response_is_sent=1;
