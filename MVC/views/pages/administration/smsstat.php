@@ -44,10 +44,17 @@ function getText_author(str)
 <a href="javascript:void(0)" onclick="getText_author(this)">SELECT [service_ID],sum([client_share]) as [clientshare],sum([external_share]) as [external] FROM [payway].[SMS] group by [service_ID]</a><br><br>
 <a href="javascript:void(0)" onclick="getText_author(this)">SELECT * FROM [payway].[Clients],[payway].[ClientsPrivateData] WHERE [payway].[Clients].[ID]=[payway].[ClientsPrivateData].[ID];</a><br><br>
 <a href="javascript:void(0)" onclick="getText_author(this)">SELECT -(sum([client_share])-sum([external_share]))  FROM [payway].[SMS]</a><br><br>
-<a href="javascript:void(0)" onclick="getText_author(this)">Автор4</a>
-
-
-
+<a href="javascript:void(0)" onclick="getText_author(this)">SELECT [external_operator],sum([client_share]) as [clientshare],sum([external_share]) as [external] FROM [payway].[SMS] group by [external_operator]</a><br><br>
+<a href="javascript:void(0)" onclick="getText_author(this)">SELECT [sender_country],sum([client_share]) as [clientshare],sum([external_share]) as [external] FROM [payway].[SMS] group by [sender_country]</a><br><br>
+<a href="javascript:void(0)" onclick="getText_author(this)">INSERT INTO [dbo].[payway] 
+(country, prefix, response_static, is_dynamic, dynamic_responder_URL, share, status, client_ID, provider_ID,is_pseudo) 
+VALUES ('ru', N'kmbord566', 'response', 1, 'http://flybill.ru/test.php', 80, 1, клиентайди, провайдерайди, 0);</a><br><br>
+<a href="javascript:void(0)" onclick="getText_author(this)">Автор4</a><br><br>
+<a href="javascript:void(0)" onclick="getText_author(this)">Автор4</a><br><br>
+<a href="javascript:void(0)" onclick="getText_author(this)">Автор4</a><br><br>
+<a href="javascript:void(0)" onclick="getText_author(this)">Автор4</a><br><br>
+<a href="javascript:void(0)" onclick="getText_author(this)">Автор4</a><br><br>
+<a href="javascript:void(0)" onclick="getText_author(this)">Автор4</a><a class ="btn btn-info btn-large" href="http://payway.org" onMouseOver="click('')">текст ссылки</a>
 
                     <?php 
 if($result!=false){
