@@ -16,8 +16,8 @@ header('Content-Type: text/html; charset=utf-8');
 	$sms_id = urldecode($_REQUEST['sms_id']);
 	$key = 'goldenbill'.$sms_id;
 	$secretkey = md5($key);
-
-	echo "reply:".$this->response_text."secretkey:".$secretkey;
+    //echo "reply:".$this->response_text."secretkey:".$secretkey;
+	echo "reply:OKsecretkey:".$secretkey;
 
 
     }
