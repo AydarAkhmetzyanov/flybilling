@@ -1,6 +1,6 @@
 <?php
 
-class SMS_PL3 extends SMS
+class SMS_PLASTIC1 extends SMS
 {
 
     protected function setHandlerLogic(){
@@ -40,7 +40,13 @@ header('Content-Type: text/html; charset=utf-8');
     }
 
     protected function checkMessageParams(){
-  
+  $requiredParams=array('abonent_num','message','income','number','sms_id','operator','operator_id');
+        foreach($requiredParams as $paramName){
+            if(!isset($_GET[$paramName])){
+                return FALSE;
+            }
+        }
+        return TRUE;
         return TRUE;
     }
 
