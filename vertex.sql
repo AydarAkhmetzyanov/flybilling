@@ -289,7 +289,6 @@ INSERT INTO [vertex].[SMSCorePrefixes]
 (prefix, country, provider_ID) 
 VALUES (N'981333', 'ru', 1);
 
-
 create table [vertex].[SMSProviders] 
             (
                 [ID] [int] IDENTITY(1,1) NOT NULL,
