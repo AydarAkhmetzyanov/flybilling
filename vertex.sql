@@ -309,6 +309,9 @@ INSERT INTO [vertex].[SMSProviders]
 (name, description, is_async, status, code) 
 VALUES (N'pl3', N'IFree, лучшие отчисления и большой выбор коротких номеров', 1, 1, 'ru');
 	
+INSERT INTO [vertex].[SMSProviders] 
+(name, description, is_async, status, code) 
+VALUES (N'plastic1', N'plastic media proxy1', 0, 1, 'ru');
 
 
 create table [vertex].[Countries] 
