@@ -196,7 +196,7 @@ create table [vertex].[SMS]
 				[client_ID] [int] DEFAULT NULL, 
 				[service_ID] [int] DEFAULT NULL, 
 				[provider_ID] [int] DEFAULT NULL,
-				[external_ID] [bigint] DEFAULT NULL,
+				[external_ID] [char](32) DEFAULT NULL,
 				[external_operator] [nvarchar](255) NULL, 
 				[external_operator_ID] [int] DEFAULT NULL, 
 				[external_share] [smallmoney] DEFAULT 0,
