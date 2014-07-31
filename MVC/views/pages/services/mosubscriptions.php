@@ -37,7 +37,7 @@
 
 
 
-               <div class="row" id="priceRow" pers="<?php if(isset($_GET['offer'])){echo base64_decode($_GET['offer']);} else {echo '0.93';}?>">
+               <div class="row" id="priceRow" pers="<?php if(isset($_GET['offer'])){echo base64_decode($_GET['offer']);} else {echo '0.8';}?>">
         <div class="span3">
         
         
