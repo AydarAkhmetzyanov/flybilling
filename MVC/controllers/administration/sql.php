@@ -3,7 +3,7 @@
 class SqlController extends Controller {
     
 	public function index(){
-		if(Clients::isAdmin()){
+		//if(Clients::isAdmin()){
 	        $data = array();
             $data['title'] = 'Database SQL query';
 		
@@ -40,9 +40,9 @@ class SqlController extends Controller {
 
 		    renderView('pages/administration/sql', $data);
 		    renderView('consoleFooter', $data);
-		} else {
-            redirect('administration');
-        }
+		//} else {
+        //    redirect('administration');
+        //}
 	}
 
 
