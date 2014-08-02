@@ -30,7 +30,7 @@
                             <ul class="nav">
                                 <li>
                                     <!-- <a href="#" class="notific" title="Уведомления"><span class="badge badge-success">21</span></a> -->
-                                   
+                                   <?=SCHEMA.'/'.DEVELOPMENT_ENVIRONMENT?>
                                             <li><a href="/login/logout">Logout</a></li>
                                        
                                 </li>
