@@ -118,7 +118,7 @@ class SMSServices extends Model
         if(count($corePrefixes)==0){ API_helper::failResponse('Out of free prefixes',500); exit(); }
         $prefix = $corePrefixes[0]['prefix']; //TODO: random select not first
         $resultPrefix=$prefix;
-        $i = 10;
+        $i = 100;
         while (!self::checkPrefixAvailability($prefix.$i)) {
             $i++;
         }
